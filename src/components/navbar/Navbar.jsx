@@ -19,7 +19,7 @@ export default function NavBar() {
   //   }
 
   return (
-    <nav className="max-h-[70px] w-full bg-green-400 shadow">
+    <nav className="max-h-[70px] w-full">
       <div className="navbarbg">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
