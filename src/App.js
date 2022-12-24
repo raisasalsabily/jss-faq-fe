@@ -1,10 +1,10 @@
-import logo from "./logo.svg"
-import "./App.css"
+import React from "react"
+import Navbar from "../src/components/navbar/Navbar.jsx"
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-xl font-bold underline">Front end</h1>
+    <div className="App font-poppins">
+      <Navbar />
     </div>
   )
 }
