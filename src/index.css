@@ -34,3 +34,12 @@ body {
     rgba(95, 201, 181, 0.9) 30%
   );
 }
+.footerbg {
+  background-size: contain;
+  background: linear-gradient(
+      45deg,
+      rgba(34, 38, 41, 0) 0%,
+      rgba(34, 38, 41, 0) 0%
+    ),
+    url(https://jss.jogjakota.go.id/v4/img/bg/footer.jpg) repeat;
+}
