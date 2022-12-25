@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App font-poppins">
       <Navbar />
-      <div className="h-[600px] flex items-center justify-center">BLANK</div>
+      <div className="h-[400px] flex items-center justify-center">BLANK</div>
       <Footer />
     </div>
   )
