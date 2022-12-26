@@ -92,16 +92,21 @@ export default function NavBar() {
             >
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/rent">Beranda</a>
+                  <a href="https://jss.jogjakota.go.id/v4">Beranda</a>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/profile">Bantuan</a>
+                  <a
+                    href="https://help.jogjakota.go.id/livechat.html?channel=oaTnqVdEL9xvWA8VigoLpDgk"
+                    target="__blank"
+                  >
+                    Bantuan
+                  </a>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/admin/member">Panduan</a>
+                  <a href="https://jss.jogjakota.go.id/v4/panduan">Panduan</a>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <a href="/admin/member">FAQ</a>
+                  <a href="/">FAQ</a>
                 </li>
               </ul>
             </div>

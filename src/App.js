@@ -1,15 +1,14 @@
 import React from "react"
-import Navbar from "../src/components/navbar/Navbar.jsx"
-import Footer from "../src/components/footer/Footer.jsx"
-import NavbarLeft from "./components/navbar/NavbarLeft.jsx"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Home from "./pages/Home.js"
 
 function App() {
   return (
-    <div className="App font-poppins">
-      <Navbar />
-      <div className="h-[400px] flex items-center justify-center">BLANK</div>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" caseSensitive={false} element={<Home />} />
+      </Routes>
+    </Router>
   )
 }
 
