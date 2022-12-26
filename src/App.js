@@ -1,6 +1,7 @@
 import React from "react"
 import Navbar from "../src/components/navbar/Navbar.jsx"
 import Footer from "../src/components/footer/Footer.jsx"
+import NavbarLeft from "./components/navbar/NavbarLeft.jsx"
 
 function App() {
   return (
