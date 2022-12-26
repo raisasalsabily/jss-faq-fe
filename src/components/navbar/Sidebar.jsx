@@ -9,10 +9,20 @@ function Sidebar({ sidebar }) {
       }`}
     >
       <ul className="text-sm font-medium text-slate-400">
-        <li className="p-2">Beranda</li>
-        <li className="p-2">Panduan</li>
-        <li className="p-2">Bantuan</li>
-        <li className="p-2">FAQ</li>
+        <li className="p-2">
+          <a href="https://jss.jogjakota.go.id/v4">Beranda</a>
+        </li>
+        <li className="p-2">
+          <a href="https://help.jogjakota.go.id/livechat.html?channel=oaTnqVdEL9xvWA8VigoLpDgk">
+            Bantuan
+          </a>
+        </li>
+        <li className="p-2">
+          <a href="https://jss.jogjakota.go.id/v4/panduan">Panduan</a>
+        </li>
+        <li className="p-2">
+          <a href="#">FAQ</a>
+        </li>
       </ul>
     </div>
   )
