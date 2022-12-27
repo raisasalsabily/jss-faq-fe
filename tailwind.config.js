@@ -5,7 +5,6 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins", "serif"],
     },
-    fontSize: {},
     extend: {
       colors: {
         current: "currentColor",
