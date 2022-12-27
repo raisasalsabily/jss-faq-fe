@@ -41,7 +41,7 @@ export default function NavBar() {
                 {/* hamburger */}
                 <div className="md:hidden">
                   <button
-                    className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                    className="p-2 text-neutral-700 rounded-md outline-none focus:border-neutral-400 focus:border"
                     onClick={toggleSidebar}
                   >
                     <svg
