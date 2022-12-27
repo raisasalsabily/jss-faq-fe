@@ -4,7 +4,7 @@ import LoginBtn from "../button/LoginBtn"
 import Backdrop from "./Backdrop"
 import Sidebar from "./Sidebar"
 
-import jssLogo from "../../assets/images/jss-logo.png"
+import jssLogoText from "../../assets/images/jss-logo-text.png"
 
 export default function NavBar() {
   const [sidebar, setSidebar] = useState(false)
@@ -64,7 +64,7 @@ export default function NavBar() {
                 <a href="/">
                   <img
                     className="w-[90px] h-[30px]"
-                    src={jssLogo}
+                    src={jssLogoText}
                     alt="JSS Logo"
                   ></img>
                 </a>
