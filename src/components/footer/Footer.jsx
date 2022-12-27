@@ -11,31 +11,31 @@ export default function Footer() {
         {/* -------------- FOOTER TOP START -------------- */}
         <div id="footer-top" className="flex flex-col lg:flex-row">
           <div id="pelajari" className="lg:basis-[300px] px-2">
-            <h5 className="font-semibold text-16 lg:text-[18px] mb-4">
+            <h5 className="font-semibold text-b-lg lg:text-[18px] mb-4">
               Pelajari
             </h5>
-            <p className="text-[12px] lg:text-[14px] py-1">
+            <p className="text-b-md lg:text-b-md py-1">
               Syarat dan Ketentuan
             </p>
-            <p className="text-[12px] lg:text-[14px] py-1">
+            <p className="text-b-md lg:text-b-md py-1">
               Kebijakan Privasi Data
             </p>
           </div>
           <div id="apa-jss" className="lg:basis-[450px] px-2">
-            <h5 className="font-semibold text-16 lg:text-[18px] mb-4">
+            <h5 className="font-semibold text-b-lg lg:text-[18px] mb-4">
               Apa sih JSS itu ?
             </h5>
-            <p className="text-[12px] lg:text-[14px]">
+            <p className="text-b-md lg:text-b-md">
               Jogja Smart Service adalah Balaikota Virtual atau Portal maya
               Pemerintah Kota Yogyakarta dalam rangka memberikan layanan
               langsung kepada semua masyarakat di Kota Yogyakarta.
             </p>
           </div>
           <div id="satu-pintu" className="lg:basis-3/12 px-2">
-            <h5 className="font-semibold text-16 lg:text-[18px] mb-4">
+            <h5 className="font-semibold text-b-lg lg:text-[18px] mb-4">
               Satu Pintu
             </h5>
-            <p className="text-[12px] lg:text-[14px]">
+            <p className="text-b-md lg:text-b-md">
               Daftar layanan Pemerintah Kota yang dapat diakses langsung oleh
               masyarakat dengan mengedepankan pelayanan mandiri (Swalayan).
             </p>
@@ -59,7 +59,7 @@ export default function Footer() {
         <div id="footer-bottom" className="mx-2 mt-6 border-t-[1px]">
           <div
             id="copyright"
-            className="text-center lg:text-left text-[13px] lg:text-[14px] py-2"
+            className="text-center lg:text-left text-[13px] lg:text-b-md py-2"
           >
             © 2018 - 2022, Jogja Smart Service by Dinas Komunikasi Informatika
             dan Persandian. JSS v4.0.0

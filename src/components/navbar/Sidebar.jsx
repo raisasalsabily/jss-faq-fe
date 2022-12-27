@@ -8,7 +8,7 @@ function Sidebar({ sidebar }) {
         sidebar ? "-translate-x-0" : "-translate-x-full"
       }`}
     >
-      <ul className="text-sm font-medium text-slate-400">
+      <ul className="text-b-md font-medium text-neutral-700">
         <li className="p-2">
           <a href="https://jss.jogjakota.go.id/v4">Beranda</a>
         </li>
