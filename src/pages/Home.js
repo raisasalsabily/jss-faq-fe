@@ -5,6 +5,7 @@ import Footer from "./../components/footer/Footer.jsx"
 import HelpButton from "../components/button/HelpButton.jsx"
 import HelpBox from "../components/box/HelpBox.jsx"
 import Tag from "../components/tag/Tag.jsx"
+import CopyLink from "../components/icon/CopyLink.jsx"
 
 const Home = () => {
   return (
@@ -16,6 +17,11 @@ const Home = () => {
         {/* tag */}
         <div className="flex justify-center items-center m-10">
           <Tag className="" tag="tagtagtagtag" />
+        </div>
+
+        {/* copy link */}
+        <div className="flex justify-center items-center m-10">
+          <CopyLink className="" />
         </div>
 
         {/* helpbox */}
