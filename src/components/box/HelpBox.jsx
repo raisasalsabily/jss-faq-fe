@@ -19,7 +19,7 @@ function HelpBox(props) {
 
       {/* bagian kanan */}
       <div className="basis-2/3 flex flex-col items-start gap-6">
-        <p className="text-3xl font-bold text-neutral-0">
+        <p className="text-h-lg text-white font-bold text-neutral-0">
           Perlu bantuan lebih lanjut?
         </p>
         <HelpButton />
