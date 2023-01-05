@@ -1,6 +1,7 @@
 import React from 'react'
 import TagBox from '../components/box/TagBox'
 import BackBtn from '../components/button/BackBtn'
+import ReadTime from '../components/icon/ReadTime'
 
 export const Testing = () => {
   return (
@@ -8,7 +9,7 @@ export const Testing = () => {
         <h1>Dummy Page just for Testing components</h1>
         <TagBox/>
         <BackBtn/>
-        
+        <ReadTime minutes="2"/>
     </div>
   )
 }
