@@ -13,6 +13,7 @@ import Tag from "../components/tag/Tag.jsx"
 import CopyLink from "../components/icon/CopyLink.jsx"
 import TxtInput from "../components/input/TxtInput.jsx"
 import InputLabel from "../components/input/InputLabel.jsx"
+import MultiInput from "../components/input/MultiInput.jsx"
 
 export const Testing = () => {
   return (
@@ -44,6 +45,13 @@ export const Testing = () => {
         <InputLabel className="" />
         <TxtInput className="" />
       </div>
+
+      {/* TagInput */}
+      <div className="m-2">
+        <MultiInput />
+      </div>
+
+      <div className="mt-96"></div>
     </div>
   )
 }
