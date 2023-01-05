@@ -8,6 +8,7 @@ export const Testing = () => {
         <h1>Dummy Page just for Testing components</h1>
         <TagBox/>
         <BackBtn/>
+        
     </div>
   )
 }
