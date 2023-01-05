@@ -7,6 +7,8 @@ import HelpButton from "../components/button/HelpButton.jsx"
 import HelpBox from "../components/box/HelpBox.jsx"
 import Tag from "../components/tag/Tag.jsx"
 import CopyLink from "../components/icon/CopyLink.jsx"
+import TxtInput from "../components/input/TxtInput.jsx"
+import InputLabel from "../components/input/InputLabel.jsx"
 
 const Home = () => {
   return (
