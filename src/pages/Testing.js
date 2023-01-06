@@ -15,6 +15,7 @@ import TxtInput from "../components/input/TxtInput.jsx"
 import InputLabel from "../components/input/InputLabel.jsx"
 import MultiInput from "../components/input/MultiInput.jsx"
 import DropInput from "../components/input/DropInput"
+import CategorySidebar from "../components/Category/CategorySidebar"
 
 export const Testing = () => {
   return (
@@ -55,6 +56,11 @@ export const Testing = () => {
       {/* DropInput */}
       <div className="m-2">
         <DropInput />
+      </div>
+
+      {/* Category */}
+      <div className="m-2">
+        <CategorySidebar />
       </div>
 
       <div className="mt-96"></div>
