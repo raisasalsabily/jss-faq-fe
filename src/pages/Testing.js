@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import TagBox from "../components/box/TagBox"
 import AddDataBtn from "../components/button/AddDataBtn"
 import BackBtn from "../components/button/BackBtn"
@@ -16,8 +16,11 @@ import InputLabel from "../components/input/InputLabel.jsx"
 import MultiInput from "../components/input/MultiInput.jsx"
 import DropInput from "../components/input/DropInput"
 import CategorySidebar from "../components/Category/CategorySidebar"
+import TextEditor from "../components/input/TextEditor"
 
 export const Testing = () => {
+  const [value, setValue] = useState("") // state untuk TextEditor
+
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
@@ -29,41 +32,42 @@ export const Testing = () => {
       <FilterBtn />
       <DeleteBtn />
       <EditBtn />
-
       <SearchBar />
-
       {/* copy link */}
       <div className="m-2">
         <CopyLink className="" />
       </div>
-
       {/* helpbox */}
       <div className="m-2">
         <HelpBox className="" />
       </div>
-
       {/* TxtInput & InputLabel */}
       <div className="m-2 w-96">
         <InputLabel className="" />
         <TxtInput className="" />
       </div>
-
       {/* TagInput */}
       <div className="m-2">
         <MultiInput />
       </div>
-
       {/* DropInput */}
       <div className="m-2">
         <DropInput />
       </div>
-
       {/* Category */}
       <div className="m-2">
         <CategorySidebar />
       </div>
 
-      <div className="mt-96"></div>
+      {/* TextEditor */}
+
+      <div className="m-4 mb-36">
+        <TextEditor setValue={setValue} />
+        <div>
+          Hasil: <br />
+          {value}
+        </div>
+      </div>
     </div>
   )
 }
