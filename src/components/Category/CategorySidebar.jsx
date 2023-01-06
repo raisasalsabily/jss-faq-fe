@@ -10,9 +10,9 @@ function CategorySidebar() {
   // }
 
   return (
-    <aside className="w-[351px] h-min-content absolute bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
+    <aside className="w-[351px] h-min-content bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
       <CategoryBtn />
-      <ul className="relative">
+      <ul className="">
         <Category value="Akun" />
         <Category value="Layanan Aplikasi" />
         <Category value="Dukcapil" />
