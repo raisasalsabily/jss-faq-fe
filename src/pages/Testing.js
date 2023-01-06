@@ -14,6 +14,7 @@ import CopyLink from "../components/icon/CopyLink.jsx"
 import TxtInput from "../components/input/TxtInput.jsx"
 import InputLabel from "../components/input/InputLabel.jsx"
 import MultiInput from "../components/input/MultiInput.jsx"
+import DropInput from "../components/input/DropInput"
 
 export const Testing = () => {
   return (
@@ -49,6 +50,11 @@ export const Testing = () => {
       {/* TagInput */}
       <div className="m-2">
         <MultiInput />
+      </div>
+
+      {/* DropInput */}
+      <div className="m-2">
+        <DropInput />
       </div>
 
       <div className="mt-96"></div>
