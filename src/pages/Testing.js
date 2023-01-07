@@ -17,6 +17,7 @@ import MultiInput from "../components/input/MultiInput.jsx"
 import DropInput from "../components/input/DropInput"
 import CategorySidebar from "../components/Category/CategorySidebar"
 import TextEditor from "../components/input/TextEditor"
+import ContentSidebar from "../components/dashboard/ContentSidebar"
 
 export const Testing = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -24,15 +25,7 @@ export const Testing = () => {
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
-      <TagBox />
-      <BackBtn />
-      <ReadTime minutes="2" />
-      <SaveBtn />
-      <AddDataBtn />
-      <FilterBtn />
-      <DeleteBtn />
-      <EditBtn />
-      <SearchBar />
+      <ContentSidebar/>
       {/* copy link */}
       <div className="m-2">
         <CopyLink className="" />
