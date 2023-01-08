@@ -1,6 +1,6 @@
 import React from "react"
 
-export const DashboardTitle = (props) => {
+function DashboardTitle(props) {
   return (
     <div id={props.id}>
       <h4 className="font-semibold text-h-md text-neutral-800">
@@ -10,6 +10,8 @@ export const DashboardTitle = (props) => {
     </div>
   )
 }
+
+export default DashboardTitle
 
 DashboardTitle.defaultValue = {
   title: "Insert title",
