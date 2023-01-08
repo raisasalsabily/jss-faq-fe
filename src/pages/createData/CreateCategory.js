@@ -1,14 +1,14 @@
 import React, { useState } from "react"
-import { DashboardTitle } from "../components/dashboard/DashboardTitle"
-import Footer from "../components/footer/Footer"
-import NavBar from "../components/navbar/Navbar"
-import InputLabel from "../components/input/InputLabel"
-import TxtInput from "../components/input/TxtInput"
-import DropInput from "../components/input/DropInput"
-import MultiInput from "../components/input/MultiInput"
-import TextEditor from "../components/input/TextEditor"
-import SaveBtn from "../components/button/SaveBtn"
-import ContentSidebar from "../components/dashboard/ContentSidebar"
+import DashboardTitle from "../../components/dashboard/DashboardTitle"
+import Footer from "../../components/footer/Footer"
+import NavBar from "../../components/navbar/Navbar"
+import InputLabel from "../../components/input/InputLabel"
+import TxtInput from "../../components/input/TxtInput"
+import DropInput from "../../components/input/DropInput"
+import MultiInput from "../../components/input/MultiInput"
+import TextEditor from "../../components/input/TextEditor"
+import SaveBtn from "../../components/button/SaveBtn"
+import ContentSidebar from "../../components/dashboard/ContentSidebar"
 
 const CreateCategory = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -20,7 +20,7 @@ const CreateCategory = () => {
         <div className="flex">
           {/* sidebar */}
           <aside className="py-10 border-r border-neutral-200">
-            <ContentSidebar />
+            <ContentSidebar label1="Pertanyaan" />
           </aside>
 
           {/* start - right side - form group */}
