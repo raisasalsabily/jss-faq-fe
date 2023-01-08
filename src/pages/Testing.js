@@ -25,7 +25,7 @@ export const Testing = () => {
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
-      <ContentSidebar/>
+      <ContentSidebar />
       {/* copy link */}
       <div className="m-2">
         <CopyLink className="" />
@@ -53,13 +53,17 @@ export const Testing = () => {
       </div>
 
       {/* TextEditor */}
-
       <div className="m-4 mb-36">
         <TextEditor setValue={setValue} />
         <div>
           Hasil: <br />
           {value}
         </div>
+      </div>
+
+      {/* ContentSidebar/Dashbaord Sidebar */}
+      <div className="m-2">
+        <ContentSidebar />
       </div>
     </div>
   )
