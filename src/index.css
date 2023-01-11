@@ -24,6 +24,7 @@
 
 body {
   background: #fff;
+  font-family: 'Poppins';
 }
 
 .navbarbg {
@@ -42,4 +43,11 @@ body {
       rgba(34, 38, 41, 0) 0%
     ),
     url(https://jss.jogjakota.go.id/v4/img/bg/footer.jpg) repeat;
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
