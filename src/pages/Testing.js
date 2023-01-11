@@ -19,6 +19,8 @@ import CategorySidebar from "../components/Category/CategorySidebar"
 import TextEditor from "../components/input/TextEditor"
 import ContentSidebar from "../components/dashboard/ContentSidebar"
 import Searchbar from "../components/searchbar/SearchBar"
+import ContentHeader from "../components/dashboard/ContentHeader"
+
 
 export const Testing = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -26,7 +28,17 @@ export const Testing = () => {
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
+
       <Searchbar className="w-[320px]" />
+
+
+      {/* content header */}
+      <ContentHeader
+        id="faq-list"
+        title="Pertanyaan"
+        jumlahData="12"
+        direct="/createfaq"
+      />
 
       {/* copy link */}
       <div className="m-2">
