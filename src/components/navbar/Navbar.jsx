@@ -27,7 +27,7 @@ export default function NavBar() {
   //   }
 
   return (
-    <nav className="max-h-[70px] w-full">
+    <nav className="max-h-[70px] w-full top-0 fixed z-[9999]">
       <div className="navbarbg">
         <div
           id="nav-container"

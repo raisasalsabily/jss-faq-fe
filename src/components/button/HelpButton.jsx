@@ -9,7 +9,7 @@ function HelpButton(props) {
           props.className
         }
       >
-        Kontak via Live Chat JSS
+        Buka Live Chat
       </div>
     </a>
   )

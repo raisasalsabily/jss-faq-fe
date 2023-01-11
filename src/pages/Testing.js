@@ -18,6 +18,7 @@ import DropInput from "../components/input/DropInput"
 import CategorySidebar from "../components/Category/CategorySidebar"
 import TextEditor from "../components/input/TextEditor"
 import ContentSidebar from "../components/dashboard/ContentSidebar"
+import Searchbar from "../components/searchbar/SearchBar"
 
 export const Testing = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -25,7 +26,8 @@ export const Testing = () => {
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
-      <ContentSidebar />
+      <Searchbar className="w-[320px]" />
+
       {/* copy link */}
       <div className="m-2">
         <CopyLink className="" />

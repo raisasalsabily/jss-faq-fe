@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import Category from "./Category"
+import SingleList from "./SingleList"
 import CategoryBtn from "./CategoryBtn"
 
-function CategorySidebar() {
+function CategorySidebar(props) {
   // const [isActive, setIsActive] = useState(false)
 
   // const handleClick = () => {
@@ -13,21 +13,22 @@ function CategorySidebar() {
     <aside className="w-[351px] h-min-content bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
       <CategoryBtn />
       <ul className="">
-        <Category value="Akun" />
-        <Category value="Layanan Aplikasi" />
-        <Category value="Dukcapil" />
-        <Category value="PTSP" />
-        <Category value="Kesehatan" />
-        <Category value="Pajak dan Retribusi" />
-        <Category value="Tenaga Kerja" />
-        <Category value="Perdagangan" />
-        <Category value="Sosial" />
-        <Category value="Lingkungan" />
-        <Category value="Layanan Pegawai" />
-        <Category value="Pariwisata dan Budaya" />
-        <Category value="BUMD dan BLUD" />
-        <Category value="Portal Berita" />
-        <Category value="Informasi Publik" />
+        <SingleList value="Akun" />
+        <SingleList value="Layanan Aplikasi" />
+        <SingleList value="Dukcapil" />
+        <SingleList value="PTSP" />
+        <SingleList value="Kesehatan" />
+        <SingleList value="Pajak dan Retribusi" />
+        <SingleList value="Tenaga Kerja" />
+        <SingleList value="Perdagangan" />
+        <SingleList value="Sosial" />
+        <SingleList value="Lingkungan" />
+        <SingleList value="Layanan Pegawai" />
+        <SingleList value="Pariwisata dan Budaya" />
+        <SingleList value="BUMD dan BLUD" />
+        <SingleList value="Portal Berita" />
+        <SingleList value="Informasi Publik" />
+        <SingleList value="Lainnya" />
       </ul>
     </aside>
   )
