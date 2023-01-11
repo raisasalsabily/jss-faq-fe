@@ -1,28 +1,34 @@
 import React from "react"
 
-import jssLogo from "../../assets/images/jss-logo.png"
+import helpImg from "../../assets/images/help.svg"
 import HelpButton from "../button/HelpButton"
 
 function HelpBox(props) {
   return (
     <div
       id="bantuan-box"
-      className={
-        "bg-gradient-to-tr from-teal-500 to-teal-100 w-3/5 h-60 rounded-3xl flex justify-center items-center" +
-        props.className
-      }
+      className={`bg-gradient-to-tr from-teal-500 to-teal-100 w-full h-64 flex justify-center items-center ${props.className}`}
     >
-      {/* bagian kiri (logo) */}
-      <div className="basis-1/3 flex justify-center items-center">
-        <img src={jssLogo} alt="JSS Logo"></img>
-      </div>
+      <div
+        id="bantuan-content"
+        className="w-8/12 flex justify-center items-center"
+      >
+        {/* bagian kiri (text) */}
+        <div className="basis-7/12 flex flex-col items-start gap-2">
+          <h3 className="text-h-lg text-white font-bold">
+            Perlu bantuan lebih lanjut?
+          </h3>
+          <p className="text-b-lg text-teal-50">
+            Jika Anda masih mengalami kendala terkait JSS, silakan kontak kami
+            secara langsung melalui Live Chat.
+          </p>
+          <HelpButton />
+        </div>
 
-      {/* bagian kanan */}
-      <div className="basis-2/3 flex flex-col items-start gap-6">
-        <p className="text-h-lg text-white font-bold text-neutral-0">
-          Perlu bantuan lebih lanjut?
-        </p>
-        <HelpButton />
+        {/* bagian kanan (logo) */}
+        <div className="basis-5/12 flex justify-center items-center">
+          <img src={helpImg} alt="JSS Logo"></img>
+        </div>
       </div>
     </div>
   )

@@ -20,7 +20,14 @@ const CreateTag = () => {
         <div className="flex">
           {/* sidebar */}
           <aside className="py-10 border-r border-neutral-200">
-            <ContentSidebar />
+            <ContentSidebar
+              value1="Pertanyaan"
+              to1="/createfaq"
+              value2="Kategori"
+              to2="/createcategory"
+              value3="Tag"
+              to3="/createtag"
+            />
           </aside>
 
           {/* start - right side - form group */}

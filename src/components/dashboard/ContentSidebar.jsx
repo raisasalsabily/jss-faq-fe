@@ -1,39 +1,25 @@
 import React, { useState } from "react"
 import { Icon } from "@iconify/react"
-import { NavLink } from "react-router-dom"
+import SingleList from "../Category/SingleList"
+import CategoryBtn from "../Category/CategoryBtn"
 
-function ContentSidebar() {
+function ContentSidebar(props) {
+  // const [isActive, setIsActive] = useState(false)
+
+  // const handleClick = () => {
+  //   setIsActive((current) => !current)
+  // }
+
   return (
-    <aside className="w-[250px] h-min-content bg-transparent text-neutral-700 text-b-lg font-medium font-poppins">
-      <div className="flex items-center gap-2 px-2">
-        <Icon icon="mdi:cog" />
-        <h1 className="text-b-sm font-bold">KELOLA KONTEN</h1>
+    <aside className="w-[351px] h-min-content text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
+      <div className="h-10 text-b-sm font-bold flex items-center hover:bg-teal-900 hover:text-white transition duration-300 ease-in-out">
+        <Icon icon="mdi:cog" className="w-4 h-4" />
+        <p className="pl-2">KELOLA KONTEN</p>
       </div>
-      <ul>
-        <li className="relative">
-          <NavLink
-            className={`h-10 flex items-center px-10 overflow-hidden text-ellipsis whitespace-nowrap hover:text-teal-900 hover:bg-teal-50 hover:border-r-2 hover:border-teal-500 transition duration-300 ease-in-out`}
-            to="/createfaq"
-          >
-            Pertanyaan
-          </NavLink>
-        </li>
-        <li className="relative">
-          <NavLink
-            className={`h-10 flex items-center px-10 overflow-hidden text-ellipsis whitespace-nowrap hover:text-teal-900 hover:bg-teal-50 hover:border-r-2 hover:border-teal-500 transition duration-300 ease-in-out`}
-            to="/createcategory"
-          >
-            Kategori
-          </NavLink>
-        </li>
-        <li className="relative">
-          <NavLink
-            className={`h-10 flex items-center px-10 overflow-hidden text-ellipsis whitespace-nowrap hover:text-teal-900 hover:bg-teal-50 hover:border-r-2 hover:border-teal-500 transition duration-300 ease-in-out`}
-            to="/createtag"
-          >
-            Tag
-          </NavLink>
-        </li>
+      <ul className="">
+        <SingleList value={props.value1} to={props.to1} />
+        <SingleList value={props.value2} to={props.to2} />
+        <SingleList value={props.value3} to={props.to3} />
       </ul>
     </aside>
   )

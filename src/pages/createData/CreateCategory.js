@@ -8,7 +8,7 @@ import DropInput from "../../components/input/DropInput"
 import MultiInput from "../../components/input/MultiInput"
 import TextEditor from "../../components/input/TextEditor"
 import SaveBtn from "../../components/button/SaveBtn"
-import ContentSidebar from "../../components/dashboard/ContentSidebar"
+import ContentSidebar from "../../components/dashboard/ContentSidebar.jsx"
 
 const CreateCategory = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -20,7 +20,14 @@ const CreateCategory = () => {
         <div className="flex">
           {/* sidebar */}
           <aside className="py-10 border-r border-neutral-200">
-            <ContentSidebar label1="Pertanyaan" />
+            <ContentSidebar
+              value1="Pertanyaan"
+              to1="/createfaq"
+              value2="Kategori"
+              to2="/createcategory"
+              value3="Tag"
+              to3="/createtag"
+            />
           </aside>
 
           {/* start - right side - form group */}
