@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import TagBox from "../components/box/TagBox"
 import AddDataBtn from "../components/button/AddDataBtn"
 import BackBtn from "../components/button/BackBtn"
@@ -13,36 +13,64 @@ import Tag from "../components/tag/Tag.jsx"
 import CopyLink from "../components/icon/CopyLink.jsx"
 import TxtInput from "../components/input/TxtInput.jsx"
 import InputLabel from "../components/input/InputLabel.jsx"
+import MultiInput from "../components/input/MultiInput.jsx"
+import DropInput from "../components/input/DropInput"
+import CategorySidebar from "../components/Category/CategorySidebar"
+import TextEditor from "../components/input/TextEditor"
+import ContentSidebar from "../components/dashboard/ContentSidebar"
+import ContentHeader from "../components/dashboard/ContentHeader"
 
 export const Testing = () => {
+  const [value, setValue] = useState("") // state untuk TextEditor
+
   return (
     <div>
       <h1>Dummy Page just for Testing components</h1>
-      <TagBox />
-      <BackBtn />
-      <ReadTime minutes="2" />
-      <SaveBtn />
-      <AddDataBtn />
-      <FilterBtn />
-      <DeleteBtn />
-      <EditBtn />
-
-      <SearchBar />
-
+      {/* content header */}
+      <ContentHeader
+        id="faq-list"
+        title="Pertanyaan"
+        jumlahData="12"
+        direct="/createfaq"
+      />
       {/* copy link */}
       <div className="m-2">
         <CopyLink className="" />
       </div>
-
       {/* helpbox */}
       <div className="m-2">
         <HelpBox className="" />
       </div>
-
       {/* TxtInput & InputLabel */}
       <div className="m-2 w-96">
         <InputLabel className="" />
         <TxtInput className="" />
+      </div>
+      {/* TagInput */}
+      <div className="m-2">
+        <MultiInput />
+      </div>
+      {/* DropInput */}
+      <div className="m-2">
+        <DropInput />
+      </div>
+      {/* Category */}
+      <div className="m-2">
+        <CategorySidebar />
+      </div>
+
+      {/* TextEditor */}
+      <div className="m-4 mb-36">
+        <TextEditor setValue={setValue} />
+        <div>
+          Hasil: <br />
+          {value}
+        </div>
+      </div>
+
+      {/* ContentSidebar/Dashbaord Sidebar */}
+      <div className="m-2">
+        <ContentSidebar />
       </div>
     </div>
   )
