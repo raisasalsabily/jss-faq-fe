@@ -15,7 +15,9 @@ export default function FaqItem({ title, content, faqRoute }) {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <p className="w-11/12 text-b-lg text-neutral-800">{title}</p>
-                <div className="w-1/12 text-right">{isOpen ? "-" : "+"}</div>
+                <button className="w-1/12 text-right">
+                    {isOpen ? "-" : "+"}
+                </button>
             </div>
 
             <div
@@ -27,9 +29,9 @@ export default function FaqItem({ title, content, faqRoute }) {
                     {content}
                 </p>
                 {isLong && (
-                    <div className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
+                    <button className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
                         Baca selengkapnya
-                    </div>
+                    </button>
                 )}
             </div>
         </div>
