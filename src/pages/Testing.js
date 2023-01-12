@@ -22,6 +22,7 @@ import Searchbar from "../components/searchbar/SearchBar"
 import ContentHeader from "../components/dashboard/ContentHeader"
 import FaqList from "../components/collapse/FaqList"
 import FaqTable from "../components/table/FaqTable"
+import JSSLiveChat from "../components/icon/JSSLiveChat"
 
 export const Testing = () => {
   const [value, setValue] = useState("") // state untuk TextEditor
@@ -74,7 +75,8 @@ export const Testing = () => {
       <h1>Dummy Page just for Testing components</h1>
 
       <Searchbar className="w-[320px]" />
-
+      {/* jss ngambang */}
+      <JSSLiveChat/>
       {/* content header */}
       <ContentHeader
         id="faq-list"
