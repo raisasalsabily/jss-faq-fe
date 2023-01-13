@@ -47,6 +47,7 @@ const TagDashboard = () => {
                 entityName="Tag"
                 data={tagData}
                 sidebarContent={sidebarContent}
+                addLink="/createtag"
             />
         </DefaultLayout>
     );

@@ -52,6 +52,7 @@ const FaqDashboard = () => {
                 entityName="Pertanyaan"
                 data={faqData}
                 sidebarContent={sidebarContent}
+                addLink="/createfaq"
             />
         </DefaultLayout>
     );

@@ -47,6 +47,7 @@ const CategoryDashboard = () => {
                 entityName="Kategori"
                 data={categoryData}
                 sidebarContent={sidebarContent}
+                addLink="/createcategory"
             />
         </DefaultLayout>
     );

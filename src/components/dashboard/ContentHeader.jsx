@@ -23,7 +23,7 @@ function ContentHeader(props) {
         </div>    
         <div className="flex justify-end">
             <Searchbar
-                className="w-[340px] "
+                className="w-[301px] "
                 placeholder="Cari..."
             />
         </div>        
