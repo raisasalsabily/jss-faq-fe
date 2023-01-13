@@ -6,7 +6,7 @@ function DashboardTitle(props) {
       <h4 className="font-semibold text-h-md text-neutral-800">
         {props.title}
       </h4>
-      <p className="text-b-lg text-neutral-600">{props.subTitle}</p>
+      <p className="text-b-sm text-neutral-600">{props.subTitle}</p>
     </div>
   )
 }

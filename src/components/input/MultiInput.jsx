@@ -29,7 +29,7 @@ function MultiInput(props) {
   //   }
 
   return (
-    <div className={"w-[961px] text-b-sm text-neutral-800" + props.className}>
+    <div className={"w-full text-b-sm text-neutral-800" + props.className}>
       <Select
         placeholder={props.placeholder}
         components={animatedComp}

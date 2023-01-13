@@ -19,7 +19,7 @@ export default function TablePagination({ range, setPage, page, slice }) {
     };
 
     return (
-        <div className="mt-4 flex gap-1 float-right">
+        <div className="mt-4 flex gap-1">
             <button
                 className="transition text-b-sm w-6 h-6 tabular-nums rounded text-neutral-700 hover:text-teal-500"
                 onClick={onPrevClick}
@@ -30,10 +30,10 @@ export default function TablePagination({ range, setPage, page, slice }) {
                 return (
                     <button
                         key={el}
-                        className={`transition text-b-sm w-6 h-6 tabular-nums rounded  ${
+                        className={`transition duration-300 text-b-sm w-6 h-6 tabular-nums rounded  ${
                             page === el
-                                ? "text-teal-900 bg-teal-50"
-                                : " text-neutral-700 hover:text-teal-500"
+                                ? "text-teal-900 bg-teal-50 drop-shadow-[0_2px_50px_rgba(156,220,209,0.50)]"
+                                : " text-neutral-700 hover:text-teal-900"
                         }`}
                         onClick={() => setPage(el)}
                     >

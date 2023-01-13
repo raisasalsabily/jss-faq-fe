@@ -54,11 +54,13 @@ export default function PopConfirm({
         <div className="relative inline-block transition">
             <span onClick={togglePopConfirm}>{children}</span>
             <div
-                className={`transition-all absolute rounded-md -translate-x-1/2 px-5 py-4 w-64 bg-white z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.15)] ${
+                className={`transition-all absolute -top-32 left-1/2 rounded-md -translate-x-1/2 px-5 py-4 w-64 bg-white z-30 drop-shadow-[0_0_50px_rgba(0,0,0,0.15)] ${
                     isComponentVisible
                         ? "visible opacity-100"
                         : "invisible opacity-0"
-                }`}
+                } 
+                before:content-['_'] before:left-1/2 before:h-0 before:w-0 before:absolute before:border-transparent
+                 before:border-4 before:-ml-2 before:border-t-white before:top-full`}
                 ref={ref}
             >
                 <div className="text-red-900 flex items-center mb-1">

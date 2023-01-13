@@ -16,6 +16,7 @@ module.exports = {
             "b-sm": ["0.75rem", "1.3rem"], // 12px
         },
         colors: {
+            transparent: "transparent",
             current: "currentColor",
             white: "#FFF",
             black: "#000",

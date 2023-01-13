@@ -5,7 +5,7 @@ const TextEditor = (props) => {
   const editor = useRef(null)
 
   return (
-    <div className="w-[960px]">
+    <div className="w-full">
       <JoditEditor
         ref={editor}
         onChange={(content) => props.setValue(content)}
