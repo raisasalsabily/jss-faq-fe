@@ -1,73 +1,87 @@
-import React, { useState } from "react";
-import SaveBtn from "../../components/button/SaveBtn";
-import InputLabel from "../../components/input/InputLabel";
-import TxtInput from "../../components/input/TxtInput";
-import DashboardCreateLayout from "../../components/layout/DashboardCreateLayout";
-import DefaultLayout from "../../components/layout/DefaultLayout";
+import React, { useState } from "react"
+import axios from "axios"
+import SaveBtn from "../../components/button/SaveBtn"
+import InputLabel from "../../components/input/InputLabel"
+import TxtInput from "../../components/input/TxtInput"
+import DashboardCreateLayout from "../../components/layout/DashboardCreateLayout"
+import DefaultLayout from "../../components/layout/DefaultLayout"
 
 const CreateCategory = () => {
-    const [name, setName] = useState("");
-    const entityName = "Kategori";
+  const [category, setCategory] = useState("")
+  const [show, setIsShow] = useState(false)
+  const entityName = "Kategori"
 
-    const handleSubmit = async (e) => {
-        // e.preventDefault();
-        // try {
-        //     await axios
-        //         .post("http://localhost:5000/api/categories", {
-        //             name,
-        //         })
-        //         .then(function (response) {
-        //             //setAlert
-        //         });
-        // } catch (err) {
-        //     console.log(err);
-        // }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await axios
+        .post("http://localhost:5000/api/categories", {
+          category,
+          show,
+        })
+        .then(function (response) {
+          //setAlert
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-    const sidebarContent = [
-        {
-            value: "Pertanyaan",
-            url: "/dashboard-faq",
-        },
-        {
-            value: "Kategori",
-            url: "/dashboard-category",
-        },
-        {
-            value: "Tag",
-            url: "/dashboard-tag",
-        },
-    ];
+  const sidebarContent = [
+    {
+      value: "Pertanyaan",
+      url: "/dashboard-faq",
+    },
+    {
+      value: "Kategori",
+      url: "/dashboard-category",
+    },
+    {
+      value: "Tag",
+      url: "/dashboard-tag",
+    },
+  ]
 
-    return (
-        <DefaultLayout>
-            <DashboardCreateLayout
-                entityName="Kategori"
-                sidebarContent={sidebarContent}
-            >
-                {/* form */}
-                <form
-                    className="w-full bg-white rounded-lg p-8 flex flex-col gap-4"
-                    onSubmit={handleSubmit}
-                >
-                    {/* Nama kategori */}
-                    <div>
-                        <InputLabel
-                            label={"Nama " + entityName.toLowerCase()}
-                        />
-                        <TxtInput
-                            placeholder={`Tulis ${entityName} baru...`}
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
+  return (
+    <DefaultLayout>
+      <DashboardCreateLayout
+        entityName="Kategori"
+        sidebarContent={sidebarContent}
+      >
+        {/* form */}
+        <form
+          className="w-full bg-white rounded-lg p-8 flex flex-col gap-4"
+          onSubmit={handleSubmit}
+        >
+          {/* Nama kategori */}
+          <div>
+            <InputLabel label={"Nama " + entityName.toLowerCase()} />
+            <TxtInput
+              placeholder={`Tulis ${entityName} baru...`}
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </div>
 
-                    {/* button */}
-                    <SaveBtn />
-                </form>
-            </DashboardCreateLayout>
-        </DefaultLayout>
-    );
-};
+          {/* Tampilkan kategori */}
+          <div className="flex flex-col items-start">
+            <InputLabel label="Tampilkan kategori" />
+            <input
+              type="checkbox"
+              value={show}
+              onChange={() => setIsShow((current) => !current)}
+              id="check"
+              name="check"
+              className="m-1 w-4 h-4 text-teal-900 bg-gray-100 border-gray-300 rounded focus:ring-teal-50 focus:ring-2 "
+            />
+          </div>
 
-export default CreateCategory;
+          {/* button */}
+          <SaveBtn />
+        </form>
+      </DashboardCreateLayout>
+    </DefaultLayout>
+  )
+}
+
+export default CreateCategory

@@ -1,5 +1,5 @@
-import React from "react"
-
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 import Navbar from "./../components/navbar/Navbar.jsx"
 import Footer from "./../components/footer/Footer.jsx"
 import Searchbar from "../components/searchbar/SearchBar.jsx"
@@ -51,6 +51,16 @@ const Home = () => {
     },
   ]
 
+  const [cats, setCats] = useState([]) // state to fetch category sidebar items
+
+  useEffect(() => {
+    const getCats = async () => {
+      const res = await axios.get("http://localhost:5000/api/categories")
+      setCats(res.data)
+    }
+    getCats()
+  }, [])
+
   return (
     <>
       <div className="font-poppins">
@@ -74,7 +84,7 @@ const Home = () => {
             <div className="my-20 border-t border-neutral-200 flex">
               {/* CategorySidebar */}
               <aside>
-                <CategorySidebar />
+                <CategorySidebar cats={cats} />
               </aside>
 
               {/* QuestionList */}
