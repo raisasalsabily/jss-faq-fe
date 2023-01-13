@@ -12,14 +12,16 @@ import SaveBtn from "../../components/button/SaveBtn"
 import ContentSidebar from "../../components/dashboard/ContentSidebar.jsx"
 
 const CreateCategory = () => {
-  const [name, setName] = useState("")
+  const [category, setCategory] = useState("")
+  const [show, setIsShow] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await axios
         .post("http://localhost:5000/api/categories", {
-          name,
+          category,
+          show,
         })
         .then(function (response) {
           //setAlert
@@ -67,8 +69,20 @@ const CreateCategory = () => {
                 <InputLabel label="Nama kategori" />
                 <TxtInput
                   placeholder="Tulis kategori baru..."
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                />
+              </div>
+              {/* Tampilkan kategori */}
+              <div className="flex flex-col items-start">
+                <InputLabel label="Tampilkan kategori" />
+                <input
+                  type="checkbox"
+                  value={show}
+                  onChange={() => setIsShow((current) => !current)}
+                  id="check"
+                  name="check"
+                  className="m-1 w-4 h-4 text-teal-900 bg-gray-100 border-gray-300 rounded focus:ring-teal-50 focus:ring-2 "
                 />
               </div>
 

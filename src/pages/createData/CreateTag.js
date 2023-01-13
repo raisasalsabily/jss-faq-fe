@@ -12,14 +12,14 @@ import SaveBtn from "../../components/button/SaveBtn"
 import ContentSidebar from "../../components/dashboard/ContentSidebar"
 
 const CreateTag = () => {
-  const [name, setName] = useState("")
+  const [tag, setTag] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await axios
         .post("http://localhost:5000/api/tags", {
-          name,
+          tag,
         })
         .then(function (response) {
           //setAlert
@@ -67,8 +67,8 @@ const CreateTag = () => {
                 <InputLabel label="Nama tag" />
                 <TxtInput
                   placeholder="Tulis tag baru..."
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={tag}
+                  onChange={(e) => setTag(e.target.value)}
                 />
               </div>
 
