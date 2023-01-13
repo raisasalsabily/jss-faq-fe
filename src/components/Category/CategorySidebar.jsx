@@ -12,8 +12,19 @@ function CategorySidebar(props) {
   return (
     <aside className="w-[351px] h-min-content bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
       <CategoryBtn />
-      <ul className="">
-        <SingleList value="Akun" />
+      <ul>
+        {props.cats.map((c) => (
+          <SingleList value={c.category} />
+        ))}
+      </ul>
+    </aside>
+  )
+}
+
+export default CategorySidebar
+
+{
+  /* <SingleList value="Akun" />
         <SingleList value="Layanan Aplikasi" />
         <SingleList value="Dukcapil" />
         <SingleList value="PTSP" />
@@ -28,10 +39,5 @@ function CategorySidebar(props) {
         <SingleList value="BUMD dan BLUD" />
         <SingleList value="Portal Berita" />
         <SingleList value="Informasi Publik" />
-        <SingleList value="Lainnya" />
-      </ul>
-    </aside>
-  )
+        <SingleList value="Lainnya" /> */
 }
-
-export default CategorySidebar
