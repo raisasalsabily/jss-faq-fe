@@ -14,6 +14,8 @@ import CategoryDashboard from "./pages/dashboard/CategoryDashboard.js";
 import TagDashboard from "./pages/dashboard/TagDashboard.js";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { LongAnswer } from "./pages/LongAnswer.js";
+import { SearchResult } from "./pages/SearchResult.js";
 
 function App() {
     useEffect(() => {
@@ -38,7 +40,16 @@ function App() {
                     caseSensitive={false}
                     element={<SignIn />}
                 />
-
+                <Route
+                    path="/answer"
+                    caseSensitive={false}
+                    element={<LongAnswer />}
+                />
+                <Route
+                    path="/search"
+                    caseSensitive={false}
+                    element={<SearchResult />}
+                />
                 <Route
                     path="/createfaq"
                     caseSensitive={false}
