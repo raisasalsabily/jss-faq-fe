@@ -54,23 +54,51 @@ const Home = () => {
     },
   ]
 
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+
   const [cats, setCats] = useState([]) // state to fetch category sidebar items
   const [faqs, setFaqs] = useState([]) // state to fetch faqs
-  const { search } = useLocation()
+  const { search } = useLocation(["Akun"])
   // console.log(location)
 
   useEffect(() => {
     const getCats = async () => {
-      const res = await axios.get("http://localhost:5000/api/categories")
-      setCats(res.data)
+      setLoading(true)
+      try {
+        const res = await axios.get("http://localhost:5000/api/categories", {
+          headers: {
+            Accept: "application/json",
+          },
+        })
+        setCats(res.data)
+      } catch (error) {
+        setError(error)
+        // console.log(error)
+      }
+      setLoading(false)
     }
     getCats()
   }, [])
 
   useEffect(() => {
     const fetchFaqs = async () => {
-      const res = await axios.get("http://localhost:5000/api/posts" + search)
-      setFaqs(res.data)
+      setLoading(true)
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/posts${search}`,
+          {
+            headers: {
+              Accept: "application/json",
+            },
+          }
+        )
+        setFaqs(res.data)
+      } catch (error) {
+        // console.log(error)
+        setError(error)
+      }
+      setLoading(false)
     }
     fetchFaqs()
   }, [search])
