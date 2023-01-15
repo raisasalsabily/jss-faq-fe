@@ -13,7 +13,11 @@ function CategorySidebar({ cats }) {
     <aside className="w-[351px] h-min-content bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200">
       <CategoryBtn />
       <ul>
-        {cats.map((c) => (c.show ? <SingleList value={c.category} /> : null))}
+        {cats.map((c) =>
+          c.show ? (
+            <SingleList value={c.category} to={`/?cat=${c.category}`} />
+          ) : null
+        )}
       </ul>
     </aside>
   )
