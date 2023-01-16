@@ -2,6 +2,7 @@ import React from 'react'
 import { Login } from '../components/auth/Login'
 import HelpButton from '../components/button/HelpButton'
 import jssLogoText from "../assets/images/jss-logo-text.png"
+import JSSLiveChat from '../components/icon/JSSLiveChat'
 
 export const SignIn = () => {
   return (
@@ -30,9 +31,7 @@ export const SignIn = () => {
                 </div>                
             </div>
             <Login/>
-            <div className='fixed bottom-[10px] right-[10px]'>
-                <HelpButton/>
-            </div>
+            <JSSLiveChat/>
         </div>
     </>
   )

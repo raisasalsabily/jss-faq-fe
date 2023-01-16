@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import Navbar from "./../components/navbar/Navbar.jsx"
-import Footer from "./../components/footer/Footer.jsx"
-import Searchbar from "../components/searchbar/SearchBar.jsx"
-import CategorySidebar from "../components/Category/CategorySidebar.jsx"
-import HelpBox from "../components/box/HelpBox.jsx"
-import FaqList from "../components/collapse/FaqList.js"
 import { useLocation } from "react-router-dom"
-import { faColonSign } from "@fortawesome/free-solid-svg-icons"
+import TagBox from "../components/box/TagBox"
+import BackBtn from "../components/button/BackBtn"
+import Footer from "../components/footer/Footer"
+import JSSLiveChat from "../components/icon/JSSLiveChat"
+import ReadTime from "../components/icon/ReadTime"
+import AnswerDesc from "../components/items/AnswerDesc"
+import TitleWithLink from "../components/items/TitleWithLink"
+import NavBar from "../components/navbar/Navbar"
 
-const Home = () => {
+export const LongAnswer = () => {
   const faqData = [
     {
       id: 1,
@@ -57,97 +58,53 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const [cats, setCats] = useState([]) // state to fetch category sidebar items
-  const [faqs, setFaqs] = useState([]) // state to fetch faqs
-  const { search } = useLocation(["Akun"])
-  // console.log(location)
+  const location = useLocation()
+  const path = location.pathname.split("/")[2]
+  const [singleFaq, setSingleFaq] = useState({})
+
+  // const [url, setUrl] = useState("")
+
+  // // get current url
+  // useEffect(() => {
+  //   setUrl(window.location.href)
+  // }, [])
 
   useEffect(() => {
-    const getCats = async () => {
+    const getSingleFaq = async () => {
       setLoading(true)
       try {
-        const res = await axios.get("http://localhost:5000/api/categories", {
+        const res = await axios.get(`http://localhost:5000/api/posts/${path}`, {
           headers: {
             Accept: "application/json",
           },
         })
-        setCats(res.data)
-      } catch (error) {
-        setError(error)
-        // console.log(error)
-      }
-      setLoading(false)
-    }
-    getCats()
-  }, [])
-
-  useEffect(() => {
-    const fetchFaqs = async () => {
-      setLoading(true)
-      try {
-        const res = await axios.get(
-          `http://localhost:5000/api/posts${search}`,
-          {
-            headers: {
-              Accept: "application/json",
-            },
-          }
-        )
-        setFaqs(res.data)
+        setSingleFaq(res.data)
       } catch (error) {
         // console.log(error)
         setError(error)
       }
       setLoading(false)
     }
-    fetchFaqs()
-  }, [search])
+    getSingleFaq()
+  }, [path])
 
   return (
-    <>
-      <div className="font-poppins">
-        <Navbar />
-
-        {/* start - container */}
-        <div id="container" className="flex justify-center items-center">
-          <div className="w-10/12 mt-32 flex flex-col justify-center items-center">
-            {/* Title */}
-            <div id="title">
-              <h1 className="mb-2 text-h-lg font-bold">
-                Halo, ada yang dapat kami bantu?
-              </h1>
-            </div>
-            {/* searchbar */}
-            <div>
-              <Searchbar />
-            </div>
-
-            {/* sidebar and question list */}
-            <div className="min-w-full my-20 border-t border-neutral-200 flex">
-              {/* CategorySidebar */}
-              <aside>
-                <CategorySidebar cats={cats} />
-              </aside>
-              {/* QuestionList */}
-              <main className="p-10">
-                {faqs ? (
-                  <FaqList data={faqs} category={faqs[0]?.category} />
-                ) : null}
-              </main>
-            </div>
-          </div>
+    <div>
+      <NavBar />
+      <div
+        id="container"
+        className="min-h-screen py-16 bg-white flex justify-center"
+      >
+        <div className="w-10/12 md:p-20">
+          <BackBtn />
+          <TitleWithLink question={singleFaq?.question} />
+          <ReadTime minutes="1" />
+          <AnswerDesc answer={singleFaq?.answer} />
+          <TagBox tag={singleFaq?.tag} />
         </div>
-        {/* end - container */}
-
-        {/* helpbox */}
-        <div id="helpbox">
-          <HelpBox />
-        </div>
-
-        <Footer />
       </div>
-    </>
+      <JSSLiveChat />
+      <Footer />
+    </div>
   )
 }
-
-export default Home

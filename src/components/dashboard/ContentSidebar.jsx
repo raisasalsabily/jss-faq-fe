@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Icon } from "@iconify/react"
 import SingleList from "../Category/SingleList"
-import CategoryBtn from "../Category/CategoryBtn"
 
 function ContentSidebar(props) {
   // const [isActive, setIsActive] = useState(false)
@@ -17,11 +16,10 @@ function ContentSidebar(props) {
         <p className="pl-2">KELOLA KONTEN</p>
       </div>
       <ul className="">
-        {props.content && props.content.map((obj) => {
-          return (
-            <SingleList value={obj.value} to={obj.url} />
-          )
-        })}
+        {props.content &&
+          props.content.map((obj) => {
+            return <SingleList value={obj.value} to={obj.url} />
+          })}
       </ul>
     </aside>
   )
