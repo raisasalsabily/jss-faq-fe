@@ -1,59 +1,96 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DefaultLayout from "../../components/layout/DefaultLayout";
+import DashboardTitle from "../../components/dashboard/DashboardTitle";
+import FaqTable from "../../components/table/FaqTable";
+import AddDataBtn from "../../components/button/AddDataBtn";
 
 const FaqDashboard = () => {
-    const faqData = [
-        {
-            id: 1,
-            title: "Bagaimana cara menginstall aplikasi JSS di android/iphone saya?",
-            category: "Akun",
-        },
-        {
-            id: 2,
-            title: "Bagaimana cara mendaftar JSS menggunakan WhatsApp?",
-            category: "Akun",
-        },
-        {
-            id: 3,
-            title: "Bagaimana cara mendaftar JSS menggunakan email?",
-            category: "Akun",
-        },
-        {
-            id: 4,
-            title: "Link aktivasi tidak terkirim ke WhatsApp saya",
-            category: "Akun",
-        },
-        {
-            id: 5,
-            title: "Username dan/atau password saya dinyatakan salah",
-            category: "Akun",
-        },
-    ];
+    const [faqs, setFaqs] = useState([]);
+    const [dataTable, setDataTable] = useState([]);
 
-    const sidebarContent = [
-        {
-            value: "Pertanyaan",
-            url: "/dashboard-faq",
-        },
-        {
-            value: "Kategori",
-            url: "/dashboard-category",
-        },
-        {
-            value: "Tag",
-            url: "/dashboard-tag",
-        },
-    ];
+    const getFaqs = async () => {
+        try {
+            const res = await axios.get(
+                "http://localhost:5000/api/posts/?table=true"
+            );
+            setFaqs(res.data);
+            setDataTable(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        getFaqs();
+    }, []);
+
+    const handleSearch = (e) => {
+        const key = e.target.value.toLowerCase();
+
+        const searchRes = faqs.filter((obj) => {
+            let isInclude = false;
+            for (const prop in obj) {
+                if (obj[prop].toString().toLowerCase().includes(key))
+                    isInclude = true;
+            }
+            return isInclude;
+        });
+
+        setDataTable(searchRes);
+    };
 
     return (
         <DefaultLayout>
-            <DashboardLayout
-                entityName="Pertanyaan"
-                data={faqData}
-                sidebarContent={sidebarContent}
-                addLink="/createfaq"
-            />
+            <DashboardLayout>
+                <div className="flex justify-between">
+                    <DashboardTitle
+                        id="index-data-title"
+                        title="FAQ"
+                        subTitle={
+                            dataTable
+                                ? dataTable.length + " data ditemukan"
+                                : ""
+                        }
+                    />
+                    <Link to="create">
+                        <AddDataBtn />
+                    </Link>
+                </div>
+
+                <div className={`w-96 relative self-end`}>
+                    <input
+                        className="w-full py-1 px-4 border-2 border-neutral-300 rounded-full text-b-md text-neutral-600 focus:outline-none focus:ring-teal-50 focus:border-teal-50"
+                        type="text"
+                        name="search"
+                        placeholder="Telusuri..."
+                        onChange={handleSearch}
+                        required
+                    />
+                    <button className="absolute right-0 top-2 mr-4 flex">
+                        <FontAwesomeIcon
+                            icon={faMagnifyingGlass}
+                            className="text-neutral-600"
+                        />
+                    </button>
+                </div>
+
+                {/* Table */}
+                {dataTable && (
+                    <div data-aos="fade">
+                        <FaqTable
+                            data={dataTable}
+                            rowsPerPage="5"
+                            lstProp={["question", "category"]}
+                        />
+                    </div>
+                )}
+            </DashboardLayout>
         </DefaultLayout>
     );
 };

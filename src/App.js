@@ -40,35 +40,38 @@ function App() {
                 />
 
                 <Route
-                    path="/createfaq"
-                    caseSensitive={false}
-                    element={<CreateFaq />}
-                />
-                <Route
-                    path="/createtag"
-                    caseSensitive={false}
-                    element={<CreateTag />}
-                />
-                <Route
-                    path="/createcategory"
-                    caseSensitive={false}
-                    element={<CreateCategory />}
-                />
-                <Route
-                    path="/dashboard-faq"
+                    path="/dashboard/faq"
                     caseSensitive={false}
                     element={<FaqDashboard />}
                 />
                 <Route
-                    path="/dashboard-category"
+                    path="/dashboard/faq/create"
+                    caseSensitive={false}
+                    element={<CreateFaq />}
+                />
+
+                <Route
+                    path="/dashboard/category"
                     caseSensitive={false}
                     element={<CategoryDashboard />}
                 />
                 <Route
-                    path="/dashboard-tag"
+                    path="/dashboard/category/create"
+                    caseSensitive={false}
+                    element={<CreateCategory />}
+                />
+
+                <Route
+                    path="/dashboard/tag"
                     caseSensitive={false}
                     element={<TagDashboard />}
                 />
+                <Route
+                    path="/dashboard/tag/create"
+                    caseSensitive={false}
+                    element={<CreateTag />}
+                />
+
                 <Route
                     path="/testing"
                     caseSensitive={false}

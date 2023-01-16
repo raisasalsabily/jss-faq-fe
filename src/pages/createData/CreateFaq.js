@@ -1,41 +1,28 @@
 import React, { useState } from "react";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
-import Footer from "../../components/footer/Footer";
-import NavBar from "../../components/navbar/Navbar";
 import InputLabel from "../../components/input/InputLabel";
 import TxtInput from "../../components/input/TxtInput";
 import DropInput from "../../components/input/DropInput";
 import MultiInput from "../../components/input/MultiInput";
 import TextEditor from "../../components/input/TextEditor";
 import SaveBtn from "../../components/button/SaveBtn";
-import ContentSidebar from "../../components/dashboard/ContentSidebar";
 import DefaultLayout from "../../components/layout/DefaultLayout";
-import DashboardCreateLayout from "../../components/layout/DashboardCreateLayout";
+import DashboardLayout from "../../components/layout/DashboardLayout";
 
 const CreateFaq = () => {
     const [value, setValue] = useState(""); // state untuk TextEditor
 
-    const sidebarContent = [
-        {
-            value: "Pertanyaan",
-            url: "/dashboard-faq",
-        },
-        {
-            value: "Kategori",
-            url: "/dashboard-category",
-        },
-        {
-            value: "Tag",
-            url: "/dashboard-tag",
-        },
-    ];
-
     return (
         <DefaultLayout>
-            <DashboardCreateLayout
-                entityName="FAQ"
-                sidebarContent={sidebarContent}
-            >
+            <DashboardLayout>
+                {/* title */}
+                <div className="">
+                    <DashboardTitle
+                        id="create-data-title"
+                        title="Menambah Data"
+                        subTitle="FAQ"
+                    />
+                </div>
                 <form className="w-full bg-white rounded-lg p-8 flex flex-col gap-4">
                     {/* Pertanyaan */}
                     <div>
@@ -77,7 +64,7 @@ const CreateFaq = () => {
                 </form>
 
                 {/* button */}
-            </DashboardCreateLayout>
+            </DashboardLayout>
         </DefaultLayout>
     );
 };
