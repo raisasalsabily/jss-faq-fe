@@ -6,10 +6,12 @@ import TxtInput from "../../components/input/TxtInput";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
+import { useNavigate } from "react-router-dom";
 
 const CreateCategory = () => {
     const [category, setCategory] = useState("");
     const [show, setIsShow] = useState(false);
+    const navigate = useNavigate();
     const entityName = "Kategori";
 
     const handleSubmit = async (e) => {
@@ -21,6 +23,7 @@ const CreateCategory = () => {
                     show,
                 })
                 .then(function (response) {
+                    navigate("/dashboard/category");
                     //setAlert
                 });
         } catch (err) {

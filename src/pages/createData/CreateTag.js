@@ -6,9 +6,11 @@ import SaveBtn from "../../components/button/SaveBtn";
 import DefaultLayout from "../../components/layout/DefaultLayout";
 import DashboardLayout from "../../components/layout/DashboardLayout";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
+import { useNavigate } from "react-router-dom";
 
 const CreateTag = () => {
     const [tag, setTag] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,6 +21,7 @@ const CreateTag = () => {
                 })
                 .then(function (response) {
                     //setAlert
+                    navigate("/dashboard/tag");
                 });
         } catch (err) {
             console.log(err);
