@@ -62,6 +62,13 @@ export const LongAnswer = () => {
   const path = location.pathname.split("/")[2]
   const [singleFaq, setSingleFaq] = useState({})
 
+  // const [url, setUrl] = useState("")
+
+  // // get current url
+  // useEffect(() => {
+  //   setUrl(window.location.href)
+  // }, [])
+
   useEffect(() => {
     const getSingleFaq = async () => {
       setLoading(true)
