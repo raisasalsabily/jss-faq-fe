@@ -123,7 +123,7 @@ const Home = () => {
             </div>
 
             {/* sidebar and question list */}
-            <div className="my-20 border-t border-neutral-200 flex">
+            <div className="min-w-full my-20 border-t border-neutral-200 flex">
               {/* CategorySidebar */}
               <aside>
                 <CategorySidebar cats={cats} />
