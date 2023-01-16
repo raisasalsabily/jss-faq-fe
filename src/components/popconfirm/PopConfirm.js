@@ -31,7 +31,7 @@ export default function PopConfirm({
     title = "",
     desc = "",
     onConfirm,
-    onCancel,
+    onCancel = () => {},
 }) {
     const { ref, isComponentVisible, setIsComponentVisible } =
         useComponentVisible(false);

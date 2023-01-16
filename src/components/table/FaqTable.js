@@ -5,10 +5,15 @@ import EditBtn from "../button/EditBtn";
 import PopConfirm from "../popconfirm/PopConfirm";
 import TablePagination from "./TablePagination";
 
-export default function FaqTable({ className = "", data, rowsPerPage }) {
+export default function FaqTable({
+    className = "",
+    data,
+    rowsPerPage,
+    lstProp,
+    onDelete,
+}) {
     const [page, setPage] = useState(1);
     const { slice, range } = useTable(data, page, rowsPerPage);
-    const lstProp = data.length > 0 ? Object.keys(data[0]) : [];
 
     return (
         <div className="flex flex-col items-end">
@@ -19,7 +24,7 @@ export default function FaqTable({ className = "", data, rowsPerPage }) {
                             {lstProp?.map((prop, i) => {
                                 if (i === 0) {
                                     return (
-                                        <th className="w-2/12 rounded-tl-lg uppercase pl-10 py-4 text-left text-neutral-600 text-b-sm font-bold">
+                                        <th className="rounded-tl-lg uppercase pl-10 py-4 text-left text-neutral-600 text-b-sm font-bold">
                                             {prop}
                                         </th>
                                     );
@@ -58,26 +63,20 @@ export default function FaqTable({ className = "", data, rowsPerPage }) {
                                     {lstProp.map((prop, i) => {
                                         if (i === 0) {
                                             return (
-                                                <td className="pl-10 pr-1 py-4 text-left text-neutral-900 text-b-sm tabular-nums">
-                                                    {data[prop]}
+                                                <td className="pl-10 py-4 text-left text-neutral-900 text-b-sm tabular-nums">
+                                                    {data[prop].toString()}
                                                 </td>
                                             );
                                         }
                                         return (
                                             <td className="text-left px-4 py-4 text-neutral-900 text-b-sm">
-                                                {data[prop]}
+                                                {data[prop].toString()}
                                             </td>
                                         );
                                     })}
                                     <td className="text-left pl-4 pr-10 text-neutral-900 text-b-sm">
                                         <PopConfirm
-                                            onCancel={() => alert("gagal")}
-                                            onConfirm={() =>
-                                                alert(
-                                                    data.id +
-                                                        " berhasil dihapus"
-                                                )
-                                            }
+                                            onConfirm={() => onDelete(data._id)}
                                         >
                                             <DeleteBtn className="mr-2" />
                                         </PopConfirm>
