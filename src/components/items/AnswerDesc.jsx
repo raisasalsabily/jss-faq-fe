@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react"
 
-function AnswerDesc(props) {
-    return ( 
-        <p className='text-neutral-900 text-b-md md:text-b-lg py-3'>
-            {props.article}
-        </p>    
-    );
+function AnswerDesc({ answer }) {
+  return answer ? (
+    <p className="text-neutral-900 text-b-md md:text-b-lg py-3">{answer}</p>
+  ) : null
 }
 
-export default AnswerDesc;
+export default AnswerDesc
