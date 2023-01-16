@@ -130,7 +130,9 @@ const Home = () => {
               </aside>
               {/* QuestionList */}
               <main className="p-10">
-                <FaqList data={faqs} category={faqs[0].category} />
+                {faqs ? (
+                  <FaqList data={faqs} category={faqs[0]?.category} />
+                ) : null}
               </main>
             </div>
           </div>
