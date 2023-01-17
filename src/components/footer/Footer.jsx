@@ -47,12 +47,12 @@ export default function Footer() {
             <img
               src="https://jss.jogjakota.go.id/v4/img/ios.png"
               alt="Download dari App Store"
-              className="h-[76px] w-[230px] lg:h-[50px] lg:w-[155px]"
+              className="h-12 lg:h-[50px] lg:w-[155px]"
             ></img>
             <img
               src="https://jss.jogjakota.go.id/v4/img/gplay.png"
               alt="Download dari Google Play Store"
-              className="h-[76px] w-[230px] lg:h-[50px] lg:w-[155px]"
+              className="h-12 lg:h-[50px] lg:w-[155px]"
             ></img>
           </div>
         </div>

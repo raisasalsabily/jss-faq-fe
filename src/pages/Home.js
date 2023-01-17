@@ -113,7 +113,7 @@ const Home = () => {
                 {/* start - container */}
                 <div
                     id="container"
-                    className="flex justify-center items-center"
+                    className="flex justify-center items-center min-h-screen"
                 >
                     <div className="max-w-7xl w-11/12 mt-32 flex flex-col justify-center items-center">
                         {/* Title */}

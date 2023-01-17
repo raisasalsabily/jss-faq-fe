@@ -11,7 +11,7 @@ function CategorySidebar({ cats }) {
 
   return (
     <div
-      className="w-full h-min-content bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200
+      className="w-full h-full bg-white text-neutral-700 text-b-lg font-medium border-r border-neutral-200
     "
     >
       <div className="h-10 text-b-sm font-bold flex items-center pt-2">
