@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Icon } from "@iconify/react"
 
@@ -13,10 +14,17 @@ import DefaultLayout from "../../components/layout/DefaultLayout"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 
 const CreateFaq = () => {
+  const navigate = useNavigate()
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+
+  const [question, setQuestion] = useState("")
+  const [slug, setSlug] = useState("")
+  const [category, setCategory] = useState("")
+
   const [cats, setCats] = useState([]) // state to fetch category
-  const [dropInput, setDropInput] = useState("") // input value ffor category dropdown
+  const [dropInput, setDropInput] = useState("") // input value for category dropdown
   const [dropSelected, setDropSelected] = useState("") // selected value of category dropdown
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
@@ -42,6 +50,24 @@ const CreateFaq = () => {
     getCats()
   }, [])
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await axios
+        .post("http://localhost:5000/api/posts", {
+          question,
+          slug,
+          category,
+        })
+        .then(function (response) {
+          navigate("/dashboard/faq")
+          //setAlert
+        })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <DefaultLayout>
       <DashboardLayout>
@@ -53,11 +79,18 @@ const CreateFaq = () => {
             subTitle="FAQ"
           />
         </div>
-        <form className="w-full bg-white rounded-lg p-8 flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full bg-white rounded-lg p-8 flex flex-col gap-4"
+        >
           {/* Pertanyaan */}
           <div>
             <InputLabel label="Pertanyaan" />
-            <TxtInput placeholder="Tulis pertanyaan..." />
+            <TxtInput
+              placeholder="Tulis pertanyaan..."
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
           </div>
 
           {/* Route URL dan Kategori */}
@@ -65,7 +98,11 @@ const CreateFaq = () => {
             {/* Route URL */}
             <div>
               <InputLabel label="Route URL" />
-              <TxtInput placeholder="Generate url..." />
+              <TxtInput
+                placeholder="Generate url..."
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+              />
             </div>
 
             {/* Kategori */}
@@ -80,6 +117,7 @@ const CreateFaq = () => {
                     !dropSelected && "text-neutral-700"
                   }`}
                 >
+                  {/* show selected value */}
                   {dropSelected
                     ? dropSelected?.length > 40
                       ? dropSelected?.substring(0, 40) + "..."
@@ -124,14 +162,15 @@ const CreateFaq = () => {
                           ? "block"
                           : "hidden"
                       }`}
-                      onClick={() => {
+                      onClick={(e) => {
                         if (
                           cats?.category?.toLowerCase() !==
                           dropSelected.toLowerCase()
                         ) {
                           setDropSelected(cats?.category)
                           setDropOpen(false)
-                          // setDropInput("")
+                          setDropInput("")
+                          setCategory(cats?.category)
                         }
                       }}
                     >
