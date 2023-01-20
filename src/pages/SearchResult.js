@@ -53,11 +53,11 @@ export const SearchResult = () => {
   return (
     <div>
       <NavBar/>
-      <div id="container" className="min-h-screen py-16 bg-white flex justify-center">
-        <div className='w-10/12 md:p-20'>
+      <div id="container" className="flex justify-center items-center min-h-screen">
+        <div className='max-w-7xl w-11/12 mt-32 flex flex-col justify-center items-center'>
           <SearchBox/>
-          <div className='my-20 border-t border-neutral-200 flex'>
-            <main>
+          <div className='min-w-full my-20 border-t border-neutral-200 flex sticky top-[10vh]'>
+            <main className="w-full p-5 md:p-10">
               <SearchList data={faqData} category={faqData[0].category} />
             </main>
           </div>
