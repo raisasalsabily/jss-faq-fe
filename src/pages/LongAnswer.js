@@ -60,7 +60,7 @@ export const LongAnswer = () => {
                 className="min-h-screen py-16 bg-white flex justify-center"
             >
                 {singleFaq && (
-                    <div className="w-11/12 max-w-5xl md:p-20" data-aos="fade">
+                    <div className="w-5/6 max-w-5xl pt-10" data-aos="fade">
                         <BackBtn />
                         <TitleWithLink question={singleFaq?.question} />
                         <ReadTime minutes={readTime} />

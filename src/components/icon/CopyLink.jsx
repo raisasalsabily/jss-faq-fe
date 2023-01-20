@@ -16,7 +16,7 @@ function CopyLink() {
 
   return (
     <button
-      className="w-10 h-10 rounded-full bg-teal-50 text-teal-900 flex justify-center items-center"
+      className="w-10 h-10 rounded-full bg-teal-50 text-teal-900 flex justify-center items-center hover:drop-shadow-lg hover:-translate-y-1 transition"
       onClick={handleCopy}
     >
       <Icon icon="mdi:link-variant" />
