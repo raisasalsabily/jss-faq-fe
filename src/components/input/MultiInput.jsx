@@ -1,57 +1,95 @@
 import React, { useState } from "react"
-import Select from "react-select"
-import makeAnimated from "react-select/animated"
-import multiInputStyles from "./MultiInputStyle.jsx" // import style for MultiInput
 
-const animatedComp = makeAnimated()
+export default function MultiInput({
+  label,
+  id,
+  name,
+  placeholder,
+  error,
+  onChange,
+  defaultTag,
+}) {
+  const [value, setValue] = useState("")
+  const [tag, setTag] = useState(defaultTag ? defaultTag : [])
+  const [isActive, setIsActive] = useState(false)
 
-const tagOptions = [
-  { value: "KTP", label: "KTP" },
-  { value: "SIM", label: "SIM" },
-  { value: "Password", label: "Password" },
-  { value: "Lupa", label: "Lupa" },
-  { value: "Kartu Keluarga", label: "Kartu Keluarga" },
-  { value: "Subsidi", label: "Subsidi" },
-  { value: "Verifikasi", label: "Verifikasi" },
-  { value: "Penipuan", label: "Penipuan" },
-  { value: "Login", label: "Login" },
-  {
-    value: "Panjang Banget Test Panjang Banget Test",
-    label: "Panjang Banget Test Panjang Banget Test",
-  },
-]
+  const changeHandler = (e) => {
+    setValue(e.target.value)
+    onChange(name, tag)
+  }
 
-function MultiInput(props) {
-  const [selectedOpt, setSelectedOpt] = useState([])
+  const removeTag = (e) => {
+    const arr = tag.filter((t) => t !== e)
+    setTag(arr)
+    onChange(name, arr)
+  }
 
-  //   const handleSelect = () => {
-  //     console.log(selectedOpt)
-  //   }
+  const updateTagsHandler = (e) => {
+    e.preventDefault()
+    // Add tags if input is not empty and if input value is not comma
+    if (e.target.value !== "" && e.target.value !== ",") {
+      if (e.key === ",") {
+        const newTag = value.trim().split(",")[0]
+
+        if (!tag.includes(newTag) && newTag !== "") {
+          const arr = [...tag, newTag]
+          setTag(arr)
+          onChange(name, arr)
+        }
+        setValue("")
+      } else if (e.key === "Enter") {
+        const newTag = value.trim()
+        if (!tag.includes(newTag) && newTag !== "") {
+          const arr = [...tag, newTag]
+          setTag(arr)
+          onChange(name, arr)
+        }
+        setValue("")
+      }
+    }
+
+    // Remove tag if backspace is pressed
+    if (e.key === "Backspace" && tag.length > 0) {
+      const copyOfTags = [...tag]
+      copyOfTags.pop()
+      setTag(copyOfTags)
+      onChange(name, copyOfTags)
+    }
+  }
+
+  const focusHandler = () => {
+    setIsActive(true)
+  }
+
+  const blurHandler = () => {
+    setIsActive(false)
+  }
 
   return (
-    <div className={"w-full text-b-sm text-neutral-800" + props.className}>
-      <Select
-        placeholder={props.placeholder}
-        components={animatedComp}
-        isMulti
-        options={tagOptions}
-        onChange={(item) => setSelectedOpt(item)}
-        isClearable={true}
-        isSearchable={true}
-        closeMenuOnSelect={false}
-        popupHeight=""
-        styles={multiInputStyles}
-      />
-
-      {/* <button onClick={handleSelect}>Console log tags!</button> */}
+    <div className={!isActive ? "mb-8" : "mb-8 border-2"}>
+      <div className="border border-neutral-900">
+        <div className="flex flex-wrap p-2">
+          {tag.map((tag, i) => (
+            <div key={i} className="bg-teal-50 p-2 mb-2">
+              {tag} <span onClick={() => removeTag(tag)}>x</span>
+            </div>
+          ))}
+          <input
+            type="text"
+            placeholder={placeholder}
+            name={name}
+            id={id ? id : name}
+            value={value}
+            onChange={changeHandler}
+            autoComplete="off"
+            onKeyUp={updateTagsHandler}
+            onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+            onFocus={focusHandler}
+            onBlur={blurHandler}
+          />
+        </div>
+      </div>
+      {error && <div className="error">{error}</div>}
     </div>
   )
 }
-
-export default MultiInput
-
-MultiInput.defaultProps = {
-  placeholder: "Tambahkan kata kunci",
-}
-
-// referensi data dinamis: https://www.tutsmake.com/react-multi-select-dropdown-with-dynamic-search-example/

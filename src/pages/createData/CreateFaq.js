@@ -31,6 +31,37 @@ const CreateFaq = () => {
 
   const [value, setValue] = useState("") // state untuk TextEditor
 
+  const [tag, setTag] = useState([])
+  const [errors, setErrors] = useState({})
+
+  const changeHandler = (name, value) => {
+    if (name === "tag") {
+      setTag(value)
+      if (value.length > 0 && errors.tag) {
+        setError((prev) => {
+          const prevErrors = { ...prev }
+          delete prevErrors.tag
+          return prevErrors
+        })
+      }
+    }
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    if (tag.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        tag: "Masukkan setidaknya satu tag",
+      }))
+    }
+    if (tag.length > 0) {
+      console.log(tag)
+      // submit form
+    }
+  }
+
   const getCats = async () => {
     setLoading(true)
     try {
@@ -53,12 +84,25 @@ const CreateFaq = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    if (tag.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        tag: "Masukkan setidaknya satu tag",
+      }))
+    }
+    if (tag.length > 0) {
+      console.log(tag)
+      // submit form
+    }
+
     try {
       await axios
         .post("http://localhost:5000/api/posts", {
           question,
           slug,
           category,
+          tag,
         })
         .then(function (response) {
           navigate("/dashboard/faq")
@@ -122,7 +166,15 @@ const CreateFaq = () => {
           {/* Tag */}
           <div>
             <InputLabel label="Tag" />
-            <MultiInput />
+            <MultiInput
+              label="Tag"
+              id="tag"
+              name="tag"
+              placeholder="Tambahkan tag"
+              onChange={changeHandler}
+              error={errors.tag}
+              defaultTag={tag}
+            />
           </div>
 
           {/* Jawaban */}
