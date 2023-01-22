@@ -19,7 +19,7 @@ function CopyLink() {
 
   setTimeout(() => {
     setCopied(false);
-  }, 1200);
+  }, 2200);
 
   return (
     <div>
