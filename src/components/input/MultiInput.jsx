@@ -1,7 +1,7 @@
 import React, { useState } from "react"
+import { Icon } from "@iconify/react"
 
 export default function MultiInput({
-  label,
   id,
   name,
   placeholder,
@@ -11,7 +11,7 @@ export default function MultiInput({
 }) {
   const [value, setValue] = useState("")
   const [tag, setTag] = useState(defaultTag ? defaultTag : [])
-  const [isActive, setIsActive] = useState(false)
+  // const [isActive, setIsActive] = useState(false)
 
   const changeHandler = (e) => {
     setValue(e.target.value)
@@ -26,6 +26,7 @@ export default function MultiInput({
 
   const updateTagsHandler = (e) => {
     e.preventDefault()
+
     // Add tags if input is not empty and if input value is not comma
     if (e.target.value !== "" && e.target.value !== ",") {
       if (e.key === ",") {
@@ -57,21 +58,32 @@ export default function MultiInput({
     }
   }
 
-  const focusHandler = () => {
-    setIsActive(true)
-  }
+  // const focusHandler = () => {
+  //   setIsActive(true)
+  // }
 
-  const blurHandler = () => {
-    setIsActive(false)
-  }
+  // const blurHandler = () => {
+  //   setIsActive(false)
+  // }
 
   return (
-    <div className={!isActive ? "mb-8" : "mb-8 border-2"}>
-      <div className="border border-neutral-900">
-        <div className="flex flex-wrap p-2">
+    <div
+      className={`w-full border border-neutral-200 rounded text-b-md font-normal`}
+    >
+      <div>
+        <div className="flex flex-wrap gap-2 p-2">
           {tag.map((tag, i) => (
-            <div key={i} className="bg-teal-50 p-2 mb-2">
-              {tag} <span onClick={() => removeTag(tag)}>x</span>
+            <div className="flex items-center bg-teal-50 text-teal-900 text-b-sm font-bold rounded-md ">
+              <div key={i} className="min-w-min px-4 py-2 ">
+                <span>{tag}</span>
+              </div>
+              <div className="text-center pr-2">
+                <Icon
+                  icon="system-uicons:cross-circle"
+                  className="w-4 h-4 rounded-full hover:bg-teal-500 hover:text-neutral-100 transition"
+                  onClick={() => removeTag(tag)}
+                />
+              </div>
             </div>
           ))}
           <input
@@ -84,8 +96,9 @@ export default function MultiInput({
             autoComplete="off"
             onKeyUp={updateTagsHandler}
             onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
-            onFocus={focusHandler}
-            onBlur={blurHandler}
+            // onFocus={focusHandler}
+            // onBlur={blurHandler}
+            className="focus:outline-none"
           />
         </div>
       </div>
