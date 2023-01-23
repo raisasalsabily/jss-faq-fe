@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/auth/Login.jsx";
 import { Register } from "./components/auth/Register.jsx";
 import FaqDashboard from "./pages/dashboard/FaqDashboard.js";
-import CreateFaq from "./pages/createData/CreateFaq.js";
 import Home from "./pages/Home.js";
 import { SignIn } from "./pages/SignIn.js";
 import { SignUp } from "./pages/SignUp.js";
@@ -18,6 +17,7 @@ import CreateCategory from "./pages/dashboard/create/CreateCategory.js";
 import EditCategory from "./pages/dashboard/edit/EditCategory.js";
 import CreateTag from "./pages/dashboard/create/CreateTag.js";
 import EditTag from "./pages/dashboard/edit/EditTag.js";
+import CreateFaq from "./pages/dashboard/create/CreateFaq.js";
 
 function App() {
     useEffect(() => {
@@ -100,6 +100,11 @@ function App() {
                     path="/testing"
                     caseSensitive={false}
                     element={<Testing />}
+                />
+                <Route
+                    path="/search"
+                    caseSensitive={false}
+                    element={<SearchResult />}
                 />
             </Routes>
         </Router>

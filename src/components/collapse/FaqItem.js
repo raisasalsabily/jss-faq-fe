@@ -13,7 +13,7 @@ export default function FaqItem({
   const [isLong, setIsLong] = useState(false)
 
   useEffect(() => {
-    if (content.length > 250) setIsLong(true)
+    if (content?.length > 250) setIsLong(true)
   }, [content])
 
   return (
@@ -22,7 +22,9 @@ export default function FaqItem({
         className="flex justify-around w-full"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <p className="w-11/12 text-b-lg text-neutral-800">{title}</p>
+        <p className="w-11/12 text-b-lg text-neutral-800">
+          {title ? title : null}
+        </p>
         <button className="w-1/12 text-right">{isOpen ? "-" : "+"}</button>
       </div>
 
@@ -32,7 +34,7 @@ export default function FaqItem({
         }`}
       >
         <p className="mt-4 text-b-sm sm:text-b-md text-neutral-600 line-clamp">
-          {content}
+          {content ? content : null}
         </p>
         {isLong ? (
           <Link to={`/post/${_id}`}>
