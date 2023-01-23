@@ -383,7 +383,7 @@ class QuillEditor extends React.Component {
     return (
       <div>
         <div id="toolbar">
-          <select
+          {/* <select
             className="ql-header"
             defaultValue={""}
             onChange={(e) => e.persist()}
@@ -391,7 +391,7 @@ class QuillEditor extends React.Component {
             <option value="1" />
             <option value="2" />
             <option value="" />
-          </select>
+          </select> */}
           <button className="ql-bold" />
           <button className="ql-italic" />
           <button className="ql-underline" />
@@ -404,6 +404,10 @@ class QuillEditor extends React.Component {
           <button className="ql-video" />
           <button className="ql-blockquote" />
           <button className="ql-clean" />
+          <span class="ql-formats">
+            <button class="ql-list" value="ordered" />
+            <button class="ql-list" value="bullet" />
+          </span>
         </div>
         <ReactQuill
           ref={(el) => {
@@ -468,6 +472,8 @@ class QuillEditor extends React.Component {
     "code-block",
     "video",
     "blockquote",
+    "list",
+    "bullet",
     "clean",
   ]
 }

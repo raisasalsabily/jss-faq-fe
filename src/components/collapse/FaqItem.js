@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import DOMPurify from "dompurify"
 
 export default function FaqItem({
   title,
@@ -33,9 +34,10 @@ export default function FaqItem({
           isOpen ? "max-h-96" : "max-h-0"
         }`}
       >
-        <p className="mt-4 text-b-sm sm:text-b-md text-neutral-600 line-clamp">
-          {content ? content : null}
-        </p>
+        <p
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+          className="mt-4 text-b-sm sm:text-b-md text-neutral-600 line-clamp"
+        />
         {isLong ? (
           <Link to={`/post/${_id}`}>
             <button className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
