@@ -105,7 +105,13 @@ const CategoryDashboard = () => {
                             <FaqTable
                                 data={dataTable}
                                 rowsPerPage="5"
-                                lstProp={["category", "show"]}
+                                lstProp={[
+                                    {
+                                        attribute: "category",
+                                        label: "Kategori",
+                                    },
+                                    { attribute: "show", label: "Ditampilkan" },
+                                ]}
                                 onDelete={deleteCat}
                             />
                         </div>

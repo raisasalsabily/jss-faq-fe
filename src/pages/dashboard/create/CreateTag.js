@@ -1,14 +1,14 @@
-import React, { useState } from "react";
 import axios from "axios";
-import InputLabel from "../../components/input/InputLabel";
-import TxtInput from "../../components/input/TxtInput";
-import SaveBtn from "../../components/button/SaveBtn";
-import DefaultLayout from "../../components/layout/DefaultLayout";
-import DashboardLayout from "../../components/layout/DashboardLayout";
-import DashboardTitle from "../../components/dashboard/DashboardTitle";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SaveBtn from "../../../components/button/SaveBtn";
+import DashboardTitle from "../../../components/dashboard/DashboardTitle";
+import InputLabel from "../../../components/input/InputLabel";
+import TxtInput from "../../../components/input/TxtInput";
+import DashboardLayout from "../../../components/layout/DashboardLayout";
+import DefaultLayout from "../../../components/layout/DefaultLayout";
 
-const CreateTag = () => {
+export default function CreateTag() {
     const [tag, setTag] = useState("");
     const navigate = useNavigate();
 
@@ -59,6 +59,4 @@ const CreateTag = () => {
             </DashboardLayout>
         </DefaultLayout>
     );
-};
-
-export default CreateTag;
+}

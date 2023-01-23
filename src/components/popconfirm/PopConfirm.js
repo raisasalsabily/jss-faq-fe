@@ -68,7 +68,9 @@ export default function PopConfirm({
                         icon={faExclamationCircle}
                         className="mr-2"
                     />{" "}
-                    <p className="text-b-sm font-medium">Menghapus data</p>
+                    <p className="text-b-sm font-medium">
+                        Penghapusan permanen
+                    </p>
                 </div>
                 <p className="text-b-sm text-neutral-600 mb-2">
                     Anda yakin akan menghapus?

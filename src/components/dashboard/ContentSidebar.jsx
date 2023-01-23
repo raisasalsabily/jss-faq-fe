@@ -18,7 +18,7 @@ function ContentSidebar(props) {
       <ul className="">
         {props.content &&
           props.content.map((obj) => {
-            return <SingleList value={obj.value} to={obj.url} />
+            return <SingleList value={obj.value} to={obj.url} key={obj.value} />
           })}
       </ul>
     </aside>

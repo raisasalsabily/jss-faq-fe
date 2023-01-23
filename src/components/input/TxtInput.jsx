@@ -9,6 +9,7 @@ function TxtInput(props) {
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}
+      name={props.name}
     />
   )
 }

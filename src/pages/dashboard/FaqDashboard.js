@@ -86,7 +86,10 @@ const FaqDashboard = () => {
                         <FaqTable
                             data={dataTable}
                             rowsPerPage="5"
-                            lstProp={["question", "category"]}
+                            lstProp={[
+                                { attribute: "question", label: "Pertanyaan" },
+                                { attribute: "category", label: "Kategori" },
+                            ]}
                         />
                     </div>
                 )}
