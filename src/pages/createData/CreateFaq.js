@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 import axios from "axios"
 import { Icon } from "@iconify/react"
 
@@ -13,6 +14,7 @@ import SaveBtn from "../../components/button/SaveBtn"
 import DefaultLayout from "../../components/layout/DefaultLayout"
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import DropSearch from "../../components/input/DropSearch"
+import QuillEditor from "../../components/input/QuillEditor"
 
 const CreateFaq = () => {
   const navigate = useNavigate()
@@ -29,7 +31,8 @@ const CreateFaq = () => {
   const [dropSelected, setDropSelected] = useState("") // selected value of category dropdown
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
-  const [value, setValue] = useState("") // state untuk TextEditor
+  const [answer, setAnswer] = useState("") // state untuk TextEditor
+  const [files, setFiles] = useState([]) // state untuk files TextEditor
 
   const [tag, setTag] = useState([])
   const [errors, setErrors] = useState({})
@@ -47,19 +50,13 @@ const CreateFaq = () => {
     }
   }
 
-  const submitHandler = (e) => {
-    e.preventDefault()
+  const onEditorChange = (value) => {
+    setAnswer(value)
+    // console.log(value)
+  }
 
-    if (tag.length === 0) {
-      setErrors((prev) => ({
-        ...prev,
-        tag: "Masukkan setidaknya satu tag",
-      }))
-    }
-    if (tag.length > 0) {
-      console.log(tag)
-      // submit form
-    }
+  const onFilesChange = (files) => {
+    setFiles(files)
   }
 
   const getCats = async () => {
@@ -84,17 +81,21 @@ const CreateFaq = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setAnswer("")
 
-    if (tag.length === 0) {
-      setErrors((prev) => ({
-        ...prev,
-        tag: "Masukkan setidaknya satu tag",
-      }))
-    }
-    if (tag.length > 0) {
-      console.log(tag)
-      // submit form
-    }
+    // const variables = {
+    //   answer: answer,
+    // }
+    // if (tag.length === 0) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     tag: "Masukkan setidaknya satu tag",
+    //   }))
+    // }
+    // if (tag.length > 0) {
+    //   console.log(tag)
+    //   // submit form
+    // }
 
     try {
       await axios
@@ -103,6 +104,7 @@ const CreateFaq = () => {
           slug,
           category,
           tag,
+          answer,
         })
         .then(function (response) {
           navigate("/dashboard/faq")
@@ -180,7 +182,13 @@ const CreateFaq = () => {
           {/* Jawaban */}
           <div>
             <InputLabel label="Jawaban" />
-            <TextEditor setValue={setValue} />
+            <QuillEditor
+              placeholder="Tulis jawaban"
+              onEditorChange={onEditorChange}
+              onFilesChange={onFilesChange}
+            />
+
+            {/* <TextEditor setValue={setValue} /> */}
             {/* <div>
                 Hasil: <br />
                 {value}
