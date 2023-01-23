@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/auth/Login.jsx";
 import { Register } from "./components/auth/Register.jsx";
 import FaqDashboard from "./pages/dashboard/FaqDashboard.js";
-import CreateCategory from "./pages/createData/CreateCategory.js";
 import CreateFaq from "./pages/createData/CreateFaq.js";
-import CreateTag from "./pages/createData/CreateTag.js";
 import Home from "./pages/Home.js";
 import { SignIn } from "./pages/SignIn.js";
 import { SignUp } from "./pages/SignUp.js";
@@ -16,6 +14,10 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { LongAnswer } from "./pages/LongAnswer.js";
 import { SearchResult } from "./pages/SearchResult.js";
+import CreateCategory from "./pages/dashboard/create/CreateCategory.js";
+import EditCategory from "./pages/dashboard/edit/EditCategory.js";
+import CreateTag from "./pages/dashboard/create/CreateTag.js";
+import EditTag from "./pages/dashboard/edit/EditTag.js";
 
 function App() {
     useEffect(() => {
@@ -72,6 +74,11 @@ function App() {
                     caseSensitive={false}
                     element={<CreateCategory />}
                 />
+                <Route
+                    path="/dashboard/category/edit/:id"
+                    caseSensitive={false}
+                    element={<EditCategory />}
+                />
 
                 <Route
                     path="/dashboard/tag"
@@ -82,6 +89,11 @@ function App() {
                     path="/dashboard/tag/create"
                     caseSensitive={false}
                     element={<CreateTag />}
+                />
+                <Route
+                    path="/dashboard/tag/edit/:id"
+                    caseSensitive={false}
+                    element={<EditTag />}
                 />
 
                 <Route
