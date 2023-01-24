@@ -18,6 +18,7 @@ export default function EditFaq() {
     const [question, setQuestion] = useState("");
     const [slug, setSlug] = useState("");
     const [category, setCategory] = useState(null);
+    const [initQuestion, setInitQuestion] = useState("");
 
     const [cats, setCats] = useState([]); // state to fetch category
     const [dropInput, setDropInput] = useState(""); // input value for category dropdown
@@ -66,6 +67,7 @@ export default function EditFaq() {
                 }
             );
             setQuestion(res.data.question);
+            setInitQuestion(res.data.question);
             setSlug(res.data.slug);
             setCategory(res.data.category);
             console.log(category);
@@ -123,6 +125,16 @@ export default function EditFaq() {
         }
     };
 
+    const slugify = () =>
+        setSlug(
+            question
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/[\s_-]+/g, "-")
+                .replace(/^-+|-+$/g, "")
+        );
+
     return (
         <DefaultLayout>
             <DashboardLayout>
@@ -130,8 +142,8 @@ export default function EditFaq() {
                 <div className="">
                     <DashboardTitle
                         id="create-data-title"
-                        title="Menambah Data"
-                        subTitle="FAQ"
+                        title="Mengubah Data"
+                        subTitle={`FAQ - ${initQuestion}`}
                     />
                 </div>
                 <form
@@ -158,6 +170,11 @@ export default function EditFaq() {
                                 value={slug}
                                 onChange={(e) => setSlug(e.target.value)}
                             />
+
+                            <div
+                                className="w-4 h-4 bg-teal-500"
+                                onClick={slugify}
+                            ></div>
                         </div>
 
                         {/* Kategori */}
@@ -200,6 +217,7 @@ export default function EditFaq() {
                             placeholder="Tulis jawaban"
                             onEditorChange={onEditorChange}
                             onFilesChange={onFilesChange}
+                            editorHtml={answer}
                         /> */}
                         {/* <TextEditor setValue={setValue} /> */}
                         {/* <div>

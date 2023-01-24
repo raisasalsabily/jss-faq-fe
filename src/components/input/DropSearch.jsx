@@ -7,7 +7,7 @@ export default function DropSearch({ cats, setCategory, placeholder, initValue =
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
   return (
-    <div id="drop-search" className="w-full text-b-md">
+    <div id="drop-search" className="w-full text-b-md relative">
       <div
         onClick={() => {
           setDropOpen(!dropOpen)}}
@@ -28,7 +28,7 @@ export default function DropSearch({ cats, setCategory, placeholder, initValue =
       </div>
       {/* drop list start */}
       <ul
-        className={`bg-white mt-2 overflow-y-auto ${
+        className={`bg-white mt-2 overflow-y-auto absolute w-full ${
           dropOpen ? "max-h-60 border border-neutral-200" : "max-h-0"
         }`}
       >
