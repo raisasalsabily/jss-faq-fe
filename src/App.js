@@ -16,6 +16,12 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { LongAnswer } from "./pages/LongAnswer.js";
 import { SearchResult } from "./pages/SearchResult.js";
+import CreateCategory from "./pages/dashboard/create/CreateCategory.js";
+import EditCategory from "./pages/dashboard/edit/EditCategory.js";
+import CreateTag from "./pages/dashboard/create/CreateTag.js";
+import EditTag from "./pages/dashboard/edit/EditTag.js";
+import CreateFaq from "./pages/dashboard/create/CreateFaq.js";
+import EditFaq from "./pages/dashboard/edit/EditFaq.js";
 
 function App() {
     useEffect(() => {
@@ -60,6 +66,11 @@ function App() {
                     path="/dashboard/faq/create"
                     caseSensitive={false}
                     element={<CreateFaq />}
+                />
+                <Route
+                    path="/dashboard/faq/edit/:id"
+                    caseSensitive={false}
+                    element={<EditFaq />}
                 />
 
                 <Route
