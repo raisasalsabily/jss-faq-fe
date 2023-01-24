@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Login } from "./components/auth/Login.jsx";
 import { Register } from "./components/auth/Register.jsx";
 import FaqDashboard from "./pages/dashboard/FaqDashboard.js";
-import CreateCategory from "./pages/createData/CreateCategory.js";
-import CreateFaq from "./pages/createData/CreateFaq.js";
-import CreateTag from "./pages/createData/CreateTag.js";
 import Home from "./pages/Home.js";
 import { SignIn } from "./pages/SignIn.js";
 import { SignUp } from "./pages/SignUp.js";
@@ -83,6 +80,11 @@ function App() {
                     caseSensitive={false}
                     element={<CreateCategory />}
                 />
+                <Route
+                    path="/dashboard/category/edit/:id"
+                    caseSensitive={false}
+                    element={<EditCategory />}
+                />
 
                 <Route
                     path="/dashboard/tag"
@@ -94,11 +96,21 @@ function App() {
                     caseSensitive={false}
                     element={<CreateTag />}
                 />
+                <Route
+                    path="/dashboard/tag/edit/:id"
+                    caseSensitive={false}
+                    element={<EditTag />}
+                />
 
                 <Route
                     path="/testing"
                     caseSensitive={false}
                     element={<Testing />}
+                />
+                <Route
+                    path="/search"
+                    caseSensitive={false}
+                    element={<SearchResult />}
                 />
             </Routes>
         </Router>

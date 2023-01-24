@@ -28,7 +28,7 @@ export default function DropSearch({ cats, setCategory, placeholder, initValue =
       </div>
       {/* drop list start */}
       <ul
-        className={`bg-white mt-2 overflow-y-auto   ${
+        className={`bg-white mt-2 overflow-y-auto ${
           dropOpen ? "max-h-60 border border-neutral-200" : "max-h-0"
         }`}
       >

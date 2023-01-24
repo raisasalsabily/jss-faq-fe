@@ -86,11 +86,12 @@ const Home = () => {
                                 <CategorySidebar cats={cats} />
                             </aside>
                             {/* QuestionList */}
-                            <main className="w-full p-10">
+                            <main className="w-full p-5 md:p-10 max-w-sm lg:max-w-none">
                                 {faqs ? (
                                     <FaqList
                                         data={faqs}
                                         category={faqs[0]?.category}
+                                        cats={cats}
                                     />
                                 ) : null}
                             </main>

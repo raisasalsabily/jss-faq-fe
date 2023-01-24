@@ -95,7 +95,7 @@ const TagDashboard = () => {
                         <FaqTable
                             data={dataTable}
                             rowsPerPage="5"
-                            lstProp={["tag"]}
+                            lstProp={[{ attribute: "tag", label: "Tag" }]}
                             onDelete={deleteTag}
                         />
                     </div>

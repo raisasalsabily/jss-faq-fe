@@ -1,20 +1,19 @@
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
-import { Icon } from "@iconify/react"
+import SaveBtn from "../../../components/button/SaveBtn"
+import DashboardTitle from "../../../components/dashboard/DashboardTitle"
+import DropSearch from "../../../components/input/DropSearch"
+import InputLabel from "../../../components/input/InputLabel"
+import MultiInput from "../../../components/input/MultiInput"
+import QuillEditor from "../../../components/input/QuillEditor"
+import TxtInput from "../../../components/input/TxtInput"
+import DashboardLayout from "../../../components/layout/DashboardLayout"
+import DefaultLayout from "../../../components/layout/DefaultLayout"
 
-import DashboardTitle from "../../components/dashboard/DashboardTitle"
-import InputLabel from "../../components/input/InputLabel"
-import TxtInput from "../../components/input/TxtInput"
-import DropInput from "../../components/input/DropInput"
-import MultiInput from "../../components/input/MultiInput"
-import TextEditor from "../../components/input/TextEditor"
-import SaveBtn from "../../components/button/SaveBtn"
-import DefaultLayout from "../../components/layout/DefaultLayout"
-import DashboardLayout from "../../components/layout/DashboardLayout"
-import DropSearch from "../../components/input/DropSearch"
+import imageTest from "../../../assets/images/batik.svg"
 
-const CreateFaq = () => {
+export default function CreateFaq() {
   const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
@@ -29,7 +28,33 @@ const CreateFaq = () => {
   const [dropSelected, setDropSelected] = useState("") // selected value of category dropdown
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
-  const [value, setValue] = useState("") // state untuk TextEditor
+  const [answer, setAnswer] = useState([]) // state untuk TextEditor
+  const [files, setFiles] = useState([]) // state untuk files TextEditor
+
+  const [tag, setTag] = useState([])
+  const [errors, setErrors] = useState({})
+
+  const changeHandler = (name, value) => {
+    if (name === "tag") {
+      setTag(value)
+      if (value.length > 0 && errors.tag) {
+        setError((prev) => {
+          const prevErrors = { ...prev }
+          delete prevErrors.tag
+          return prevErrors
+        })
+      }
+    }
+  }
+
+  const onEditorChange = (value) => {
+    setAnswer(value)
+    // console.log(value)
+  }
+
+  const onFilesChange = (files) => {
+    setFiles(files)
+  }
 
   const getCats = async () => {
     setLoading(true)
@@ -53,12 +78,30 @@ const CreateFaq = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setAnswer("")
+
+    // const variables = {
+    //   answer: answer,
+    // }
+    // if (tag.length === 0) {
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     tag: "Masukkan setidaknya satu tag",
+    //   }))
+    // }
+    // if (tag.length > 0) {
+    //   console.log(tag)
+    //   // submit form
+    // }
+
     try {
       await axios
         .post("http://localhost:5000/api/posts", {
           question,
           slug,
           category,
+          tag,
+          answer,
         })
         .then(function (response) {
           navigate("/dashboard/faq")
@@ -122,17 +165,25 @@ const CreateFaq = () => {
           {/* Tag */}
           <div>
             <InputLabel label="Tag" />
-            <MultiInput />
+            <MultiInput
+              label="Tag"
+              id="tag"
+              name="tag"
+              placeholder="Tambahkan tag"
+              onChange={changeHandler}
+              error={errors.tag}
+              defaultTag={tag}
+            />
           </div>
 
           {/* Jawaban */}
           <div>
             <InputLabel label="Jawaban" />
-            <TextEditor setValue={setValue} />
-            {/* <div>
-                Hasil: <br />
-                {value}
-              </div> */}
+            <QuillEditor
+              placeholder="Tulis jawaban"
+              onEditorChange={onEditorChange}
+              onFilesChange={onFilesChange}
+            />
           </div>
           <SaveBtn />
         </form>
@@ -142,5 +193,3 @@ const CreateFaq = () => {
     </DefaultLayout>
   )
 }
-
-export default CreateFaq

@@ -4,6 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* to enable list style in dangerouslysetinnerhtml, enable set-inner-html class  */
+  .set-inner-html ul {
+    @apply list-disc list-inside;
+  }
+  .set-inner-html ol {
+    @apply list-decimal list-inside;
+  }
+}
+
 /* @layer components {
   @font-face {
     font-family: "Poppins";
@@ -24,7 +34,7 @@
 
 body {
   background: #fff;
-  font-family: 'Poppins';
+  font-family: "Poppins";
 }
 
 .navbarbg {
@@ -48,6 +58,6 @@ body {
 .line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
