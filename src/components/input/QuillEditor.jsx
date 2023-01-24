@@ -249,6 +249,7 @@ class QuillEditor extends React.Component {
       e.currentTarget.files.length > 0
     ) {
       const file = e.currentTarget.files[0]
+      // console.log(file)
 
       let formData = new FormData()
       const config = {
@@ -256,36 +257,38 @@ class QuillEditor extends React.Component {
       }
       formData.append("file", file)
 
-      axios.post("/api/blog/uploadfiles", formData, config).then((response) => {
-        if (response.data.success) {
-          const quill = this.reactQuillRef.getEditor()
-          quill.focus()
+      axios
+        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .then((response) => {
+          if (response.data.success) {
+            const quill = this.reactQuillRef.getEditor()
+            quill.focus()
 
-          let range = quill.getSelection()
-          let position = range ? range.index : 0
+            let range = quill.getSelection()
+            let position = range ? range.index : 0
 
-          //먼저 노드 서버에다가 이미지를 넣은 다음에   여기 아래에 src에다가 그걸 넣으면 그게
-          //이미지 블롯으로 가서  크리에이트가 이미지를 형성 하며 그걸 발류에서     src 랑 alt 를 가져간후에  editorHTML에 다가 넣는다.
-          quill.insertEmbed(position, "image", {
-            src: "http://localhost:5000/" + response.data.url,
-            alt: response.data.fileName,
-          })
-          quill.setSelection(position + 1)
+            //먼저 노드 서버에다가 이미지를 넣은 다음에   여기 아래에 src에다가 그걸 넣으면 그게
+            //이미지 블롯으로 가서  크리에이트가 이미지를 형성 하며 그걸 발류에서     src 랑 alt 를 가져간후에  editorHTML에 다가 넣는다.
+            quill.insertEmbed(position, "image", {
+              src: "http://localhost:5000/" + response.data.url,
+              alt: response.data.fileName,
+            })
+            quill.setSelection(position + 1)
 
-          if (this._isMounted) {
-            this.setState(
-              {
-                files: [...this.state.files, file],
-              },
-              () => {
-                this.props.onFilesChange(this.state.files)
-              }
-            )
+            if (this._isMounted) {
+              this.setState(
+                {
+                  files: [...this.state.files, file],
+                },
+                () => {
+                  this.props.onFilesChange(this.state.files)
+                }
+              )
+            }
+          } else {
+            return alert("failed to upload file")
           }
-        } else {
-          return alert("failed to upload file")
-        }
-      })
+        })
     }
   }
 
@@ -306,33 +309,35 @@ class QuillEditor extends React.Component {
       }
       formData.append("file", file)
 
-      axios.post("/api/blog/uploadfiles", formData, config).then((response) => {
-        if (response.data.success) {
-          const quill = this.reactQuillRef.getEditor()
-          quill.focus()
+      axios
+        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .then((response) => {
+          if (response.data.success) {
+            const quill = this.reactQuillRef.getEditor()
+            quill.focus()
 
-          let range = quill.getSelection()
-          let position = range ? range.index : 0
-          quill.insertEmbed(position, "video", {
-            src: "http://localhost:5000/" + response.data.url,
-            title: response.data.fileName,
-          })
-          quill.setSelection(position + 1)
+            let range = quill.getSelection()
+            let position = range ? range.index : 0
+            quill.insertEmbed(position, "video", {
+              src: "http://localhost:5000/" + response.data.url,
+              title: response.data.fileName,
+            })
+            quill.setSelection(position + 1)
 
-          if (this._isMounted) {
-            this.setState(
-              {
-                files: [...this.state.files, file],
-              },
-              () => {
-                this.props.onFilesChange(this.state.files)
-              }
-            )
+            if (this._isMounted) {
+              this.setState(
+                {
+                  files: [...this.state.files, file],
+                },
+                () => {
+                  this.props.onFilesChange(this.state.files)
+                }
+              )
+            }
+          } else {
+            return alert("failed to upload file")
           }
-        } else {
-          return alert("failed to upload file")
-        }
-      })
+        })
     }
   }
 
@@ -354,28 +359,30 @@ class QuillEditor extends React.Component {
       }
       formData.append("file", file)
 
-      axios.post("/api/blog/uploadfiles", formData, config).then((response) => {
-        if (response.data.success) {
-          const quill = this.reactQuillRef.getEditor()
-          quill.focus()
+      axios
+        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .then((response) => {
+          if (response.data.success) {
+            const quill = this.reactQuillRef.getEditor()
+            quill.focus()
 
-          let range = quill.getSelection()
-          let position = range ? range.index : 0
-          quill.insertEmbed(position, "file", response.data.fileName)
-          quill.setSelection(position + 1)
+            let range = quill.getSelection()
+            let position = range ? range.index : 0
+            quill.insertEmbed(position, "file", response.data.fileName)
+            quill.setSelection(position + 1)
 
-          if (this._isMounted) {
-            this.setState(
-              {
-                files: [...this.state.files, file],
-              },
-              () => {
-                this.props.onFilesChange(this.state.files)
-              }
-            )
+            if (this._isMounted) {
+              this.setState(
+                {
+                  files: [...this.state.files, file],
+                },
+                () => {
+                  this.props.onFilesChange(this.state.files)
+                }
+              )
+            }
           }
-        }
-      })
+        })
     }
   }
 
@@ -409,6 +416,7 @@ class QuillEditor extends React.Component {
             <button class="ql-list" value="bullet" />
           </span>
         </div>
+
         <ReactQuill
           ref={(el) => {
             this.reactQuillRef = el
