@@ -59,6 +59,9 @@ const Home = () => {
     fetchFaqs()
   }, [search])
 
+  const location = useLocation()
+  console.log(location)
+
   return (
     <>
       <div className="font-poppins">

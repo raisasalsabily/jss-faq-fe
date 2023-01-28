@@ -48,8 +48,6 @@ function Searchbar(props) {
     })
   }
 
-  const { pathname } = useLocation()
-
   return (
     <form className={`w-[320px] md:w-[640px] pt-2 relative ${props.className}`}>
       <input

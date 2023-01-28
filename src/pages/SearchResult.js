@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useLocation, Link } from "react-router-dom"
+import { useLocation, Link, useSearchParams } from "react-router-dom"
 import { createBrowserHistory } from "history"
 import axios from "axios"
 import SearchBox from "../components/box/SearchBox"
@@ -57,23 +57,41 @@ export const SearchResult = () => {
     },
   ]
 
-  // const location = useLocation()
-  // console.log(location)
+  const location = useLocation()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
-  const handleChange = (e) => setSearchQuery(e.target.value)
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const location = useLocation()
+  const [query, setQuery] = useState(searchParams.get("query"))
+  const page = searchParams.get("page") || 0
+
+  const handleChange = (e) => {
+    const newQuery = e.target.value
+    setQuery(newQuery)
+    setSearchParams({
+      query: newQuery,
+    })
+    // console.log(location)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // const newQuery = e.target.value
+    // setSearchParams({
+    //   query: newQuery,
+    // })
+    // console.log(location)
+    fetchSearch()
+  }
 
   const fetchSearch = async () => {
     setLoading(true)
     // console.log(query);
     try {
-      let currQuery = searchQuery ? searchQuery : location.state.homeQuery
+      let currQuery = query ? query : location.state.homeQuery
 
       const res = await axios.get(
         `http://localhost:5000/api/search?query=${currQuery}`,
@@ -92,11 +110,6 @@ export const SearchResult = () => {
     setLoading(false)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    fetchSearch()
-  }
-
   useEffect(() => {
     fetchSearch()
   }, [])
@@ -110,7 +123,7 @@ export const SearchResult = () => {
       >
         <div className="max-w-7xl w-11/12 mt-32 flex flex-col justify-center items-center">
           {/* <SearchBox /> */}
-          {/* ------------------------------------------------------------------------- */}
+
           <form
             className={`w-[320px] md:w-[640px] pt-2 relative`}
             onSubmit={handleSubmit}
@@ -121,7 +134,7 @@ export const SearchResult = () => {
               name="search"
               // placeholder={props.placeholder}
               required
-              value={searchQuery}
+              value={query}
               onChange={handleChange}
             />
 
