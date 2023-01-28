@@ -1,15 +1,16 @@
 import React, { useState } from "react"
 import { Icon } from "@iconify/react"
 
-export default function DropSearch({ cats, setCategory, placeholder }) {
+export default function DropSearch({ cats, setCategory, placeholder, initValue = "" }) {
   const [dropInput, setDropInput] = useState("") // input value for category dropdown
-  const [dropSelected, setDropSelected] = useState("") // selected value of category dropdown
+  const [dropSelected, setDropSelected] = useState(initValue) // selected value of category dropdown
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
   return (
-    <div id="drop-search" className="w-full text-b-md">
+    <div id="drop-search" className="w-full text-b-md relative z-10">
       <div
-        onClick={() => setDropOpen(!dropOpen)}
+        onClick={() => {
+          setDropOpen(!dropOpen)}}
         className={`bg-white box-border w-full p-2 flex items-center justify-between rounded border border-neutral-200 ${
           !dropSelected && "text-neutral-300"
         }`}
@@ -27,7 +28,7 @@ export default function DropSearch({ cats, setCategory, placeholder }) {
       </div>
       {/* drop list start */}
       <ul
-        className={`bg-white mt-2 overflow-y-auto ${
+        className={`bg-white mt-2 overflow-y-auto absolute w-full ${
           dropOpen ? "max-h-60 border border-neutral-200" : "max-h-0"
         }`}
       >

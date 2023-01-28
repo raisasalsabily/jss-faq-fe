@@ -5,7 +5,7 @@ function Category(props) {
   return (
     <li className="relative">
       <NavLink
-        className={`h-10 flex items-center px-10 overflow-hidden text-ellipsis whitespace-nowrap hover:text-teal-900 hover:bg-teal-50 hover:border-r-2 hover:border-teal-500 transition duration-300 ease-in-out`}
+        className={`px-10 py-3 md:px-10 md:py-2 flex items-center overflow-hidden text-ellipsis whitespace-nowrap text-neutral-700 hover:text-teal-900 hover:bg-teal-50 hover:border-r-2 hover:border-teal-500 transition duration-300 ease-in-out`}
         to={props.to}
         data-mdb-ripple="true"
         data-mdb-ripple-color="black"

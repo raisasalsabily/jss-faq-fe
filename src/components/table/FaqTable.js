@@ -55,20 +55,15 @@ export default function FaqTable({
                                     className="last:[&>td]:last:rounded-br-lg  first:[&>td]:last:rounded-bl-lg"
                                 >
                                     {lstProp.map((prop, i) => {
-                                        if (i === 0) {
-                                            return (
-                                                <td className="pl-10 py-4 text-left text-neutral-900 text-b-sm tabular-nums">
-                                                    {data[
-                                                        prop.attribute
-                                                    ].toString()}
-                                                </td>
-                                            );
-                                        }
                                         return (
-                                            <td className="text-left px-4 py-4 text-neutral-900 text-b-sm">
-                                                {data[
-                                                    prop.attribute
-                                                ].toString()}
+                                            <td
+                                                className={`text-left text-neutral-900 text-b-sm ${
+                                                    i === 0
+                                                        ? "pl-10 py-4"
+                                                        : "p-4"
+                                                }`}
+                                            >
+                                                {data[prop.attribute]}
                                             </td>
                                         );
                                     })}

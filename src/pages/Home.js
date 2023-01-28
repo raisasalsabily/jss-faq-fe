@@ -4,7 +4,7 @@ import Navbar from "./../components/navbar/Navbar.jsx";
 import Footer from "./../components/footer/Footer.jsx";
 import CategorySidebar from "../components/Category/CategorySidebar.jsx";
 import HelpBox from "../components/box/HelpBox.jsx";
-import JSSLiveChat from '../components/icon/JSSLiveChat';
+import JSSLiveChat from "../components/icon/JSSLiveChat";
 import FaqList from "../components/collapse/FaqList.js";
 import { useLocation } from "react-router-dom";
 import SearchBox from "../components/box/SearchBox.jsx";
@@ -40,7 +40,6 @@ const Home = () => {
     const fetchFaqs = async () => {
         setLoading(true);
         let query = search ? search : "?cat=Akun";
-        console.log(query);
         try {
             const res = await axios.get(
                 `http://localhost:5000/api/posts${query}`,
@@ -72,21 +71,20 @@ const Home = () => {
                 <Navbar />
 
                 {/* start - container */}
+                <SearchBox />
                 <div
                     id="container"
-                    className="flex justify-center items-center min-h-screen"
+                    className="flex justify-center items-center"
                 >
-                    <div className="max-w-7xl w-11/12 mt-32 flex flex-col justify-center items-center">
-                        <SearchBox/>
-
+                    <div className="max-w-7xl w-full flex flex-col justify-center items-center">
                         {/* sidebar and question list */}
-                        <div className="min-w-full my-20 border-t border-neutral-200 flex sticky top-[10vh]">
+                        <div className="my-12 md:my-20 md:px-8 w-full md:border-t border-neutral-200 flex sticky top-[10vh]">
                             {/* CategorySidebar */}
-                            <aside className="hidden md:flex w-4/12">
+                            <aside className="hidden py-4 md:flex w-4/12 border-r border-neutral-200">
                                 <CategorySidebar cats={cats} />
                             </aside>
                             {/* QuestionList */}
-                            <main className="w-full p-5 md:p-10 max-w-sm lg:max-w-none">
+                            <main className="w-full py-5 md:p-10 max-w-sm lg:max-w-none">
                                 {faqs ? (
                                     <FaqList
                                         data={faqs}
@@ -103,7 +101,7 @@ const Home = () => {
                 <div id="helpbox">
                     <HelpBox />
                 </div>
-                <JSSLiveChat/>
+                <JSSLiveChat />
 
                 <Footer />
             </div>

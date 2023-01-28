@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import { useNavigate, useParams } from "react-router-dom";
 import SaveBtn from "../../../components/button/SaveBtn";
+import SlugButton from "../../../components/button/SlugButton";
 import DashboardTitle from "../../../components/dashboard/DashboardTitle";
 import DropSearch from "../../../components/input/DropSearch";
 import InputLabel from "../../../components/input/InputLabel";
@@ -10,29 +12,27 @@ import QuillEditor from "../../../components/input/QuillEditor";
 import TxtInput from "../../../components/input/TxtInput";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import DefaultLayout from "../../../components/layout/DefaultLayout";
-import imageTest from "../../../assets/images/batik.svg";
-import SlugButton from "../../../components/button/SlugButton";
 
-export default function CreateFaq() {
+export default function EditFaq() {
     const navigate = useNavigate();
-
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-
+    const { id } = useParams();
     const [question, setQuestion] = useState("");
     const [slug, setSlug] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState(null);
+    const [initQuestion, setInitQuestion] = useState("");
 
     const [cats, setCats] = useState([]); // state to fetch category
     const [dropInput, setDropInput] = useState(""); // input value for category dropdown
     const [dropSelected, setDropSelected] = useState(""); // selected value of category dropdown
     const [dropOpen, setDropOpen] = useState(""); //dropdown open or close
 
-    const [answer, setAnswer] = useState([]); // state untuk TextEditor
+    const [answer, setAnswer] = useState(""); // state untuk TextEditor
     const [files, setFiles] = useState([]); // state untuk files TextEditor
 
-    const [tag, setTag] = useState([]);
+    const [tag, setTag] = useState(null);
     const [errors, setErrors] = useState({});
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const changeHandler = (name, value) => {
         if (name === "tag") {
@@ -56,11 +56,35 @@ export default function CreateFaq() {
         setFiles(files);
     };
 
+    const getFaqById = async () => {
+        setLoading(true);
+        try {
+            const res = await axios.get(
+                `http://localhost:5000/api/posts/${id}`,
+                {
+                    headers: {
+                        Accept: "application/json",
+                    },
+                }
+            );
+            setQuestion(res.data.question);
+            setInitQuestion(res.data.question);
+            setSlug(res.data.slug);
+            setCategory(res.data.category);
+            setAnswer(res.data.answer);
+            setTag(res.data.tag);
+        } catch (error) {
+            setError(error);
+            // console.log(error)
+        }
+        setLoading(false);
+    };
+
     const getCats = async () => {
         setLoading(true);
         try {
             const res = await axios.get(
-                "http://localhost:5000/api/categories",
+                `http://localhost:5000/api/categories`,
                 {
                     headers: {
                         Accept: "application/json",
@@ -76,40 +100,16 @@ export default function CreateFaq() {
     };
 
     useEffect(() => {
+        getFaqById();
         getCats();
     }, []);
-
-    const slugify = () =>
-        setSlug(
-            question
-                .toLowerCase()
-                .trim()
-                .replace(/[^\w\s-]/g, "")
-                .replace(/[\s_-]+/g, "-")
-                .replace(/^-+|-+$/g, "")
-        );
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAnswer("");
-
-        // const variables = {
-        //   answer: answer,
-        // }
-        // if (tag.length === 0) {
-        //   setErrors((prev) => ({
-        //     ...prev,
-        //     tag: "Masukkan setidaknya satu tag",
-        //   }))
-        // }
-        // if (tag.length > 0) {
-        //   console.log(tag)
-        //   // submit form
-        // }
-
         try {
             await axios
-                .post("http://localhost:5000/api/posts", {
+                .put(`http://localhost:5000/api/posts/${id}`, {
                     question,
                     slug,
                     category,
@@ -125,6 +125,16 @@ export default function CreateFaq() {
         }
     };
 
+    const slugify = () =>
+        setSlug(
+            question
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/[\s_-]+/g, "-")
+                .replace(/^-+|-+$/g, "")
+        );
+
     return (
         <DefaultLayout>
             <DashboardLayout>
@@ -132,8 +142,8 @@ export default function CreateFaq() {
                 <div className="">
                     <DashboardTitle
                         id="create-data-title"
-                        title="Menambah Data"
-                        subTitle="FAQ"
+                        title="Mengubah Data"
+                        subTitle={`FAQ - ${initQuestion}`}
                     />
                 </div>
                 <form
@@ -161,6 +171,7 @@ export default function CreateFaq() {
                                     value={slug}
                                     onChange={(e) => setSlug(e.target.value)}
                                 />
+
                                 <SlugButton onClick={slugify} />
                             </div>
                         </div>
@@ -168,8 +179,9 @@ export default function CreateFaq() {
                         {/* Kategori */}
                         <div>
                             <InputLabel label="Kategori" />
-                            {cats ? (
+                            {cats && category ? (
                                 <DropSearch
+                                    initValue={category}
                                     cats={cats}
                                     setCategory={setCategory}
                                     placeholder="Pilih kategori"
@@ -181,25 +193,41 @@ export default function CreateFaq() {
                     {/* Tag */}
                     <div>
                         <InputLabel label="Tag" />
-                        <MultiInput
-                            label="Tag"
-                            id="tag"
-                            name="tag"
-                            placeholder="Tambahkan tag"
-                            onChange={changeHandler}
-                            error={errors.tag}
-                            defaultTag={tag}
-                        />
+                        {tag && (
+                            <MultiInput
+                                label="Tag"
+                                id="tag"
+                                name="tag"
+                                placeholder="Tambahkan tag"
+                                onChange={changeHandler}
+                                error={errors.tag}
+                                defaultTag={tag}
+                            />
+                        )}
                     </div>
 
                     {/* Jawaban */}
                     <div>
                         <InputLabel label="Jawaban" />
-                        <QuillEditor
-                            placeholder="Tulis jawaban"
-                            onEditorChange={onEditorChange}
-                            onFilesChange={onFilesChange}
-                        />
+                        {/* <ReactQuill
+                            theme="snow"
+                            value={answer}
+                            onChange={onEditorChange}
+                        /> */}
+                        {answer && (
+                            <QuillEditor
+                                placeholder="Tulis jawaban"
+                                onEditorChange={onEditorChange}
+                                onFilesChange={onFilesChange}
+                                initValue={answer}
+                            />
+                        )}
+
+                        {/* <TextEditor setValue={setValue} /> */}
+                        {/* <div>
+                  Hasil: <br />
+                  {value}
+                </div> */}
                     </div>
                     <SaveBtn />
                 </form>
