@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+    faMagnifyingGlass,
+    faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
@@ -14,13 +17,28 @@ const FaqDashboard = () => {
     const [faqs, setFaqs] = useState([]);
     const [dataTable, setDataTable] = useState([]);
 
+    const generateLink = (data) => {
+        if (data._id)
+            data.url = (
+                <Link to={`/post/${data._id}`} target="_blank">
+                    <FontAwesomeIcon
+                        icon={faExternalLinkAlt}
+                        className="text-teal-300 hover:text-teal-900 transition-colors"
+                    />
+                </Link>
+            );
+        return data;
+    };
+
     const getFaqs = async () => {
         try {
             const res = await axios.get(
                 "http://localhost:5000/api/posts/?table=true"
             );
-            setFaqs(res.data);
-            setDataTable(res.data);
+            let data = res.data;
+            data = data.map(generateLink);
+            setFaqs(data);
+            setDataTable(data);
         } catch (err) {
             console.log(err);
         }
@@ -89,6 +107,7 @@ const FaqDashboard = () => {
                             lstProp={[
                                 { attribute: "question", label: "Pertanyaan" },
                                 { attribute: "category", label: "Kategori" },
+                                { attribute: "url", label: "Laman" },
                             ]}
                         />
                     </div>

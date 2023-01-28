@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import { useNavigate, useParams } from "react-router-dom";
 import SaveBtn from "../../../components/button/SaveBtn";
+import SlugButton from "../../../components/button/SlugButton";
 import DashboardTitle from "../../../components/dashboard/DashboardTitle";
 import DropSearch from "../../../components/input/DropSearch";
 import InputLabel from "../../../components/input/InputLabel";
@@ -28,7 +29,7 @@ export default function EditFaq() {
     const [answer, setAnswer] = useState(""); // state untuk TextEditor
     const [files, setFiles] = useState([]); // state untuk files TextEditor
 
-    const [tag, setTag] = useState([]);
+    const [tag, setTag] = useState(null);
     const [errors, setErrors] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -70,7 +71,6 @@ export default function EditFaq() {
             setInitQuestion(res.data.question);
             setSlug(res.data.slug);
             setCategory(res.data.category);
-            console.log(category);
             setAnswer(res.data.answer);
             setTag(res.data.tag);
         } catch (error) {
@@ -165,16 +165,15 @@ export default function EditFaq() {
                         {/* Route URL */}
                         <div>
                             <InputLabel label="Route URL" />
-                            <TxtInput
-                                placeholder="Generate url..."
-                                value={slug}
-                                onChange={(e) => setSlug(e.target.value)}
-                            />
+                            <div className="flex relative">
+                                <TxtInput
+                                    placeholder="Generate url..."
+                                    value={slug}
+                                    onChange={(e) => setSlug(e.target.value)}
+                                />
 
-                            <div
-                                className="w-4 h-4 bg-teal-500"
-                                onClick={slugify}
-                            ></div>
+                                <SlugButton onClick={slugify} />
+                            </div>
                         </div>
 
                         {/* Kategori */}
@@ -194,31 +193,36 @@ export default function EditFaq() {
                     {/* Tag */}
                     <div>
                         <InputLabel label="Tag" />
-                        <MultiInput
-                            label="Tag"
-                            id="tag"
-                            name="tag"
-                            placeholder="Tambahkan tag"
-                            onChange={changeHandler}
-                            error={errors.tag}
-                            defaultTag={tag}
-                        />
+                        {tag && (
+                            <MultiInput
+                                label="Tag"
+                                id="tag"
+                                name="tag"
+                                placeholder="Tambahkan tag"
+                                onChange={changeHandler}
+                                error={errors.tag}
+                                defaultTag={tag}
+                            />
+                        )}
                     </div>
 
                     {/* Jawaban */}
                     <div>
                         <InputLabel label="Jawaban" />
-                        <ReactQuill
+                        {/* <ReactQuill
                             theme="snow"
                             value={answer}
                             onChange={onEditorChange}
-                        />
-                        {/* <QuillEditor
-                            placeholder="Tulis jawaban"
-                            onEditorChange={onEditorChange}
-                            onFilesChange={onFilesChange}
-                            editorHtml={answer}
                         /> */}
+                        {answer && (
+                            <QuillEditor
+                                placeholder="Tulis jawaban"
+                                onEditorChange={onEditorChange}
+                                onFilesChange={onFilesChange}
+                                initValue={answer}
+                            />
+                        )}
+
                         {/* <TextEditor setValue={setValue} /> */}
                         {/* <div>
                   Hasil: <br />

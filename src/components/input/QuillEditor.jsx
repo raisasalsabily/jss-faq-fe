@@ -183,14 +183,16 @@ class QuillEditor extends React.Component {
   placeholder
   onEditorChange
   onFilesChange
+  initValue
   onPollsChange
   _isMounted
+
 
   constructor(props) {
     super(props)
 
     this.state = {
-      editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : "",
+      editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : this.props.initValue ? this.props.initValue : "",
       files: [],
     }
 
@@ -390,7 +392,7 @@ class QuillEditor extends React.Component {
     return (
       <div>
         <div id="toolbar">
-          {/* <select
+          <select
             className="ql-header"
             defaultValue={""}
             onChange={(e) => e.persist()}
@@ -398,7 +400,7 @@ class QuillEditor extends React.Component {
             <option value="1" />
             <option value="2" />
             <option value="" />
-          </select> */}
+          </select>
           <button className="ql-bold" />
           <button className="ql-italic" />
           <button className="ql-underline" />

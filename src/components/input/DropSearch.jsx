@@ -7,7 +7,7 @@ export default function DropSearch({ cats, setCategory, placeholder, initValue =
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
 
   return (
-    <div id="drop-search" className="w-full text-b-md relative">
+    <div id="drop-search" className="w-full text-b-md relative z-10">
       <div
         onClick={() => {
           setDropOpen(!dropOpen)}}
