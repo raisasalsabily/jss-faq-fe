@@ -71,6 +71,7 @@ export const SearchResult = () => {
   const page = searchParams.get("page") || 0
 
   const handleChange = (e) => {
+    setRecOpen(true)
     const newQuery = e.target.value
     // setSearchQuery(newQuery)
     // console.log(newQuery)
@@ -84,6 +85,7 @@ export const SearchResult = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setRecOpen(false)
     // const newQuery = e.target.value
     // setCurrKeyword(newQuery)
     // setSearchParams({
@@ -147,7 +149,7 @@ export const SearchResult = () => {
     fetchSearch()
   }, [])
 
-  const [recOpen, setRecOpen] = useState(true) //search recommendation open or close
+  const [recOpen, setRecOpen] = useState((current) => !current) //search recommendation open or close
 
   return (
     <div>
@@ -191,7 +193,7 @@ export const SearchResult = () => {
                         query.toLowerCase()
                       ) {
                         setQuery(searchRec?.question)
-                        setRecOpen(false)
+                        setRecOpen((current) => !current)
                       }
                     }}
                   >
