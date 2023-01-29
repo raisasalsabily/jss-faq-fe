@@ -61,7 +61,7 @@ export default function NavBar() {
                   </button>
                 </div>
                 {/* JSS Logo */}
-                <a href="/">
+                <a href="https://jss.jogjakota.go.id/v4">
                   <img
                     className="w-[90px] h-[30px]"
                     src={jssLogoText}
