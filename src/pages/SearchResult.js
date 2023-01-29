@@ -7,6 +7,7 @@ import JSSLiveChat from "../components/icon/JSSLiveChat"
 import NavBar from "../components/navbar/Navbar"
 import SearchList from "../components/search/SearchList"
 import Searchbar from "../components/searchbar/SearchBar"
+import bgSearch from "../assets/images/bg-search.png"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
@@ -73,12 +74,14 @@ export const SearchResult = () => {
     setSearchParams({
       query: newQuery,
     })
+
     // console.log(location)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     // const newQuery = e.target.value
+    // setCurrKeyword(newQuery)
     // setSearchParams({
     //   query: newQuery,
     // })
@@ -118,26 +121,34 @@ export const SearchResult = () => {
       <NavBar />
       <div
         id="container"
-        className="flex justify-center items-center min-h-screen"
+        className="mt-16 flex flex-col items-center min-h-screen"
       >
-        <div className="max-w-7xl w-11/12 mt-32 flex flex-col justify-center items-center">
+        <div
+          id="search-box"
+          className="py-16 flex flex-col justify-center items-center w-full bg-cover bg-bottom"
+          style={{ backgroundImage: `url(${bgSearch})` }}
+        >
+          <h1 className="mb-2 text-h-sm lg:text-h-md font-bold text-center text-teal-700">
+            Hasil pencarian
+          </h1>
+
           <Searchbar
             className=""
-            placeholder="Telusuri..."
+            placeholder="Telusuri lagi..."
             value={query}
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
-
-          <div className="min-w-full my-20 border-t border-neutral-200 flex sticky top-[10vh]">
-            <main className="w-full p-5 md:p-10">
-              <SearchList
-                data={searchResults ? searchResults : null}
-                // category={searchResults[0].category}
-              />
-            </main>
-          </div>
         </div>
+
+        <main className="mt-8 mb-20 max-w-7xl w-11/12 flex flex-col items-center">
+          <div id="search-result" className="w-full md:px-10 flex">
+            <SearchList
+              data={searchResults ? searchResults : null}
+              // category={searchResults[0].category}
+            />
+          </div>
+        </main>
       </div>
       <JSSLiveChat />
       <Footer />
