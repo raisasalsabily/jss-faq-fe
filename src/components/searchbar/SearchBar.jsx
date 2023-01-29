@@ -11,6 +11,7 @@ function Searchbar({
   onChange,
   onClick,
   onSubmit,
+  onFocus,
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -47,14 +48,6 @@ function Searchbar({
 
   const navigate = useNavigate()
 
-  const redirectToSearch = () => {
-    navigate(`/search`, {
-      state: {
-        homeQuery: searchQuery,
-      },
-    })
-  }
-
   return (
     <form
       className={`w-[320px] md:w-[640px] pt-2 relative ${className}`}
@@ -68,6 +61,7 @@ function Searchbar({
         required
         value={value}
         onChange={onChange}
+        onFocus={onFocus}
       />
 
       <button type="submit" className="absolute right-0 top-0 mt-5 mr-4 flex">

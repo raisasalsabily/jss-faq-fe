@@ -62,7 +62,9 @@ export const SearchResult = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
+  // const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
+  const [searchRec, setSearchRec] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [query, setQuery] = useState(searchParams.get("query"))
@@ -70,6 +72,8 @@ export const SearchResult = () => {
 
   const handleChange = (e) => {
     const newQuery = e.target.value
+    // setSearchQuery(newQuery)
+    // console.log(newQuery)
     setQuery(newQuery)
     setSearchParams({
       query: newQuery,
@@ -112,9 +116,38 @@ export const SearchResult = () => {
     setLoading(false)
   }
 
+  const fetchSearchRec = async () => {
+    setLoading(true)
+    // console.log(query);
+    try {
+      let currQuery = query ? query : null
+
+      const res = await axios.get(
+        `http://localhost:5000/api/search?query=${currQuery}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      )
+      setSearchRec(res.data)
+      console.log(searchRec)
+    } catch (error) {
+      console.log(error)
+      setError(error)
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchSearchRec()
+  }, [query])
+
   useEffect(() => {
     fetchSearch()
   }, [])
+
+  const [recOpen, setRecOpen] = useState(true) //search recommendation open or close
 
   return (
     <div>
@@ -124,13 +157,14 @@ export const SearchResult = () => {
         className="mt-16 flex flex-col items-center min-h-screen"
       >
         <div
-          id="search-box"
+          id="search-title--and-bar"
           className="py-16 flex flex-col justify-center items-center w-full bg-cover bg-bottom"
           style={{ backgroundImage: `url(${bgSearch})` }}
         >
           <h1 className="mb-2 text-h-sm lg:text-h-md font-bold text-center text-teal-700">
             Hasil pencarian
           </h1>
+          {/* searchbar and recommendation - start*/}
 
           <Searchbar
             className=""
@@ -139,6 +173,35 @@ export const SearchResult = () => {
             onChange={handleChange}
             onSubmit={handleSubmit}
           />
+          <div className="relative z-10 flex flex-col justify-center items-center">
+            {/* drop recommendation list start */}
+            {query ? (
+              <ul
+                className={`absolute top-0 w-[320px] md:w-[640px] mt-1 bg-white overflow-y-auto  rounded-xl ${
+                  recOpen ? "max-h-60 border border-neutral-200" : "max-h-0"
+                }`}
+              >
+                {searchRec?.map((searchRec) => (
+                  <li
+                    key={searchRec?._id}
+                    className={`p-2 text-sm hover:bg-neutral-100 list-none`}
+                    onClick={() => {
+                      if (
+                        searchRec?.question?.toLowerCase() !==
+                        query.toLowerCase()
+                      ) {
+                        setQuery(searchRec?.question)
+                        setRecOpen(false)
+                      }
+                    }}
+                  >
+                    {searchRec?.question}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+          {/* drop recommendation list end */}
         </div>
 
         <main className="mt-8 mb-20 max-w-7xl w-11/12 flex flex-col items-center">

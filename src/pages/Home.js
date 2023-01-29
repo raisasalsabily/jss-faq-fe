@@ -62,8 +62,9 @@ const Home = () => {
   // searchbar
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState([])
   const handleChange = (e) => setSearchQuery(e.target.value)
-  //   console.log(searchQuery)
+  console.log(searchQuery)
 
   const redirectToSearch = () => {
     navigate(`/search`, {
@@ -72,6 +73,31 @@ const Home = () => {
       },
     })
   }
+
+  const fetchSearch = async () => {
+    setLoading(true)
+    // console.log(query);
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/api/search?query=${searchQuery}`,
+        {
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      )
+      setSearchResults(res.data)
+      // console.log(searchResults)
+    } catch (error) {
+      console.log(error)
+      setError(error)
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchSearch()
+  }, [searchQuery])
 
   return (
     <>
