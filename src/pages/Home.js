@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import Navbar from "./../components/navbar/Navbar.jsx"
 import Footer from "./../components/footer/Footer.jsx"
@@ -6,8 +7,9 @@ import CategorySidebar from "../components/Category/CategorySidebar.jsx"
 import HelpBox from "../components/box/HelpBox.jsx"
 import JSSLiveChat from "../components/icon/JSSLiveChat"
 import FaqList from "../components/collapse/FaqList.js"
-import { useLocation, useNavigate } from "react-router-dom"
-import SearchBox from "../components/box/SearchBox.jsx"
+import Searchbar from "../components/searchbar/SearchBar.jsx"
+import SearchRecom from "../components/search/SearchRecom.jsx"
+import bgSearch from "../assets/images/bg-search.png"
 
 const Home = () => {
   const [loading, setLoading] = useState(false)
@@ -63,15 +65,25 @@ const Home = () => {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
-  const handleChange = (e) => setSearchQuery(e.target.value)
+  const [recOpen, setRecOpen] = useState((current) => !current) //search recommendation open or close
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value)
+    setRecOpen(true)
+  }
   console.log(searchQuery)
 
   const redirectToSearch = () => {
+    setRecOpen(false)
     navigate(`/search`, {
       state: {
         homeQuery: searchQuery,
       },
     })
+  }
+
+  const handleSearchBlur = (e) => {
+    e.preventDefault()
+    setRecOpen(false)
   }
 
   const fetchSearch = async () => {
@@ -103,15 +115,33 @@ const Home = () => {
     <>
       <div className="font-poppins">
         <Navbar />
+        <div
+          id="help-box"
+          className="pt-16 flex flex-col justify-center items-center w-full h-[70vh] bg-cover bg-bottom"
+          style={{ backgroundImage: `url(${bgSearch})` }}
+        >
+          <h1 className="mb-2 text-h-sm lg:text-h-lg font-bold text-center text-teal-700 mx-4">
+            Halo, ada yang dapat kami bantu?
+          </h1>
+          <div>
+            <Searchbar
+              className=""
+              placeholder="Telusuri..."
+              value={searchQuery}
+              onChange={handleChange}
+              onClick={redirectToSearch}
+              // onBlur={handleSearchBlur}
+            />
+            <SearchRecom
+              query={searchQuery}
+              setQuery={setSearchQuery}
+              searchRec={searchResults}
+              recOpen={recOpen}
+              setRecOpen={setRecOpen}
+            />
+          </div>
+        </div>
 
-        {/* start - container */}
-        <SearchBox
-          className=""
-          placeholder="Telusuri..."
-          value={searchQuery}
-          onChange={handleChange}
-          onClick={redirectToSearch}
-        />
         <div id="container" className="flex justify-center items-center">
           <div className="max-w-7xl w-full flex flex-col justify-center items-center">
             {/* sidebar and question list */}

@@ -11,6 +11,7 @@ import bgSearch from "../assets/images/bg-search.png"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import SearchRecom from "../components/search/SearchRecom"
 
 export const SearchResult = () => {
   const faqData = [
@@ -66,9 +67,15 @@ export const SearchResult = () => {
   const [searchResults, setSearchResults] = useState([])
   const [searchRec, setSearchRec] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
+  const [recOpen, setRecOpen] = useState((current) => !current) //search recommendation open or close
 
   const [query, setQuery] = useState(searchParams.get("query"))
   const page = searchParams.get("page") || 0
+
+  const handleSearchBlur = (e) => {
+    e.preventDefault()
+    setRecOpen(false)
+  }
 
   const handleChange = (e) => {
     setRecOpen(true)
@@ -149,8 +156,6 @@ export const SearchResult = () => {
     fetchSearch()
   }, [])
 
-  const [recOpen, setRecOpen] = useState((current) => !current) //search recommendation open or close
-
   return (
     <div>
       <NavBar />
@@ -174,36 +179,15 @@ export const SearchResult = () => {
             value={query}
             onChange={handleChange}
             onSubmit={handleSubmit}
+            // onBlur={handleSearchBlur}
           />
-          <div className="relative z-10 flex flex-col justify-center items-center">
-            {/* drop recommendation list start */}
-            {query ? (
-              <ul
-                className={`absolute top-0 w-[320px] md:w-[640px] mt-1 bg-white overflow-y-auto  rounded-xl ${
-                  recOpen ? "max-h-60 border border-neutral-200" : "max-h-0"
-                }`}
-              >
-                {searchRec?.map((searchRec) => (
-                  <li
-                    key={searchRec?._id}
-                    className={`p-2 text-sm hover:bg-neutral-100 list-none`}
-                    onClick={() => {
-                      if (
-                        searchRec?.question?.toLowerCase() !==
-                        query.toLowerCase()
-                      ) {
-                        setQuery(searchRec?.question)
-                        setRecOpen((current) => !current)
-                      }
-                    }}
-                  >
-                    {searchRec?.question}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
-          {/* drop recommendation list end */}
+          <SearchRecom
+            query={query}
+            setQuery={setQuery}
+            searchRec={searchRec}
+            recOpen={recOpen}
+            setRecOpen={setRecOpen}
+          />
         </div>
 
         <main className="mt-8 mb-20 max-w-7xl w-11/12 flex flex-col items-center">

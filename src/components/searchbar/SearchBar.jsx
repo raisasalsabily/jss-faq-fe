@@ -12,6 +12,7 @@ function Searchbar({
   onClick,
   onSubmit,
   onFocus,
+  onBlur,
 }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -62,6 +63,7 @@ function Searchbar({
         value={value}
         onChange={onChange}
         onFocus={onFocus}
+        onBlur={onBlur}
       />
 
       <button type="submit" className="absolute right-0 top-0 mt-5 mr-4 flex">
