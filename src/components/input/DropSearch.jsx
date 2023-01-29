@@ -1,7 +1,12 @@
 import React, { useState } from "react"
 import { Icon } from "@iconify/react"
 
-export default function DropSearch({ cats, setCategory, placeholder, initValue = "" }) {
+export default function DropSearch({
+  cats,
+  setCategory,
+  placeholder,
+  initValue = "",
+}) {
   const [dropInput, setDropInput] = useState("") // input value for category dropdown
   const [dropSelected, setDropSelected] = useState(initValue) // selected value of category dropdown
   const [dropOpen, setDropOpen] = useState("") //dropdown open or close
@@ -10,7 +15,8 @@ export default function DropSearch({ cats, setCategory, placeholder, initValue =
     <div id="drop-search" className="w-full text-b-md relative z-10">
       <div
         onClick={() => {
-          setDropOpen(!dropOpen)}}
+          setDropOpen(!dropOpen)
+        }}
         className={`bg-white box-border w-full p-2 flex items-center justify-between rounded border border-neutral-200 ${
           !dropSelected && "text-neutral-300"
         }`}
