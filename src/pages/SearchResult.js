@@ -63,7 +63,6 @@ export const SearchResult = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  // const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [searchRec, setSearchRec] = useState([])
   const [searchParams, setSearchParams] = useSearchParams()
@@ -71,11 +70,6 @@ export const SearchResult = () => {
 
   const [query, setQuery] = useState(searchParams.get("query"))
   const page = searchParams.get("page") || 0
-
-  const handleSearchBlur = (e) => {
-    e.preventDefault()
-    setRecOpen(false)
-  }
 
   const handleChange = (e) => {
     setRecOpen(true)

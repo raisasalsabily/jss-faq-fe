@@ -17,9 +17,10 @@ const Home = () => {
 
   const [cats, setCats] = useState([]) // state to fetch category sidebar items
   const [faqs, setFaqs] = useState([]) // state to fetch faqs
-  const { search } = useLocation(["Akun"])
-  // console.log(location)
 
+  const { search } = useLocation(["Akun"])
+
+  // fetch categories
   const getCats = async () => {
     setLoading(true)
     try {
@@ -36,6 +37,7 @@ const Home = () => {
     setLoading(false)
   }
 
+  // fetch faqs
   const fetchFaqs = async () => {
     setLoading(true)
     let query = search ? search : "?cat=Akun"
@@ -61,31 +63,20 @@ const Home = () => {
     fetchFaqs()
   }, [search])
 
-  // searchbar
+  // for searchbar
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [recOpen, setRecOpen] = useState((current) => !current) //search recommendation open or close
+
+  // searchbar on change
   const handleChange = (e) => {
     setSearchQuery(e.target.value)
     setRecOpen(true)
   }
-  console.log(searchQuery)
+  // console.log(searchQuery)
 
-  const redirectToSearch = () => {
-    setRecOpen(false)
-    navigate(`/search`, {
-      state: {
-        homeQuery: searchQuery,
-      },
-    })
-  }
-
-  const handleSearchBlur = (e) => {
-    e.preventDefault()
-    setRecOpen(false)
-  }
-
+  // fetch search recommendations
   const fetchSearch = async () => {
     setLoading(true)
     // console.log(query);
@@ -101,7 +92,7 @@ const Home = () => {
       setSearchResults(res.data)
       // console.log(searchResults)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       setError(error)
     }
     setLoading(false)
@@ -110,6 +101,17 @@ const Home = () => {
   useEffect(() => {
     fetchSearch()
   }, [searchQuery])
+
+  // searchbar onsubmit
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setRecOpen(false)
+    navigate(`/search`, {
+      state: {
+        homeQuery: searchQuery,
+      },
+    })
+  }
 
   return (
     <>
@@ -129,7 +131,7 @@ const Home = () => {
               placeholder="Telusuri..."
               value={searchQuery}
               onChange={handleChange}
-              onClick={redirectToSearch}
+              onSubmit={handleSubmit}
               // onBlur={handleSearchBlur}
             />
             <SearchRecom
