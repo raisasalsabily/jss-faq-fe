@@ -26,6 +26,7 @@ function App() {
             duration: 750,
             offset: 20,
             easing: "ease",
+            once: true,
         });
     }, []);
 
