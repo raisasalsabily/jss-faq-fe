@@ -3,7 +3,7 @@ import CategorySidebar from "./CategorySidebar";
 import SingleList from "./SingleList";
 import { Icon } from "@iconify/react";
 
-function PopupCategory({ cats, setIsComponentVisible }) {
+function PopupCategory({ cats, setIsComponentVisible, onClick, setActive }) {
     return (
         <div
             className="w-full py-4 bg-white text-neutral-700 text-b-lg font-medium rounded-md
@@ -16,7 +16,12 @@ function PopupCategory({ cats, setIsComponentVisible }) {
             <ul>
                 {cats.map((c) =>
                     c.show ? (
-                        <div onClick={() => setIsComponentVisible(false)}>
+                        <div
+                            onClick={() => {
+                                setActive(c.category);
+                                onClick();
+                            }}
+                        >
                             <SingleList
                                 value={c.category}
                                 to={`/?cat=${c.category}`}
