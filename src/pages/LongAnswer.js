@@ -50,19 +50,24 @@ export const LongAnswer = () => {
 
     useEffect(() => {
         getSingleFaq();
+        window.scrollTo({
+            top: 0,
+        });
     }, [path]);
 
     return (
         <div>
             <NavBar />
             <div
-                id="container"
+                id="article"
                 className="min-h-screen py-16 bg-white flex justify-center"
             >
                 {singleFaq && (
                     <div
-                        className="w-11/12 md:w-7/12 max-w-5xl pt-10"
-                        data-aos="fade"
+                        className="w-11/12 md:w-7/12 max-w-5xl pt-10 fade"
+                        style={{
+                            animationDuration: `300ms`,
+                        }}
                     >
                         <BackBtn />
                         <TitleWithLink question={singleFaq?.question} />
