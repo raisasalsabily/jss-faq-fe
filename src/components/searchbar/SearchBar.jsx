@@ -66,11 +66,10 @@ function Searchbar({
         onBlur={onBlur}
       />
 
-      <button type="submit" className="absolute right-0 top-0 mt-5 mr-4 flex">
+      <button type="submit" onClick={onClick} className="absolute right-0 top-0 mt-5 mr-4 flex">
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           className="text-neutral-600"
-          onClick={onClick}
         />
       </button>
     </form>

@@ -5,7 +5,7 @@ function HelpButton(props) {
     <a href="https://help.jogjakota.go.id/livechat.html?channel=oaTnqVdEL9xvWA8VigoLpDgk">
       <div
         className={
-          "p-2 border-solid border-2 border-teal-50 rounded-2xl text-white bg-teal-100 text-b-md w-56 flex justify-center items-center shadow-md" +
+          "p-2 border-solid border-2 border-teal-50 rounded-2xl text-white bg-teal-100 hover:bg-teal-50 transition text-b-md w-56 flex justify-center items-center shadow-md" +
           props.className
         }
       >

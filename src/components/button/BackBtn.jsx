@@ -1,13 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function BackBtn() {
+    const navigate = useNavigate()
     return (
-        <Link to="/">
-            <button className='font-poppins text-teal-500 my-4 md:text-b-lg text-b-sm hover:drop-shadow-lg transition group'>
+            <button className='font-poppins text-teal-500 my-4 md:text-b-lg text-b-sm transition group' onClick={() => navigate(-1)}>
                 <span className='group-hover:mr-1 transition-all'>←</span> Kembali
             </button>
-        </Link>        
     );
 }
 

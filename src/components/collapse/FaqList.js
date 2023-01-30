@@ -3,15 +3,15 @@ import FaqItem from "./FaqItem";
 import { Icon } from "@iconify/react";
 import PopupCategory from "../Category/PopupCategory";
 import useComponentVisible from "../../hooks/useComponentVisible";
-import Empty from "../empty/Empty";
+import Empty from "../datastate/Empty";
 
 export default function FaqList({ data, category, cats }) {
     return (
-        <div>
+        <div className="h-full">
             <h3 className="hidden md:block text-bold font-bold text-b-xl text-neutral-900">
                 {category}
             </h3>
-            <div className={category ? "sm:ml-4 px-6 md:px-0" : null}>
+            <div className={category ? "sm:ml-4 px-6 md:px-0" : "h-full"}>
                 {data.length > 0 ? (
                     data.map(
                         ({ question, answer, category, tag, _id }, idx) => (

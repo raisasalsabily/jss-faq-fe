@@ -10,10 +10,12 @@ import FaqList from "../components/collapse/FaqList.js";
 import Searchbar from "../components/searchbar/SearchBar.jsx";
 import SearchRecom from "../components/search/SearchRecom.jsx";
 import bgSearch from "../assets/images/bg-search.png";
-import Empty from "../components/empty/Empty.js";
+import Empty from "../components/datastate/Empty.js";
+import Skeleton from "../components/datastate/Skeleton.js";
 
 const Home = () => {
-    const [loading, setLoading] = useState(false);
+    const [isCatsLoading, setIsCatsLoading] = useState(false);
+    const [isFaqsLoading, setIsFaqsLoading] = useState(false);
     const [error, setError] = useState(false);
 
     const [cats, setCats] = useState([]); // state to fetch category sidebar items
@@ -22,7 +24,7 @@ const Home = () => {
     // console.log(location)
 
     const getCats = async () => {
-        setLoading(true);
+        setIsCatsLoading(true);
         try {
             const res = await axios.get(
                 "http://localhost:5000/api/categories",
@@ -37,11 +39,11 @@ const Home = () => {
             setError(error);
             // console.log(error)
         }
-        setLoading(false);
+        setIsCatsLoading(false);
     };
 
     const fetchFaqs = async () => {
-        setLoading(true);
+        setIsFaqsLoading(true);
         let query = search ? search : "?cat=Akun";
         try {
             const res = await axios.get(
@@ -57,7 +59,7 @@ const Home = () => {
             // console.log(error)
             setError(error);
         }
-        setLoading(false);
+        setIsFaqsLoading(false);
     };
 
     useEffect(() => {
@@ -94,7 +96,7 @@ const Home = () => {
     };
 
     const fetchSearch = async () => {
-        setLoading(true);
+        // setIsLoading(true);
         // console.log(query);
         try {
             const res = await axios.get(
@@ -111,7 +113,7 @@ const Home = () => {
             console.log(error);
             setError(error);
         }
-        setLoading(false);
+        // setIsLoading(false);
     };
 
     useEffect(() => {
@@ -124,7 +126,7 @@ const Home = () => {
                 <Navbar />
                 <div
                     id="help-box"
-                    className="pt-16 flex flex-col justify-center items-center w-full h-[70vh] bg-cover bg-bottom"
+                    className="pt-16 flex flex-col justify-center items-center w-full h-[50vh] bg-cover bg-bottom"
                     style={{ backgroundImage: `url(${bgSearch})` }}
                 >
                     <h1 className="mb-2 text-h-sm lg:text-h-lg font-bold text-center text-teal-700 mx-4">
@@ -158,17 +160,23 @@ const Home = () => {
                         <div className="my-12 md:my-20 md:px-8 w-full md:border-t border-neutral-200 flex sticky top-[10vh] flex-col md:flex-row">
                             {/* CategorySidebar */}
                             <aside className="flex md:py-8 md:flex md:w-4/12 border-r border-neutral-200 w-full">
-                                <CategorySidebar cats={cats} />
+                                {!isCatsLoading ? (
+                                    <CategorySidebar cats={cats} />
+                                ) : (
+                                    <Skeleton />
+                                )}
                             </aside>
                             {/* QuestionList */}
                             <main className="w-full md:py-8 md:p-10 lg:max-w-none">
-                                {faqs ? (
+                                {!isFaqsLoading ? (
                                     <FaqList
                                         data={faqs}
                                         category={faqs[0]?.category}
                                         cats={cats}
                                     />
-                                ) : null}
+                                ) : (
+                                    <Skeleton />
+                                )}
                             </main>
                         </div>
                     </div>

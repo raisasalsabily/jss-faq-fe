@@ -7,11 +7,11 @@ function HelpBox(props) {
   return (
     <div
       id="bantuan-box"
-      className={`bg-gradient-to-tr from-teal-500 to-teal-100 w-full h-[518px] md:h-64 flex justify-center items-center ${props.className}`}
+      className={`bg-gradient-to-tr from-teal-500 to-teal-100 w-full py-16 md:py-20 flex justify-center items-center ${props.className}`}
     >
       <div
         id="bantuan-content"
-        className="w-8/12 flex flex-col md:flex-row justify-center items-center gap-3"
+        className="w-10/12 md:w-8/12 flex flex-col md:flex-row justify-center items-center gap-3"
       >
         {/* logo */}
         <div className="basis-5/12 flex justify-center items-center md:order-last">

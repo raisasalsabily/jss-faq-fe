@@ -9,9 +9,10 @@ import ReadTime from "../components/icon/ReadTime";
 import AnswerDesc from "../components/items/AnswerDesc";
 import TitleWithLink from "../components/items/TitleWithLink";
 import NavBar from "../components/navbar/Navbar";
+import Skeleton from "../components/datastate/Skeleton";
 
 export const LongAnswer = () => {
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const [singleFaq, setSingleFaq] = useState({});
     const [readTime, setReadTime] = useState(1);
@@ -23,7 +24,7 @@ export const LongAnswer = () => {
 
     // // get current url
     const getSingleFaq = async () => {
-        setLoading(true);
+        setIsLoading(true);
         try {
             const res = await axios.get(
                 `http://localhost:5000/api/posts/${path}`,
@@ -39,7 +40,7 @@ export const LongAnswer = () => {
             // console.log(error)
             setError(error);
         }
-        setLoading(false);
+        setIsLoading(false);
     };
 
     const calculateReadTime = (txt) => {
@@ -60,11 +61,11 @@ export const LongAnswer = () => {
             <NavBar />
             <div
                 id="article"
-                className="min-h-screen py-16 bg-white flex justify-center"
+                className="min-h-screen py-20 md:py-32 bg-white mx-auto w-11/12 md:w-7/12 max-w-5xl"
             >
-                {singleFaq && (
+                {!isLoading ? (
                     <div
-                        className="w-11/12 md:w-7/12 max-w-5xl pt-10 fade"
+                        className="fade"
                         style={{
                             animationDuration: `300ms`,
                         }}
@@ -75,6 +76,11 @@ export const LongAnswer = () => {
                         <AnswerDesc answer={singleFaq?.answer} />
                         <TagBox tag={singleFaq?.tag} />
                     </div>
+                ) : (
+                    <>
+                        <Skeleton />
+                        <Skeleton />
+                    </>
                 )}
             </div>
             <JSSLiveChat />
