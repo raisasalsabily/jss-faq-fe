@@ -1,8 +1,9 @@
 import React from "react"
+import axios from "axios"
 import ReactQuill, { Quill } from "react-quill"
 import "react-quill/dist/quill.snow.css"
+import { Icon } from "@iconify/react"
 
-import axios from "axios"
 const __ISMSIE__ = navigator.userAgent.match(/Trident/i) ? true : false
 
 // Quill.register('modules/clipboard', PlainClipboard, true);
@@ -54,7 +55,7 @@ class Clipboard extends QuillClipboard {
           .catch((error) => console.error(error))
       })
     } else {
-      //console.log('when to use this') 보통 다른 곳에서  paste 한다음에  copy하면 이쪽 걸로 한다.
+      //console.log('when to use this') // Usually, if you paste it elsewhere and then copy it, use this one.
       super.onPaste(e)
     }
   }
@@ -118,10 +119,11 @@ Quill.register(VideoBlot)
 class FileBlot extends BlockEmbed {
   static create(value) {
     const prefixTag = document.createElement("span")
-    prefixTag.innerText = "첨부파일 - "
+
+    // prefixTag.innerText = "Lampiran - " // untuk memberikan prefix dari nama tampilan file yang diunggah
 
     const bTag = document.createElement("b")
-    //위에 첨부파일 글자 옆에  파일 이름이 b 태그를 사용해서 나온다.
+    // Next to the text of the attached file above, the file name appears using the b tag
     bTag.innerText = value
 
     const linkTag = document.createElement("a")
@@ -129,7 +131,7 @@ class FileBlot extends BlockEmbed {
     linkTag.setAttribute("target", "_blank")
     linkTag.setAttribute("className", "file-link-inner-post")
     linkTag.appendChild(bTag)
-    //linkTag 이런식으로 나온다 <a href="btn_editPic@3x.png" target="_blank" classname="file-link-inner-post"><b>btn_editPic@3x.png</b></a>
+    // linkTag looks like this <a href="btn_editPic@3x.png" target="_blank" classname="file-link-inner-post"><b>btn_editPic@3x.png</b></a>
 
     const node = super.create()
     node.appendChild(prefixTag)
@@ -152,7 +154,7 @@ Quill.register(FileBlot)
 class PollBlot extends BlockEmbed {
   static create(value) {
     const prefixTag = document.createElement("span")
-    prefixTag.innerText = "투표 - "
+    prefixTag.innerText = "vote - "
 
     const bTag = document.createElement("b")
     bTag.innerText = value.title
@@ -187,12 +189,15 @@ class QuillEditor extends React.Component {
   onPollsChange
   _isMounted
 
-
   constructor(props) {
     super(props)
 
     this.state = {
-      editorHtml: __ISMSIE__ ? "<p>&nbsp;</p>" : this.props.initValue ? this.props.initValue : "",
+      editorHtml: __ISMSIE__
+        ? "<p>&nbsp;</p>"
+        : this.props.initValue
+        ? this.props.initValue
+        : "",
       files: [],
     }
 
@@ -213,9 +218,6 @@ class QuillEditor extends React.Component {
 
   handleChange = (html) => {
     console.log("html", html)
-    // https://youtu.be/BbR-QCoKngE
-    // https://www.youtube.com/embed/ZwKhufmMxko
-    // https://tv.naver.com/v/9176888
     // renderToStaticMarkup(ReactHtmlParser(html, options));
 
     this.setState(
@@ -228,7 +230,7 @@ class QuillEditor extends React.Component {
     )
   }
 
-  // I V F P들을  눌렀을떄 insertImage: this.imageHandler로 가서  거기서 inputOpenImageRef를 클릭 시킨다.
+  // When pressing I N F P insertImage: Go to this.imageHandler and click inputOpenImageRef there
   imageHandler = () => {
     this.inputOpenImageRef.current.click()
   }
@@ -269,8 +271,8 @@ class QuillEditor extends React.Component {
             let range = quill.getSelection()
             let position = range ? range.index : 0
 
-            //먼저 노드 서버에다가 이미지를 넣은 다음에   여기 아래에 src에다가 그걸 넣으면 그게
-            //이미지 블롯으로 가서  크리에이트가 이미지를 형성 하며 그걸 발류에서     src 랑 alt 를 가져간후에  editorHTML에 다가 넣는다.
+            // First put the image in the node server and then put it in the src below here
+            // Go to the image blot and create an image, take the src and alt from the footer and put it in the editorHTML.
             quill.insertEmbed(position, "image", {
               src: "http://localhost:5000/" + response.data.url,
               alt: response.data.fileName,
@@ -405,9 +407,15 @@ class QuillEditor extends React.Component {
           <button className="ql-italic" />
           <button className="ql-underline" />
           <button className="ql-strike" />
-          <button className="ql-insertImage">I</button>
-          <button className="ql-insertVideo">V</button>
-          <button className="ql-insertFile">F</button>
+          <button className="ql-insertImage text-h-sm text-neutral-700">
+            <Icon icon="material-symbols:image-outline-rounded" />
+          </button>
+          <button className="ql-insertVideo text-h-sm text-neutral-700">
+            <Icon icon="material-symbols:video-library" />
+          </button>
+          <button className="ql-insertFile text-h-sm text-neutral-700">
+            <Icon icon="mdi:file-document-plus-outline" />
+          </button>
           <button className="ql-link" />
           <button className="ql-code-block" />
           <button className="ql-video" />
@@ -456,10 +464,10 @@ class QuillEditor extends React.Component {
   }
 
   modules = {
-    // syntax: true,
+    // syntax: true, // for highlight.js
     toolbar: {
       container: "#toolbar",
-      //id ="toorbar"는  그 위에 B I U S I V F P 이거 있는 곳이다.
+      // id ="toolbar" is where there is B I U S I V F P above it.
       handlers: {
         insertImage: this.imageHandler,
         insertVideo: this.videoHandler,
