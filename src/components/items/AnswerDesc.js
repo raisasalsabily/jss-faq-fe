@@ -29,7 +29,7 @@ function AnswerDesc({ answer }) {
       font-size: 1rem;
       line-height: 1.75rem;
       color: #1c1f1f;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     img {
@@ -37,14 +37,28 @@ function AnswerDesc({ answer }) {
       margin: 1rem auto;
     }
 
+    video {
+      max-width: 700px;
+      margin: 1rem auto;
+    }
+
     ol,
     ul {
       padding-left: 3rem;
       list-style-position: outside;
+      margin-bottom: 1rem;
     }
 
     li {
       display: list-item;
+    }
+
+    a {
+      color: #08a78b;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     blockquote {
