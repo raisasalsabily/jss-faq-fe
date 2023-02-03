@@ -117,7 +117,9 @@ const Home = () => {
     };
 
     useEffect(() => {
-        fetchSearch();
+        const getData = setTimeout(fetchSearch, 300);
+        return () => clearTimeout(getData);
+        // fetchSearch();
     }, [searchQuery]);
 
     return (
