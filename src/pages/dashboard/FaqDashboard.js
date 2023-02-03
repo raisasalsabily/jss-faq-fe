@@ -17,6 +17,12 @@ const FaqDashboard = () => {
   const [faqs, setFaqs] = useState([])
   const [dataTable, setDataTable] = useState([])
 
+  const convertShow = (data) => {
+    if (data.show) data.show = "✅"
+    else data.show = "❌"
+    return data
+  }
+
   const generateLink = (data) => {
     if (data._id)
       data.url = (
@@ -35,6 +41,7 @@ const FaqDashboard = () => {
       const res = await axios.get("http://localhost:5000/api/posts/?table=true")
       let data = res.data
       data = data.map(generateLink)
+      data = data.map(convertShow)
       setFaqs(data)
       setDataTable(data)
     } catch (err) {
@@ -109,6 +116,7 @@ const FaqDashboard = () => {
               lstProp={[
                 { attribute: "question", label: "Pertanyaan" },
                 { attribute: "category", label: "Kategori" },
+                // { attribute: "show", label: "Ditampilkan" },
                 { attribute: "url", label: "Laman" },
               ]}
               onDelete={deleteFaq}
