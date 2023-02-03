@@ -214,7 +214,7 @@ export default function CreateFaq() {
             />
           </div>
 
-          <SaveBtn />
+          <SaveBtn value="Simpan" />
         </form>
 
         {/* button */}

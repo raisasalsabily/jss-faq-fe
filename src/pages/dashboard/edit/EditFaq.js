@@ -238,7 +238,7 @@ export default function EditFaq() {
               />
             </div>
           </div>
-          <SaveBtn />
+          <SaveBtn value="Perbarui" />
         </form>
 
         {/* button */}
