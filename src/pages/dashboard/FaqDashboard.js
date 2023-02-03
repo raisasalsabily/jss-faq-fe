@@ -116,7 +116,7 @@ const FaqDashboard = () => {
               lstProp={[
                 { attribute: "question", label: "Pertanyaan" },
                 { attribute: "category", label: "Kategori" },
-                // { attribute: "show", label: "Ditampilkan" },
+                { attribute: "show", label: "Ditampilkan" },
                 { attribute: "url", label: "Laman" },
               ]}
               onDelete={deleteFaq}
