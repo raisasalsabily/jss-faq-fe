@@ -7,6 +7,7 @@ import InputLabel from "../../../components/input/InputLabel";
 import TxtInput from "../../../components/input/TxtInput";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import DefaultLayout from "../../../components/layout/DefaultLayout";
+import { toast } from "react-hot-toast";
 
 export default function CreateCategory() {
     const [category, setCategory] = useState("");
@@ -24,10 +25,10 @@ export default function CreateCategory() {
                 })
                 .then(function (response) {
                     navigate("/dashboard/category");
-                    //setAlert
+                    toast.success("Berhasil menambah data");
                 });
         } catch (err) {
-            console.log(err);
+            toast.error(err.message || "Proses gagal");
         }
     };
 

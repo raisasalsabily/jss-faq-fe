@@ -19,6 +19,7 @@ import CreateTag from "./pages/dashboard/create/CreateTag.js";
 import EditTag from "./pages/dashboard/edit/EditTag.js";
 import CreateFaq from "./pages/dashboard/create/CreateFaq.js";
 import EditFaq from "./pages/dashboard/edit/EditFaq.js";
+import { Toaster } from "react-hot-toast";
 
 function App() {
     useEffect(() => {
@@ -32,6 +33,17 @@ function App() {
 
     return (
         <Router>
+            <Toaster
+                position="bottom-center"
+                toastOptions={{
+                    // Define default options
+                    style: {
+                        background: "white",
+                        color: "#555c5d",
+                        fontSize: "0.75rem",
+                    },
+                }}
+            />
             <Routes>
                 <Route path="/" caseSensitive={false} element={<Home />} />
                 <Route

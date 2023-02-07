@@ -9,6 +9,7 @@ import DefaultLayout from "../../components/layout/DefaultLayout";
 import DashboardTitle from "../../components/dashboard/DashboardTitle";
 import FaqTable from "../../components/table/FaqTable";
 import AddDataBtn from "../../components/button/AddDataBtn";
+import { toast } from "react-hot-toast";
 
 const CategoryDashboard = () => {
     const [cats, setCats] = useState([]);
@@ -38,9 +39,10 @@ const CategoryDashboard = () => {
     const deleteCat = async (id) => {
         try {
             await axios.delete("http://localhost:5000/api/categories/" + id);
+            toast.success("Berhasil menghapus data");
             getCats();
-        } catch (error) {
-            console.log(error);
+        } catch (err) {
+            toast.error(err.message || "Proses gagal");
         }
     };
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import ReactQuill from "react-quill";
 import { useNavigate, useParams } from "react-router-dom";
 import SaveBtn from "../../../components/button/SaveBtn";
@@ -118,10 +119,10 @@ export default function EditFaq() {
                 })
                 .then(function (response) {
                     navigate("/dashboard/faq");
-                    //setAlert
+                    toast.success("Berhasil mengubah data");
                 });
         } catch (err) {
-            console.log(err);
+            toast.error(err.message || "Proses gagal");
         }
     };
 

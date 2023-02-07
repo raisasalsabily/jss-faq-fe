@@ -10,6 +10,7 @@ import TxtInput from "../../../components/input/TxtInput";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import DefaultLayout from "../../../components/layout/DefaultLayout";
 import BackBtn from "../../../components/button/BackBtn";
+import { toast } from "react-hot-toast";
 
 export default function EditCategory() {
     const { id } = useParams();
@@ -43,10 +44,10 @@ export default function EditCategory() {
                 })
                 .then(function (response) {
                     navigate("/dashboard/category");
-                    //setAlert
+                    toast.success("Berhasil mengubah data");
                 });
         } catch (err) {
-            console.log(err);
+            toast.error(err.message || "Proses gagal");
         }
     };
 

@@ -10,8 +10,8 @@ import QuillEditor from "../../../components/input/QuillEditor";
 import TxtInput from "../../../components/input/TxtInput";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import DefaultLayout from "../../../components/layout/DefaultLayout";
-import imageTest from "../../../assets/images/batik.svg";
 import SlugButton from "../../../components/button/SlugButton";
+import { toast } from "react-hot-toast";
 
 export default function CreateFaq() {
     const navigate = useNavigate();
@@ -93,20 +93,6 @@ export default function CreateFaq() {
         e.preventDefault();
         setAnswer("");
 
-        // const variables = {
-        //   answer: answer,
-        // }
-        // if (tag.length === 0) {
-        //   setErrors((prev) => ({
-        //     ...prev,
-        //     tag: "Masukkan setidaknya satu tag",
-        //   }))
-        // }
-        // if (tag.length > 0) {
-        //   console.log(tag)
-        //   // submit form
-        // }
-
         try {
             await axios
                 .post("http://localhost:5000/api/posts", {
@@ -118,10 +104,10 @@ export default function CreateFaq() {
                 })
                 .then(function (response) {
                     navigate("/dashboard/faq");
-                    //setAlert
+                    toast.success("Berhasil menambah data");
                 });
         } catch (err) {
-            console.log(err);
+            toast.error(err.message || "Proses gagal");
         }
     };
 
