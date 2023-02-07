@@ -163,7 +163,9 @@ const Home = () => {
                             {/* CategorySidebar */}
                             <aside className="flex md:py-8 md:flex md:w-4/12 border-r border-neutral-200 w-full">
                                 {!isCatsLoading ? (
-                                    <CategorySidebar cats={cats} />
+                                    <div className="w-full h-fit sticky top-28">
+                                        <CategorySidebar cats={cats} />
+                                    </div>
                                 ) : (
                                     <Skeleton />
                                 )}

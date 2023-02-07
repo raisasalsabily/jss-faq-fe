@@ -64,7 +64,7 @@ function CategorySidebar({ cats }) {
                 </button>
                 <div
                     ref={ref}
-                    className={`md:hidden absolute z-10 w-full left-0 drop-shadow-[0_0_35px_rgba(0,0,0,0.15)] top-20 transition-all  ${
+                    className={`md:hidden absolute z-10 w-full left-0 drop-shadow-[0_0_35px_rgba(0,0,0,0.15)] top-16 transition-all  ${
                         isComponentVisible
                             ? "visible opacity-100"
                             : "invisible opacity-0"
