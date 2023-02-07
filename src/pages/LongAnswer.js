@@ -7,9 +7,10 @@ import Footer from "../components/footer/Footer";
 import JSSLiveChat from "../components/icon/JSSLiveChat";
 import ReadTime from "../components/icon/ReadTime";
 import AnswerDesc from "../components/items/AnswerDesc";
-import TitleWithLink from "../components/items/TitleWithLink";
 import NavBar from "../components/navbar/Navbar";
 import Skeleton from "../components/datastate/Skeleton";
+import SocmedBtn from "../components/button/SocmedBtn";
+import Title from "../components/items/Title";
 
 export const LongAnswer = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +62,7 @@ export const LongAnswer = () => {
             <NavBar />
             <div
                 id="article"
-                className="min-h-screen py-20 md:py-32 bg-white mx-auto w-11/12 md:w-7/12 max-w-5xl"
+                className="min-h-screen py-20 md:py-28 bg-white mx-auto w-11/12 md:w-7/12 max-w-5xl"
             >
                 {!isLoading ? (
                     <div
@@ -71,8 +72,11 @@ export const LongAnswer = () => {
                         }}
                     >
                         <BackBtn />
-                        <TitleWithLink question={singleFaq?.question} />
-                        <ReadTime minutes={readTime} />
+                        <Title question={singleFaq?.question} />
+                        <div className="flex gap-2 items-center text-neutral-400 text-b-sm font-medium">
+                            <ReadTime minutes={readTime} /> <span>•</span>
+                            <SocmedBtn question={singleFaq?.question} />
+                        </div>
                         <AnswerDesc answer={singleFaq?.answer} />
                         <TagBox tag={singleFaq?.tag} />
                     </div>
