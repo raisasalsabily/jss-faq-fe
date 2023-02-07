@@ -42,6 +42,13 @@ function AnswerDesc({ answer }) {
       margin: 1rem auto;
     }
 
+    iframe {
+      max-width: 700px;
+      height: 400px;
+      max-height: 400px;
+      margin: 1rem auto;
+    }
+
     ol,
     ul {
       padding-left: 3rem;
@@ -92,7 +99,7 @@ function AnswerDesc({ answer }) {
         {answer ? (
           <p
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(answer),
+              __html: answer,
             }}
             className="set-inner-html text-neutral-700 text-b-md text-justify md:text-b-lg py-3"
           />

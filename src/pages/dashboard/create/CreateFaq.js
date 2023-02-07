@@ -32,6 +32,7 @@ export default function CreateFaq() {
     const [files, setFiles] = useState([]); // state untuk files TextEditor
 
     const [tag, setTag] = useState([]);
+    const [show, setIsShow] = useState(false);
     const [errors, setErrors] = useState({});
 
     const changeHandler = (name, value) => {
@@ -187,7 +188,21 @@ export default function CreateFaq() {
                             onFilesChange={onFilesChange}
                         />
                     </div>
-                    <SaveBtn />
+
+                    {/* Tampilkan FAQ */}
+                    <div className="flex flex-col items-start">
+                        <InputLabel label="Tampilkan FAQ" />
+                        <input
+                            type="checkbox"
+                            value={show}
+                            onChange={() => setIsShow((current) => !current)}
+                            id="check"
+                            name="check"
+                            className="m-1 w-4 h-4 text-teal-900 bg-gray-100 border-gray-300 rounded focus:ring-teal-50 focus:ring-2 "
+                        />
+                    </div>
+
+                    <SaveBtn value="Simpan" />
                 </form>
 
                 {/* button */}

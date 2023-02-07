@@ -109,7 +109,7 @@ export default function EditCategory() {
                     </div>
 
                     {/* button */}
-                    <SaveBtn />
+                    <SaveBtn value="Perbarui" />
                 </form>
             </DashboardLayout>
         </DefaultLayout>

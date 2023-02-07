@@ -74,7 +74,7 @@ export default function CreateCategory() {
                     </div>
 
                     {/* button */}
-                    <SaveBtn />
+                    <SaveBtn value="Simpan" />
                 </form>
             </DashboardLayout>
         </DefaultLayout>

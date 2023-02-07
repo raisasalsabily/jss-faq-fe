@@ -31,6 +31,7 @@ export default function EditFaq() {
     const [files, setFiles] = useState([]); // state untuk files TextEditor
 
     const [tag, setTag] = useState(null);
+    const [show, setIsShow] = useState(null);
     const [errors, setErrors] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -46,6 +47,10 @@ export default function EditFaq() {
                 });
             }
         }
+    };
+
+    const onChangeCheckbox = (curr) => {
+        setIsShow(!show);
     };
 
     const onEditorChange = (value) => {
@@ -74,6 +79,7 @@ export default function EditFaq() {
             setCategory(res.data.category);
             setAnswer(res.data.answer);
             setTag(res.data.tag);
+            setIsShow(res.data.show);
         } catch (error) {
             setError(error);
             // console.log(error)
@@ -100,11 +106,6 @@ export default function EditFaq() {
         setLoading(false);
     };
 
-    useEffect(() => {
-        getFaqById();
-        getCats();
-    }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAnswer("");
@@ -125,6 +126,10 @@ export default function EditFaq() {
             toast.error(err.message || "Proses gagal");
         }
     };
+    useEffect(() => {
+        getFaqById();
+        getCats();
+    }, []);
 
     const slugify = () =>
         setSlug(
@@ -224,13 +229,21 @@ export default function EditFaq() {
                             />
                         )}
 
-                        {/* <TextEditor setValue={setValue} /> */}
-                        {/* <div>
-                  Hasil: <br />
-                  {value}
-                </div> */}
+                        {/* Tampilkan FAQ */}
+                        <div className="flex flex-col items-start">
+                            <InputLabel label="Tampilkan FAQ" />
+                            <input
+                                type="checkbox"
+                                value={show}
+                                onChange={onChangeCheckbox}
+                                id="check"
+                                name="show"
+                                checked={show}
+                                className="m-1 w-4 h-4 text-teal-900 bg-gray-100 border-gray-300 rounded focus:ring-teal-50 focus:ring-2"
+                            />
+                        </div>
                     </div>
-                    <SaveBtn />
+                    <SaveBtn value="Perbarui" />
                 </form>
 
                 {/* button */}
