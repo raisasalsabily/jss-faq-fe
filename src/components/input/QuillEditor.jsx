@@ -21,7 +21,8 @@ class Clipboard extends QuillClipboard {
     let clipboardData = e.clipboardData || window.clipboardData
     let pastedData = await clipboardData.getData("Text")
 
-    const urlMatches = pastedData.match(/\b(http|https)?:\/\/\S+/gi) || []
+    // const urlMatches = pastedData.match(/\b(http|https)?:\/\/\S+/gi) || [] // use this if want to sanitize pasted text from links
+    const urlMatches = []
     if (urlMatches.length > 0) {
       e.preventDefault()
       urlMatches.forEach((link) => {
