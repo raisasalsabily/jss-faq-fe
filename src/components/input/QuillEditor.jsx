@@ -125,10 +125,10 @@ class FileBlot extends BlockEmbed {
 
     const bTag = document.createElement("b")
     // Next to the text of the attached file above, the file name appears using the b tag
-    bTag.innerText = value
+    bTag.innerText = value.title
 
     const linkTag = document.createElement("a")
-    linkTag.setAttribute("href", value)
+    linkTag.setAttribute("href", value.a)
     linkTag.setAttribute("target", "_blank")
     linkTag.setAttribute("className", "file-link-inner-post")
     linkTag.appendChild(bTag)
@@ -373,7 +373,10 @@ class QuillEditor extends React.Component {
 
             let range = quill.getSelection()
             let position = range ? range.index : 0
-            quill.insertEmbed(position, "file", response.data.fileName)
+            quill.insertEmbed(position, "file", {
+              a: "http://localhost:5000/" + response.data.url,
+              title: response.data.fileName.split("_")[1],
+            })
             quill.setSelection(position + 1)
 
             if (this._isMounted) {
