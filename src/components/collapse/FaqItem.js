@@ -11,11 +11,11 @@ export default function FaqItem({
     faqRoute,
 }) {
     const [isOpen, setIsOpen] = useState(false);
-    const [isLong, setIsLong] = useState(false);
+    // const [isLong, setIsLong] = useState(false);
 
-    useEffect(() => {
-        if (content?.length > 250) setIsLong(true);
-    }, [content]);
+    // useEffect(() => {
+    //     if (content?.length > 250) setIsLong(true);
+    // }, [content]);
 
     return (
         <div className="mt-8 pb-8 border-b border-neutral-200">
@@ -42,13 +42,13 @@ export default function FaqItem({
                     }}
                     className="mt-4 text-b-sm sm:text-b-md text-neutral-600 line-clamp"
                 />
-                {isLong ? (
-                    <Link to={`/post/${_id}#article`}>
-                        <button className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
-                            Baca selengkapnya
-                        </button>
-                    </Link>
-                ) : null}
+                {/* {isLong ? ( */}
+                <Link to={`/post/${_id}`}>
+                    <button className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
+                        Baca selengkapnya
+                    </button>
+                </Link>
+                {/* ) : null} */}
             </div>
         </div>
     );
