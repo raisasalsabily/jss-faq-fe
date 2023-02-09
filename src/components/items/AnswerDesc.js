@@ -91,6 +91,10 @@ function AnswerDesc({ answer }) {
         font-size: 1rem;
         line-height: 1.75rem;
       }
+      iframe {
+        max-width: 100%;
+        max-height: 200px;
+      }
     }
   `
   return (
