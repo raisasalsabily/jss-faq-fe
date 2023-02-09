@@ -85,6 +85,7 @@ export default function CreateFaq() {
             question
                 .toLowerCase()
                 .trim()
+                .replace("/", "")
                 .replace(/[^\w\s-]/g, "")
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "")
