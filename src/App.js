@@ -47,7 +47,7 @@ function App() {
             <Routes>
                 <Route path="/" caseSensitive={false} element={<Home />} />
                 <Route
-                    path="/post/:id"
+                    path="/post/:slug"
                     caseSensitive={false}
                     element={<LongAnswer />}
                 />

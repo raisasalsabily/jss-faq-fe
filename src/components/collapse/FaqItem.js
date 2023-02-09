@@ -9,6 +9,7 @@ export default function FaqItem({
     tag,
     _id,
     faqRoute,
+    slug,
 }) {
     const [isOpen, setIsOpen] = useState(false);
     // const [isLong, setIsLong] = useState(false);
@@ -43,7 +44,7 @@ export default function FaqItem({
                     className="mt-4 text-b-sm sm:text-b-md text-neutral-600 line-clamp"
                 />
                 {/* {isLong ? ( */}
-                <Link to={`/post/${_id}`}>
+                <Link to={`/post/${slug}`}>
                     <button className="mt-2 text-b-sm sm:text-b-md text-teal-500 hover:text-teal-700 transition">
                         Baca selengkapnya
                     </button>

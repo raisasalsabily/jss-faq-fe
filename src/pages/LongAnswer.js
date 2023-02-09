@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import TagBox from "../components/box/TagBox";
 import BackBtn from "../components/button/BackBtn";
 import Footer from "../components/footer/Footer";
@@ -18,6 +18,8 @@ export const LongAnswer = () => {
     const [singleFaq, setSingleFaq] = useState({});
     const [readTime, setReadTime] = useState(1);
 
+    const { slug } = useParams();
+
     const location = useLocation();
     const path = location.pathname.split("/")[2];
 
@@ -28,7 +30,7 @@ export const LongAnswer = () => {
         setIsLoading(true);
         try {
             const res = await axios.get(
-                `http://localhost:5000/api/posts/${path}`,
+                `http://localhost:5000/api/posts/slug/${slug}`,
                 {
                     headers: {
                         Accept: "application/json",
