@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import TagBox from "../components/box/TagBox";
 import BackBtn from "../components/button/BackBtn";
 import Footer from "../components/footer/Footer";
@@ -22,6 +22,7 @@ export const LongAnswer = () => {
 
     const location = useLocation();
     const path = location.pathname.split("/")[2];
+    const navigate = useNavigate();
 
     // const [url, setUrl] = useState("")
 
@@ -37,8 +38,13 @@ export const LongAnswer = () => {
                     },
                 }
             );
-            setSingleFaq(res.data);
-            setReadTime(calculateReadTime(res.data.answer));
+
+            if (res.data.show == true) {
+                setSingleFaq(res.data);
+                setReadTime(calculateReadTime(res.data.answer));
+            } else {
+                navigate("/");
+            }
         } catch (error) {
             // console.log(error)
             setError(error);

@@ -27,7 +27,7 @@ export default function EditFaq() {
     const [dropSelected, setDropSelected] = useState(""); // selected value of category dropdown
     const [dropOpen, setDropOpen] = useState(""); //dropdown open or close
 
-    const [answer, setAnswer] = useState(""); // state untuk TextEditor
+    const [answer, setAnswer] = useState(null); // state untuk TextEditor
     const [files, setFiles] = useState([]); // state untuk files TextEditor
 
     const [tag, setTag] = useState(null);
@@ -117,6 +117,7 @@ export default function EditFaq() {
                     category,
                     tag,
                     answer,
+                    show,
                 })
                 .then(function (response) {
                     navigate("/dashboard/faq");
@@ -136,6 +137,7 @@ export default function EditFaq() {
             question
                 .toLowerCase()
                 .trim()
+                .replace("/", "")
                 .replace(/[^\w\s-]/g, "")
                 .replace(/[\s_-]+/g, "-")
                 .replace(/^-+|-+$/g, "")
@@ -160,6 +162,7 @@ export default function EditFaq() {
                     <div>
                         <InputLabel label="Pertanyaan" />
                         <TxtInput
+                            required
                             placeholder="Tulis pertanyaan..."
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
@@ -173,9 +176,17 @@ export default function EditFaq() {
                             <InputLabel label="Route URL" />
                             <div className="flex relative">
                                 <TxtInput
+                                    required
                                     placeholder="Generate url..."
                                     value={slug}
-                                    onChange={(e) => setSlug(e.target.value)}
+                                    onChange={(e) =>
+                                        setSlug(
+                                            e.target.value.replace(
+                                                /[^A-Za-z0-9_-]/g,
+                                                ""
+                                            )
+                                        )
+                                    }
                                 />
 
                                 <SlugButton onClick={slugify} />
@@ -215,12 +226,7 @@ export default function EditFaq() {
                     {/* Jawaban */}
                     <div>
                         <InputLabel label="Jawaban" />
-                        {/* <ReactQuill
-                            theme="snow"
-                            value={answer}
-                            onChange={onEditorChange}
-                        /> */}
-                        {answer && (
+                        {typeof answer === "string" && (
                             <QuillEditor
                                 placeholder="Tulis jawaban"
                                 onEditorChange={onEditorChange}

@@ -27,7 +27,7 @@ const FaqDashboard = () => {
     const generateLink = (data) => {
         if (data._id)
             data.url = (
-                <Link to={`/post/${data._id}`} target="_blank">
+                <Link to={`/post/${data.slug}`} target="_blank">
                     <FontAwesomeIcon
                         icon={faExternalLinkAlt}
                         className="text-teal-300 hover:text-teal-900 transition-colors"
