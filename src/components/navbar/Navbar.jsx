@@ -98,7 +98,7 @@ export default function NavBar({ user }) {
             {!user?.isConnected ? (
               <LoginBtn text="Masuk" to="/login" />
             ) : (
-              <LoginBtn text="Keluar" to="#" onClick={LogoutHandler} />
+              <LoginBtn text="Keluar" to="/" onClick={LogoutHandler} />
             )}
 
             {user?.role === "ADMIN" ? (

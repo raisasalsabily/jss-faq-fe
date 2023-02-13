@@ -22,12 +22,22 @@ import CreateFaq from "./pages/dashboard/create/CreateFaq.js"
 import EditFaq from "./pages/dashboard/edit/EditFaq.js"
 import { Toaster } from "react-hot-toast"
 import store from "./redux/store"
-import { setUser } from "./redux/actions/authActions.js"
+import { Logout, setUser } from "./redux/actions/authActions.js"
 import { useSelector } from "react-redux"
+import { setAuth } from "./utils/setAuth.js"
+import NoAccess from "./pages/NoAccess.js"
+import AdminRouter from "./components/router/AdminRouter.js"
+import ForceRedirect from "./components/router/ForceRedirect.js"
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt)
   store.dispatch(setUser(decode))
+  setAuth(window.localStorage.jwt)
+  const currentDate = Date.now / 1000
+
+  if (decode.exp > currentDate) {
+    store.dispatch(Logout())
+  }
 }
 
 function App() {
@@ -71,18 +81,42 @@ function App() {
           caseSensitive={false}
           element={<SearchResult />}
         />
-        <Route path="/register" caseSensitive={false} element={<SignUp />} />
-        <Route path="/login" caseSensitive={false} element={<SignIn />} />
+        <Route
+          path="/register"
+          caseSensitive={false}
+          element={
+            <ForceRedirect user={user ? user : null}>
+              <SignUp />
+            </ForceRedirect>
+          }
+        />
+        <Route
+          path="/login"
+          caseSensitive={false}
+          element={
+            <ForceRedirect user={user ? user : null}>
+              <SignIn />
+            </ForceRedirect>
+          }
+        />
 
         <Route
           path="/dashboard/faq"
           caseSensitive={false}
-          element={<FaqDashboard />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <FaqDashboard />
+            </AdminRouter>
+          }
         />
         <Route
           path="/dashboard/faq/create"
           caseSensitive={false}
-          element={<CreateFaq />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <CreateFaq />
+            </AdminRouter>
+          }
         />
         <Route
           path="/dashboard/faq/edit/:id"
@@ -93,12 +127,20 @@ function App() {
         <Route
           path="/dashboard/category"
           caseSensitive={false}
-          element={<CategoryDashboard />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <CategoryDashboard />
+            </AdminRouter>
+          }
         />
         <Route
           path="/dashboard/category/create"
           caseSensitive={false}
-          element={<CreateCategory />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <CreateCategory />
+            </AdminRouter>
+          }
         />
         <Route
           path="/dashboard/category/edit/:id"
@@ -106,7 +148,7 @@ function App() {
           element={<EditCategory />}
         />
 
-        <Route
+        {/* <Route
           path="/dashboard/tag"
           caseSensitive={false}
           element={<TagDashboard />}
@@ -120,14 +162,14 @@ function App() {
           path="/dashboard/tag/edit/:id"
           caseSensitive={false}
           element={<EditTag />}
-        />
-
-        <Route path="/testing" caseSensitive={false} element={<Testing />} />
+        /> */}
         <Route
           path="/search"
           caseSensitive={false}
           element={<SearchResult />}
         />
+        <Route path="/noaccess" caseSensitive={false} element={<NoAccess />} />
+        <Route path="/testing" caseSensitive={false} element={<Testing />} />
       </Routes>
     </Router>
   )
