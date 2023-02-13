@@ -264,7 +264,7 @@ class QuillEditor extends React.Component {
       formData.append("file", file)
 
       axios
-        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .post("http://localhost:5000/api/posts/uploadimages", formData, config)
         .then((response) => {
           if (response.data.success) {
             const quill = this.reactQuillRef.getEditor()
@@ -316,7 +316,7 @@ class QuillEditor extends React.Component {
       formData.append("file", file)
 
       axios
-        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .post("http://localhost:5000/api/posts/uploadvideos", formData, config)
         .then((response) => {
           if (response.data.success) {
             const quill = this.reactQuillRef.getEditor()
@@ -366,7 +366,7 @@ class QuillEditor extends React.Component {
       formData.append("file", file)
 
       axios
-        .post("http://localhost:5000/api/posts/uploadfiles", formData, config)
+        .post("http://localhost:5000/api/posts/uploaddocs", formData, config)
         .then((response) => {
           if (response.data.success) {
             const quill = this.reactQuillRef.getEditor()
@@ -418,9 +418,9 @@ class QuillEditor extends React.Component {
           <button className="ql-insertVideo text-h-sm text-neutral-700">
             <Icon icon="material-symbols:video-library" />
           </button>
-          <button className="ql-insertFile text-h-sm text-neutral-700">
+          {/* <button className="ql-insertFile text-h-sm text-neutral-700">
             <Icon icon="mdi:file-document-plus-outline" />
-          </button>
+          </button> */}
           <button className="ql-link" />
           <button className="ql-code-block" />
           <button className="ql-video" />
