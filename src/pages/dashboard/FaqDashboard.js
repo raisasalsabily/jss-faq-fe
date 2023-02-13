@@ -5,7 +5,7 @@ import {
   faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 import DashboardLayout from "../../components/layout/DashboardLayout"
 import DefaultLayout from "../../components/layout/DefaultLayout"
@@ -17,6 +17,7 @@ import { toast } from "react-hot-toast"
 const FaqDashboard = () => {
   const [faqs, setFaqs] = useState([])
   const [dataTable, setDataTable] = useState([])
+  const location = useLocation()
 
   const convertShow = (data) => {
     if (data.show) data.show = "✅"
@@ -24,20 +25,18 @@ const FaqDashboard = () => {
     return data
   }
 
-
-    const generateLink = (data) => {
-        if (data._id)
-            data.url = (
-                <Link to={`/post/${data.slug}`} target="_blank">
-                    <FontAwesomeIcon
-                        icon={faExternalLinkAlt}
-                        className="text-teal-300 hover:text-teal-900 transition-colors"
-                    />
-                </Link>
-            );
-        return data;
-    };
-
+  const generateLink = (data) => {
+    if (data._id)
+      data.url = (
+        <Link to={`/post/${data.slug}`} target="_blank">
+          <FontAwesomeIcon
+            icon={faExternalLinkAlt}
+            className="text-teal-300 hover:text-teal-900 transition-colors"
+          />
+        </Link>
+      )
+    return data
+  }
 
   const getFaqs = async () => {
     try {
