@@ -103,6 +103,7 @@ export default function CreateFaq() {
                     category,
                     tag,
                     answer,
+                    show,
                 })
                 .then(function (response) {
                     navigate("/dashboard/faq");
@@ -132,6 +133,7 @@ export default function CreateFaq() {
                     <div>
                         <InputLabel label="Pertanyaan" />
                         <TxtInput
+                            required
                             placeholder="Tulis pertanyaan..."
                             value={question}
                             onChange={(e) => setQuestion(e.target.value)}
@@ -145,9 +147,17 @@ export default function CreateFaq() {
                             <InputLabel label="Route URL" />
                             <div className="flex relative">
                                 <TxtInput
+                                    required
                                     placeholder="Generate url..."
                                     value={slug}
-                                    onChange={(e) => setSlug(e.target.value)}
+                                    onChange={(e) =>
+                                        setSlug(
+                                            e.target.value.replace(
+                                                /[^A-Za-z0-9_-]/g,
+                                                ""
+                                            )
+                                        )
+                                    }
                                 />
                                 <SlugButton onClick={slugify} />
                             </div>
