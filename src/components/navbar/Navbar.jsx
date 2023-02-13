@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import toast from "react-hot-toast"
 import AuthBtn from "../button/AuthBtn"
@@ -12,6 +13,9 @@ import { Link } from "react-router-dom"
 
 export default function NavBar({ user }) {
   const [sidebar, setSidebar] = useState(false)
+
+  const { pathname } = useLocation()
+  const newPathname = pathname.split("/")[1]
 
   const toggleSidebar = () => {
     setSidebar((prevState) => !prevState)
@@ -108,7 +112,9 @@ export default function NavBar({ user }) {
             )}
 
             {user?.role === "ADMIN" ? (
-              <DashboardBtn text="Dashboard" to="/dashboard/faq" />
+              newPathname !== "dashboard" ? (
+                <DashboardBtn text="Dashboard" to="/dashboard/faq" />
+              ) : null
             ) : null}
           </div>
         </div>
