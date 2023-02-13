@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import axios from "axios"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
@@ -14,38 +13,10 @@ function Searchbar({
   onFocus,
   onBlur,
 }) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState([])
 
   const handleChange = (e) => setSearchQuery(e.target.value)
-  console.log(searchQuery)
-
-  // const fetchSearch = async () => {
-  //   setLoading(true)
-  //   // console.log(query);
-  //   try {
-  //     const res = await axios.get(
-  //       `http://localhost:5000/api/search?query=${searchQuery}`,
-  //       {
-  //         headers: {
-  //           Accept: "application/json",
-  //         },
-  //       }
-  //     )
-  //     setSearchResults(res.data)
-  //     console.log(searchResults)
-  //   } catch (error) {
-  //     console.log(error)
-  //     setError(error)
-  //   }
-  //   setLoading(false)
-  // }
-
-  // useEffect(() => {
-  //   fetchSearch()
-  // }, [searchQuery])
+  // console.log(searchQuery)
 
   const navigate = useNavigate()
 
@@ -60,13 +31,17 @@ function Searchbar({
         name="search"
         placeholder={placeholder}
         required
-        value={value}
+        value={value ? value : ""}
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
       />
 
-      <button type="submit" onClick={onClick} className="absolute right-0 top-0 mt-5 mr-4 flex">
+      <button
+        type="submit"
+        onClick={onClick}
+        className="absolute right-0 top-0 mt-5 mr-4 flex"
+      >
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
           className="text-neutral-600"

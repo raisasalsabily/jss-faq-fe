@@ -1,5 +1,4 @@
 import React from "react"
-import DOMPurify from "dompurify"
 import styled from "styled-components"
 
 function AnswerDesc({ answer }) {

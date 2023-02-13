@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Icon } from "@iconify/react"
 import SingleList from "../Category/SingleList"
 
@@ -14,6 +14,7 @@ function ContentSidebar({ content }) {
           content.map((c, idx) => {
             return (
               <div
+                key={c._id}
                 style={{
                   animationDuration: `${300 + idx * 50}ms`,
                 }}

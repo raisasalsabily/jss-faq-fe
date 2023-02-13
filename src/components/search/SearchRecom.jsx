@@ -19,7 +19,7 @@ export default function SearchRecom({
           }`}
         >
           {searchRec?.map((searchRec) => (
-            <Link to={`/post/${searchRec?.slug}`}>
+            <Link key={searchRec?._id} to={`/post/${searchRec?.slug}`}>
               <li
                 key={searchRec?._id}
                 className={`p-4 text-sm hover:bg-neutral-100 hover:text-neutral-800 transition list-none text-b-md border-b border-neutral-100`}
