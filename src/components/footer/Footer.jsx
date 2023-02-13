@@ -1,5 +1,4 @@
-import { useState } from "react"
-// import { useNavigate } from "react-router-dom";
+import React from "react"
 
 export default function Footer() {
   return (
@@ -14,12 +13,8 @@ export default function Footer() {
             <h5 className="font-semibold text-b-lg lg:text-[18px] mb-2">
               Pelajari
             </h5>
-            <p className="text-b-md lg:text-b-md">
-              Syarat dan Ketentuan
-            </p>
-            <p className="text-b-md lg:text-b-md">
-              Kebijakan Privasi Data
-            </p>
+            <p className="text-b-md lg:text-b-md">Syarat dan Ketentuan</p>
+            <p className="text-b-md lg:text-b-md">Kebijakan Privasi Data</p>
           </div>
           <div id="apa-jss" className="lg:basis-[450px] px-2">
             <h5 className="font-semibold text-b-lg lg:text-[18px] mb-2">

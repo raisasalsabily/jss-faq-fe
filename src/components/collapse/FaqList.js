@@ -1,8 +1,5 @@
-import React, { useState } from "react"
+import React from "react"
 import FaqItem from "./FaqItem"
-import { Icon } from "@iconify/react"
-import PopupCategory from "../Category/PopupCategory"
-import useComponentVisible from "../../hooks/useComponentVisible"
 import Empty from "../datastate/Empty"
 
 export default function FaqList({ data, category, cats }) {

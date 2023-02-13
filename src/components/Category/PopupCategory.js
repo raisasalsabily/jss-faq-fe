@@ -1,7 +1,7 @@
 import React from "react"
+import { Icon } from "@iconify/react"
 import CategorySidebar from "./CategorySidebar"
 import SingleList from "./SingleList"
-import { Icon } from "@iconify/react"
 
 function PopupCategory({ cats, setIsComponentVisible, onClick, setActive }) {
   return (

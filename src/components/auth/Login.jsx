@@ -1,13 +1,12 @@
 import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import toast from "react-hot-toast"
+import { useDispatch, useSelector } from "react-redux"
 import { LoginAction } from "../../redux/actions/authActions"
 import AuthInput from "./AuthInput"
-import AuthLabel from "./AuthLabel"
 
 export const Login = () => {
   const [form, setForm] = useState({})
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const errors = useSelector((state) => state.errors)
@@ -46,8 +45,8 @@ export const Login = () => {
                 name="username"
                 onChange={handleChange}
                 errors={errors.username}
+                label="Username"
               />
-              <AuthLabel for="input_username" value="Username" />
             </div>
             <div class="relative">
               <AuthInput
@@ -56,8 +55,8 @@ export const Login = () => {
                 name="password"
                 onChange={handleChange}
                 errors={errors.password}
+                label="Kata sandi"
               />
-              <AuthLabel for="input_password" value="Kata sandi" />
             </div>
             <div className="text-b-sm text-right">
               <a

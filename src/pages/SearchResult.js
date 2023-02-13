@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react"
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
-import SearchBox from "../components/box/SearchBox"
-import Footer from "../components/footer/Footer"
 import JSSLiveChat from "../components/icon/JSSLiveChat"
-import NavBar from "../components/navbar/Navbar"
 import SearchList from "../components/search/SearchList"
 import Searchbar from "../components/searchbar/SearchBar"
 import bgSearch from "../assets/images/bg-search.png"
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import SearchRecom from "../components/search/SearchRecom"
 import Empty from "../components/datastate/Empty"
 import DefaultLayout from "../components/layout/DefaultLayout"
 
 export const SearchResult = () => {
   const location = useLocation()
-  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)

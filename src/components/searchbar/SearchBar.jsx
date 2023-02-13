@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import axios from "axios"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
@@ -14,10 +13,7 @@ function Searchbar({
   onFocus,
   onBlur,
 }) {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState([])
 
   const handleChange = (e) => setSearchQuery(e.target.value)
   // console.log(searchQuery)

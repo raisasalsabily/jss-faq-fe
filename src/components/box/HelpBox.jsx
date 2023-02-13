@@ -1,7 +1,6 @@
 import React from "react"
-
-import helpImg from "../../assets/images/help.svg"
 import HelpButton from "../button/HelpButton"
+import helpImg from "../../assets/images/help.svg"
 
 function HelpBox(props) {
   return (
@@ -27,7 +26,7 @@ function HelpBox(props) {
             secara langsung melalui Live Chat.
           </p>
           <HelpButton />
-        </div>        
+        </div>
       </div>
     </div>
   )
