@@ -14,6 +14,7 @@ function ContentSidebar({ content }) {
           content.map((c, idx) => {
             return (
               <div
+                key={c._id}
                 style={{
                   animationDuration: `${300 + idx * 50}ms`,
                 }}

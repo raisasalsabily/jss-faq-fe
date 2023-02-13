@@ -426,9 +426,9 @@ class QuillEditor extends React.Component {
           <button className="ql-video" />
           <button className="ql-blockquote" />
           <button className="ql-clean" />
-          <span class="ql-formats">
-            <button class="ql-list" value="ordered" />
-            <button class="ql-list" value="bullet" />
+          <span className="ql-formats">
+            <button className="ql-list" value="ordered" />
+            <button className="ql-list" value="bullet" />
           </span>
         </div>
 

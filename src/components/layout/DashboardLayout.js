@@ -33,17 +33,15 @@ const DashboardLayout = ({ children }) => {
 
   const sidebarContent = [
     {
+      _id: 1,
       value: "Pertanyaan",
       url: "/dashboard/faq",
     },
     {
+      _id: 2,
       value: "Kategori",
       url: "/dashboard/category",
     },
-    // {
-    //     value: "Tag",
-    //     url: "/dashboard/tag",
-    // },
   ]
 
   return (

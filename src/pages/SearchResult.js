@@ -83,7 +83,7 @@ export const SearchResult = () => {
         }
       )
       setSearchRec(res.data)
-      console.log(searchRec)
+      // console.log(searchRec)
     } catch (error) {
       console.log(error)
       setError(error)

@@ -26,7 +26,7 @@ export default function NavBar({ user }) {
   const handleLogout = () => {
     try {
       dispatch(Logout())
-      toast.success("Anda telah log out")
+      toast.success("Berhasil log out")
     } catch (err) {
       toast.error("Ada kesalahan")
     }
