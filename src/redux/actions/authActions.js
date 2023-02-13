@@ -24,13 +24,14 @@ export const Registration = (form, navigate) => (dispatch) => {
 
 export const LoginAction = (form, navigate) => (dispatch) => {
   axios
-    .post("/http://localhost:5000/api/auth/login", form)
+    .post("http://localhost:5000/api/auth/login", form)
     .then((res) => {
       const { token } = res.data
       localStorage.setItem("jwt", token)
       const decode = jwt_decode(token)
       dispatch(setUser(decode))
       setAuth(token)
+      navigate("/")
     })
     .catch((err) => {
       dispatch({

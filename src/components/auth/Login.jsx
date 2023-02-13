@@ -1,10 +1,15 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { LoginAction } from "../../redux/actions/authActions"
 import AuthInput from "./AuthInput"
 import AuthLabel from "./AuthLabel"
 
 export const Login = () => {
   const [form, setForm] = useState({})
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -14,7 +19,8 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(form)
+    // console.log(form)
+    dispatch(LoginAction(form, navigate))
   }
 
   return (
