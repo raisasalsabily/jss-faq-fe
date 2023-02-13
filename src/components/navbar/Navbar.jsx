@@ -1,30 +1,32 @@
 import { useState } from "react"
-// import { useNavigate } from "react-router-dom";
-import LoginBtn from "../button/LoginBtn"
+import { useDispatch } from "react-redux"
+import toast from "react-hot-toast"
+import AuthBtn from "../button/AuthBtn"
+import DashboardBtn from "../button/DashboardBtn"
 import Backdrop from "./Backdrop"
 import Sidebar from "./Sidebar"
 
 import jssLogoText from "../../assets/images/jss-logo-text.png"
+import { Logout } from "../../redux/actions/authActions"
+import { Link } from "react-router-dom"
 
-export default function NavBar() {
+export default function NavBar({ user }) {
   const [sidebar, setSidebar] = useState(false)
 
   const toggleSidebar = () => {
     setSidebar((prevState) => !prevState)
   }
 
-  //   const navigate = useNavigate();
-  //   const token = localStorage.getItem("accessToken");
-  //   // if(!token){
-  //   //   button =
-  //   // }
-  //   const handleLogOut = () => {
-  //     localStorage.removeItem("accessToken");
-  //     localStorage.removeItem("userStatus");
-  //     localStorage.removeItem("userID");
+  const dispatch = useDispatch()
 
-  //       navigate("/")
-  //   }
+  const handleLogout = () => {
+    try {
+      dispatch(Logout())
+      toast.success("Anda telah log out")
+    } catch (err) {
+      toast.error("Ada kesalahan")
+    }
+  }
 
   return (
     <nav className="max-h-[70px] w-full top-0 fixed z-[9999]">
@@ -97,8 +99,18 @@ export default function NavBar() {
             </div>
           </div>
 
-          {/* Masuk/Login */}
-          <LoginBtn />
+          {/* Masuk/Login & admin access */}
+          <div className="flex gap-2">
+            {!user?.isConnected ? (
+              <AuthBtn text="Masuk" to="/login" />
+            ) : (
+              <AuthBtn text="Keluar" to="/" onClick={handleLogout} />
+            )}
+
+            {user?.role === "ADMIN" ? (
+              <DashboardBtn text="Dashboard" to="/dashboard/faq" />
+            ) : null}
+          </div>
         </div>
       </div>
       <Backdrop sidebar={sidebar} closeSidebar={toggleSidebar} />
