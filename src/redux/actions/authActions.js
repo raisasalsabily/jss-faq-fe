@@ -2,6 +2,7 @@ import axios from "axios"
 import { ERRORS, SET_USER } from "../types"
 import jwt_decode from "jwt-decode"
 import { setAuth } from "../../utils/setAuth"
+import { useNavigate } from "react-router-dom"
 
 export const Registration = (form, navigate) => (dispatch) => {
   axios

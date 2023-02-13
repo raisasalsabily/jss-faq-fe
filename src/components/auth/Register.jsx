@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Registration } from "../../redux/actions/authActions"
 import AuthInput from "./AuthInput"
 import AuthLabel from "./AuthLabel"
@@ -9,6 +9,7 @@ import AuthLabel from "./AuthLabel"
 export const Register = () => {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setForm({
@@ -19,7 +20,7 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(Registration(form))
+    dispatch(Registration(form, navigate))
     // console.log(form)
   }
 
