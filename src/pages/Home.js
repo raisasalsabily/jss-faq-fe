@@ -11,11 +11,11 @@ import FaqList from "../components/collapse/FaqList.js"
 import Searchbar from "../components/searchbar/SearchBar.jsx"
 import SearchRecom from "../components/search/SearchRecom.jsx"
 import bgSearch from "../assets/images/bg-search.png"
-import Empty from "../components/datastate/Empty.js"
 import Skeleton from "../components/datastate/Skeleton.js"
 import { setUser } from "../redux/actions/authActions.js"
 import { useSelector } from "react-redux"
 import store from "../redux/store"
+import DefaultLayout from "../components/layout/DefaultLayout.js"
 
 // auth
 if (localStorage.jwt) {
@@ -134,75 +134,66 @@ const Home = () => {
   }, [searchQuery])
 
   return (
-    <>
-      <div className="font-poppins">
-        <Navbar user={user ? user : null} />
-        <div
-          id="help-box"
-          className="pt-16 flex flex-col justify-center items-center w-full h-[50vh] bg-cover bg-bottom"
-          style={{ backgroundImage: `url(${bgSearch})` }}
-        >
-          <h1 className="mb-2 text-h-sm lg:text-h-lg font-bold text-center text-teal-700 mx-4">
-            Halo, ada yang dapat kami bantu?
-          </h1>
-          <div>
-            <Searchbar
-              className=""
-              placeholder="Telusuri..."
-              value={searchQuery}
-              onChange={handleChange}
-              onClick={redirectToSearch}
-              // onBlur={handleSearchBlur}
-            />
-            <SearchRecom
-              query={searchQuery}
-              setQuery={setSearchQuery}
-              searchRec={searchResults}
-              recOpen={recOpen}
-              setRecOpen={setRecOpen}
-            />
-          </div>
+    <DefaultLayout>
+      <div
+        id="help-box"
+        className="pt-16 flex flex-col justify-center items-center w-full h-[50vh] bg-cover bg-bottom"
+        style={{ backgroundImage: `url(${bgSearch})` }}
+      >
+        <h1 className="mb-2 text-h-sm lg:text-h-lg font-bold text-center text-teal-700 mx-4">
+          Halo, ada yang dapat kami bantu?
+        </h1>
+        <div>
+          <Searchbar
+            className=""
+            placeholder="Telusuri..."
+            value={searchQuery}
+            onChange={handleChange}
+            onClick={redirectToSearch}
+            // onBlur={handleSearchBlur}
+          />
+          <SearchRecom
+            query={searchQuery}
+            setQuery={setSearchQuery}
+            searchRec={searchResults}
+            recOpen={recOpen}
+            setRecOpen={setRecOpen}
+          />
         </div>
-
-        <div id="container" className="flex justify-center items-center">
-          <div className="max-w-7xl w-full flex flex-col justify-center items-center">
-            {/* sidebar and question list */}
-            <div className="my-12 md:my-20 md:px-8 w-full md:border-t border-neutral-200 flex sticky top-[10vh] flex-col md:flex-row">
-              {/* CategorySidebar */}
-              <aside className="flex md:py-8 md:flex md:w-4/12 border-r border-neutral-200 w-full">
-                {!isCatsLoading ? (
-                  <div className="w-full h-fit sticky top-28">
-                    <CategorySidebar cats={cats} />
-                  </div>
-                ) : (
-                  <Skeleton />
-                )}
-              </aside>
-              {/* QuestionList */}
-              <main className="w-full md:py-8 md:p-10 lg:max-w-none">
-                {!isFaqsLoading ? (
-                  <FaqList
-                    data={faqs}
-                    category={faqs[0]?.category}
-                    cats={cats}
-                  />
-                ) : (
-                  <Skeleton />
-                )}
-              </main>
-            </div>
-          </div>
-        </div>
-        {/* end - container */}
-        {/* helpbox */}
-        <div id="helpbox">
-          <HelpBox />
-        </div>
-        <JSSLiveChat />
-
-        <Footer />
       </div>
-    </>
+
+      <div id="container" className="flex justify-center items-center">
+        <div className="max-w-7xl w-full flex flex-col justify-center items-center">
+          {/* sidebar and question list */}
+          <div className="my-12 md:my-20 md:px-8 w-full md:border-t border-neutral-200 flex sticky top-[10vh] flex-col md:flex-row">
+            {/* CategorySidebar */}
+            <aside className="flex md:py-8 md:flex md:w-4/12 border-r border-neutral-200 w-full">
+              {!isCatsLoading ? (
+                <div className="w-full h-fit sticky top-28">
+                  <CategorySidebar cats={cats} />
+                </div>
+              ) : (
+                <Skeleton />
+              )}
+            </aside>
+            {/* QuestionList */}
+            <main className="w-full md:py-8 md:p-10 lg:max-w-none">
+              {!isFaqsLoading ? (
+                <FaqList data={faqs} category={faqs[0]?.category} cats={cats} />
+              ) : (
+                <Skeleton />
+              )}
+            </main>
+          </div>
+        </div>
+      </div>
+      {/* end - container */}
+      {/* helpbox */}
+      <div id="helpbox">
+        <HelpBox />
+      </div>
+      <JSSLiveChat />
+    </DefaultLayout>
   )
 }
 

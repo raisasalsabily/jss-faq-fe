@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-// import { useNavigate } from "react-router-dom";
-import LoginBtn from "../button/LoginBtn"
+import toast from "react-hot-toast"
+import AuthBtn from "../button/AuthBtn"
 import DashboardBtn from "../button/DashboardBtn"
 import Backdrop from "./Backdrop"
 import Sidebar from "./Sidebar"
@@ -18,8 +18,14 @@ export default function NavBar({ user }) {
   }
 
   const dispatch = useDispatch()
-  const LogoutHandler = () => {
-    dispatch(Logout())
+
+  const handleLogout = () => {
+    try {
+      dispatch(Logout())
+      toast.success("Anda telah log out")
+    } catch (err) {
+      toast.error("Ada kesalahan")
+    }
   }
 
   return (
@@ -96,9 +102,9 @@ export default function NavBar({ user }) {
           {/* Masuk/Login & admin access */}
           <div className="flex gap-2">
             {!user?.isConnected ? (
-              <LoginBtn text="Masuk" to="/login" />
+              <AuthBtn text="Masuk" to="/login" />
             ) : (
-              <LoginBtn text="Keluar" to="/" onClick={LogoutHandler} />
+              <AuthBtn text="Keluar" to="/" onClick={handleLogout} />
             )}
 
             {user?.role === "ADMIN" ? (

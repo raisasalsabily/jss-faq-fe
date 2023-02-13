@@ -1,6 +1,6 @@
 import React from "react"
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { Registration } from "../../redux/actions/authActions"
 import AuthInput from "./AuthInput"
@@ -10,6 +10,7 @@ export const Register = () => {
   const [form, setForm] = useState({})
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const errors = useSelector((state) => state.errors)
 
   const handleChange = (e) => {
     setForm({
@@ -40,47 +41,45 @@ export const Register = () => {
             method="POST"
             action="#"
           >
-            <div class="relative">
+            <div>
               <AuthInput
                 type="text"
                 id="input_nik"
                 name="nik"
                 onChange={handleChange}
+                errors={errors.nik}
+                label="Masukkan 16 digit NIK"
               />
-              <AuthLabel for="input_nik" value="Masukkan 16 digit NIK" />
             </div>
-            <div class="relative">
+            <div>
               <AuthInput
                 type="text"
                 id="input_nama"
                 name="fullName"
                 onChange={handleChange}
-              />
-              <AuthLabel
-                for="input_nama"
-                value="Nama lengkap sesuai KTP (tanpa gelar)"
+                errors={errors.fullName}
+                label="Nama lengkap sesuai KTP (tanpa gelar)"
               />
             </div>
-            <div class="relative">
+            <div>
               <AuthInput
                 type="text"
                 id="input_username"
                 name="username"
                 onChange={handleChange}
-              />
-              <AuthLabel
-                for="input_username"
-                value="Username (digunakan untuk login)"
+                errors={errors.username}
+                label="Username (digunakan untuk login)"
               />
             </div>
-            <div class="relative">
+            <div>
               <AuthInput
                 type="password"
                 id="input_password"
                 name="password"
                 onChange={handleChange}
+                errors={errors.password}
+                label="Kata sandi"
               />
-              <AuthLabel for="input_password" value="Kata sandi" />
             </div>
             {/* <div class="relative">
               <AuthInput
