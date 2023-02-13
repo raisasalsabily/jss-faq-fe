@@ -79,18 +79,17 @@ export const Register = () => {
                 label="Kata sandi"
               />
             </div>
-            {/* <div class="relative">
+            <div>
               <AuthInput
                 type="password"
                 id="confirm_password"
                 name="confirm"
                 onChange={handleChange}
+                errors={errors.confirm}
+                label="Masukkan ulang kata sandi"
               />
-              <AuthLabel
-                for="confirm_password"
-                value="Masukkan ulang kata sandi"
-              />
-            </div> */}
+            </div>
+
             <br />
             <button
               type="submit"
