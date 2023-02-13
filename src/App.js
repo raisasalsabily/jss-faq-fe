@@ -121,7 +121,11 @@ function App() {
         <Route
           path="/dashboard/faq/edit/:id"
           caseSensitive={false}
-          element={<EditFaq />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <EditFaq />
+            </AdminRouter>
+          }
         />
 
         <Route
@@ -145,7 +149,11 @@ function App() {
         <Route
           path="/dashboard/category/edit/:id"
           caseSensitive={false}
-          element={<EditCategory />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <EditCategory />
+            </AdminRouter>
+          }
         />
 
         {/* <Route
