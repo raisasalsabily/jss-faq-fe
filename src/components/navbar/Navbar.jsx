@@ -111,7 +111,7 @@ export default function NavBar({ user }) {
               <AuthBtn text="Keluar" to="/" onClick={handleLogout} />
             )}
 
-            {user?.role === "ADMIN" ? (
+            {user?.role === "ADMIN" || user?.role === "EDITOR" ? (
               newPathname !== "dashboard" ? (
                 <DashboardBtn text="Dashboard" to="/dashboard/faq" />
               ) : null

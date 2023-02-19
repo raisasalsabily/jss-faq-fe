@@ -16,8 +16,6 @@ import { LongAnswer } from "./pages/LongAnswer.js"
 import { SearchResult } from "./pages/SearchResult.js"
 import CreateCategory from "./pages/dashboard/create/CreateCategory.js"
 import EditCategory from "./pages/dashboard/edit/EditCategory.js"
-import CreateTag from "./pages/dashboard/create/CreateTag.js"
-import EditTag from "./pages/dashboard/edit/EditTag.js"
 import CreateFaq from "./pages/dashboard/create/CreateFaq.js"
 import EditFaq from "./pages/dashboard/edit/EditFaq.js"
 import { Toaster } from "react-hot-toast"
@@ -27,7 +25,11 @@ import { useSelector } from "react-redux"
 import { setAuth } from "./utils/setAuth.js"
 import NoAccess from "./pages/NoAccess.js"
 import AdminRouter from "./components/router/AdminRouter.js"
+import AdminEditorRouter from "./components/router/AdminEditorRouter.js"
 import ForceRedirect from "./components/router/ForceRedirect.js"
+import UserDashboard from "./pages/dashboard/UserDashboard.js"
+import EditUser from "./pages/dashboard/edit/EditUser.js"
+import CreateUser from "./pages/dashboard/create/CreateUser.js"
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt)
@@ -104,27 +106,27 @@ function App() {
           path="/dashboard/faq"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <FaqDashboard />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/faq/create"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CreateFaq />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/faq/edit/:id"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <EditFaq />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
 
@@ -132,45 +134,56 @@ function App() {
           path="/dashboard/category"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CategoryDashboard />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/category/create"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CreateCategory />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/category/edit/:id"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <EditCategory />
+            </AdminEditorRouter>
+          }
+        />
+        <Route
+          path="/dashboard/user"
+          caseSensitive={false}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <UserDashboard />
             </AdminRouter>
           }
         />
-
         {/* <Route
-          path="/dashboard/tag"
+          path="/dashboard/user/create"
           caseSensitive={false}
-          element={<TagDashboard />}
-        />
-        <Route
-          path="/dashboard/tag/create"
-          caseSensitive={false}
-          element={<CreateTag />}
-        />
-        <Route
-          path="/dashboard/tag/edit/:id"
-          caseSensitive={false}
-          element={<EditTag />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <CreateUser />
+            </AdminRouter>
+          }
         /> */}
+        <Route
+          path="/dashboard/user/edit/:id"
+          caseSensitive={false}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <EditUser />
+            </AdminRouter>
+          }
+        />
         <Route
           path="/search"
           caseSensitive={false}

@@ -13,7 +13,10 @@ function DashboardBtn({ text, to, onClick }) {
       >
         {text}
         <span className="ml-1 text-[15px]">
-          <FontAwesomeIcon icon={faArrowRightToBracket} />
+          <Icon
+            icon="system-uicons:write"
+            className="text-white text-h-sm font-bold"
+          />
         </span>
       </div>
 
