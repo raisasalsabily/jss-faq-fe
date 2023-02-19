@@ -7,10 +7,6 @@ import { useSelector } from "react-redux"
 import store from "../../redux/store"
 import { setAuth } from "../../utils/setAuth"
 
-// import DefaultLayout from "./DefaultLayout";
-// import AddDataBtn from "../button/AddDataBtn";
-// import FaqTable from "../table/FaqTable";
-
 // auth
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt)
@@ -54,7 +50,7 @@ const DashboardLayout = ({ children }) => {
       <div className="mx-auto max-w-7xl w-11/12 flex pt-12">
         {/* sidebar */}
         <aside className="border-r border-neutral-200 w-3/12 py-2">
-          <ContentSidebar content={sidebarContent} />
+          <ContentSidebar content={sidebarContent} user={user ? user : null} />
         </aside>
 
         {/* start - right side - form group */}

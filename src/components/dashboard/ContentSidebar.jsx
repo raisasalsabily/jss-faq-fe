@@ -2,7 +2,7 @@ import React from "react"
 import { Icon } from "@iconify/react"
 import SingleList from "../Category/SingleList"
 
-function ContentSidebar({ content }) {
+function ContentSidebar({ content, user }) {
   return (
     <aside className="w-full h-min-content text-neutral-700 text-b-lg font-medium">
       <div className="h-10 text-b-md font-bold flex items-center transition duration-300 ease-in-out">
@@ -12,17 +12,34 @@ function ContentSidebar({ content }) {
       <ul>
         {content &&
           content.map((c, idx) => {
-            return (
-              <div
-                key={c._id}
-                style={{
-                  animationDuration: `${300 + idx * 50}ms`,
-                }}
-                className="fade"
-              >
-                <SingleList value={c.value} to={c.url} key={c.value} />
-              </div>
-            )
+            if (user?.role !== "ADMIN") {
+              if (c.value !== "Pengguna") {
+                return (
+                  <div
+                    key={c._id}
+                    style={{
+                      animationDuration: `${300 + idx * 50}ms`,
+                    }}
+                    className="fade"
+                  >
+                    <SingleList value={c.value} to={c.url} key={c.value} />
+                  </div>
+                )
+              }
+              return null
+            } else {
+              return (
+                <div
+                  key={c._id}
+                  style={{
+                    animationDuration: `${300 + idx * 50}ms`,
+                  }}
+                  className="fade"
+                >
+                  <SingleList value={c.value} to={c.url} key={c.value} />
+                </div>
+              )
+            }
           })}
       </ul>
     </aside>

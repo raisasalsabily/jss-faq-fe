@@ -25,6 +25,7 @@ import { useSelector } from "react-redux"
 import { setAuth } from "./utils/setAuth.js"
 import NoAccess from "./pages/NoAccess.js"
 import AdminRouter from "./components/router/AdminRouter.js"
+import AdminEditorRouter from "./components/router/AdminEditorRouter.js"
 import ForceRedirect from "./components/router/ForceRedirect.js"
 import UserDashboard from "./pages/dashboard/UserDashboard.js"
 import EditUser from "./pages/dashboard/edit/EditUser.js"
@@ -105,27 +106,27 @@ function App() {
           path="/dashboard/faq"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <FaqDashboard />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/faq/create"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CreateFaq />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/faq/edit/:id"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <EditFaq />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
 
@@ -133,27 +134,27 @@ function App() {
           path="/dashboard/category"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CategoryDashboard />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/category/create"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <CreateCategory />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
           path="/dashboard/category/edit/:id"
           caseSensitive={false}
           element={
-            <AdminRouter user={user ? user : null}>
+            <AdminEditorRouter user={user ? user : null}>
               <EditCategory />
-            </AdminRouter>
+            </AdminEditorRouter>
           }
         />
         <Route
@@ -165,7 +166,7 @@ function App() {
             </AdminRouter>
           }
         />
-        <Route
+        {/* <Route
           path="/dashboard/user/create"
           caseSensitive={false}
           element={
@@ -173,7 +174,7 @@ function App() {
               <CreateUser />
             </AdminRouter>
           }
-        />
+        /> */}
         <Route
           path="/dashboard/user/edit/:id"
           caseSensitive={false}
