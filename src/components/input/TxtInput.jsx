@@ -11,12 +11,16 @@ function TxtInput(props) {
       onChange={props.onChange}
       name={props.name}
       required={props.required}
+      readOnly={props.readOnly}
+      disabled={props.disabled}
     />
   )
 }
 
 TxtInput.defaultProps = {
   placeholder: "Insert placeholder",
+  readOnly: false,
+  disabled: false,
 }
 
 export default TxtInput

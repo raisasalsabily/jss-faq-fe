@@ -16,8 +16,6 @@ import { LongAnswer } from "./pages/LongAnswer.js"
 import { SearchResult } from "./pages/SearchResult.js"
 import CreateCategory from "./pages/dashboard/create/CreateCategory.js"
 import EditCategory from "./pages/dashboard/edit/EditCategory.js"
-import CreateTag from "./pages/dashboard/create/CreateTag.js"
-import EditTag from "./pages/dashboard/edit/EditTag.js"
 import CreateFaq from "./pages/dashboard/create/CreateFaq.js"
 import EditFaq from "./pages/dashboard/edit/EditFaq.js"
 import { Toaster } from "react-hot-toast"
@@ -28,6 +26,9 @@ import { setAuth } from "./utils/setAuth.js"
 import NoAccess from "./pages/NoAccess.js"
 import AdminRouter from "./components/router/AdminRouter.js"
 import ForceRedirect from "./components/router/ForceRedirect.js"
+import UserDashboard from "./pages/dashboard/UserDashboard.js"
+import EditUser from "./pages/dashboard/edit/EditUser.js"
+import CreateUser from "./pages/dashboard/create/CreateUser.js"
 
 if (localStorage.jwt) {
   const decode = jwt_decode(localStorage.jwt)
@@ -155,22 +156,33 @@ function App() {
             </AdminRouter>
           }
         />
-
-        {/* <Route
-          path="/dashboard/tag"
+        <Route
+          path="/dashboard/user"
           caseSensitive={false}
-          element={<TagDashboard />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <UserDashboard />
+            </AdminRouter>
+          }
         />
         <Route
-          path="/dashboard/tag/create"
+          path="/dashboard/user/create"
           caseSensitive={false}
-          element={<CreateTag />}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <CreateUser />
+            </AdminRouter>
+          }
         />
         <Route
-          path="/dashboard/tag/edit/:id"
+          path="/dashboard/user/edit/:id"
           caseSensitive={false}
-          element={<EditTag />}
-        /> */}
+          element={
+            <AdminRouter user={user ? user : null}>
+              <EditUser />
+            </AdminRouter>
+          }
+        />
         <Route
           path="/search"
           caseSensitive={false}

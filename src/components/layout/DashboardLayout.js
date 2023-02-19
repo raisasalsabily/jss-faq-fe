@@ -42,6 +42,11 @@ const DashboardLayout = ({ children }) => {
       value: "Kategori",
       url: "/dashboard/category",
     },
+    {
+      _id: 3,
+      value: "Pengguna",
+      url: "/dashboard/user",
+    },
   ]
 
   return (
